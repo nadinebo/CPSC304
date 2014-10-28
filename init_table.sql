@@ -16,13 +16,16 @@
 -- name your tables with '_' between words so it is easier
 -- to read (eg. returnItem = return_item)
 
+-- if some table name might exist as a SQL command, add '_'
+-- to its end (eg. 'return' = 'return_')
+
 
 -- Nadine --
 -- * Done in mySQL * --
 -- Cannot test yet since some tables don't exist yet --
 
-drop table if exists return;
-create table return
+drop table if exists return_;
+create table return_
 	(retID char(10) not null,
 	return_date char(10),
 	receiptID char(10) not null unique,
