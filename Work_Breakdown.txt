@@ -1,0 +1,20 @@
+Work Breakdown:
+
+DEADLINE #1: Friday, October 31st
+
+1) Creating tables:
+Look at project 2 answers
+Stewart (Item, LeadSinger)
+Nicole (hasSong, Order)
+Kevin (PurchaseItem, Customer)
+Nadine (Return, ReturnItem)
+
+
+
+2) Java files:
+Write getters and setters for every attributes of the schema
+Basically class = relation name, fields = attributes
+
+———————————
+
+DEADLINE #2:
