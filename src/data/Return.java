@@ -1,4 +1,4 @@
-//package ...;
+package cpsc304.src.data;
 
 import java.math.BigInteger;
 import java.text.DateFormat;
