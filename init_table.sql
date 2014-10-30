@@ -47,20 +47,20 @@ create table return_item
 drop table if exists item;
 create table item
 	(upc integer not null,
-	item_title char(100),
-	item_type char(10),
-	item_category char(100),
-	item_company char(100),
-	item_year integer,
-	item_price integer,
-	item_stock integer,
+	title char(100),
+	_type char(10),
+	category char(100),
+	company char(100),
+	year integer,
+	price integer,
+	stock integer,
 	primary key (upc));
 
 drop table if exists lead_singer;
 create table lead_singer;
 	(upc integer not null,
-	lead_singer_name char(100) not null,
-	primary key (upc, lead_singer_name));
+	name char(100) not null,
+	primary key (upc, name));
 
 	
 
