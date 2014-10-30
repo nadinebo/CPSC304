@@ -49,7 +49,7 @@ public class Item
 	}
 
 	public String getCateory(){
-		return this.category();
+		return this.category;
 	}
 
 	public void setCategory(String category){
@@ -86,4 +86,5 @@ public class Item
 
 	public void setStock(int stock){
 		this.stock = stock;
-	}	
+	}
+}	
