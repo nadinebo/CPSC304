@@ -42,7 +42,27 @@ create table return_item
 	foreign key (retID) references return,
 	foreign key (upc) references item);
 
+-- Stewart --
+-- * Done in vim * --
+drop table if exists item;
+create table item
+	(upc integer not null,
+	item_title char(100),
+	item_type char(10),
+	item_category char(100),
+	item_company char(100),
+	item_year integer,
+	item_price integer,
+	item_stock integer,
+	primary key (upc));
 
+drop table if exists lead_singer;
+create table lead_singer;
+	(upc integer not null,
+	lead_singer_name char(100) not null,
+	primary key (upc, lead_singer_name));
+
+	
 
 
 
