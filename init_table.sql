@@ -62,8 +62,26 @@ create table lead_singer;
 	name char(100) not null,
 	primary key (upc, name));
 
-	
+-- Kevin --
+-- * Done in Sublime Text * --
 
+drop table if exists Purchase_Item;
+create table Purchase_Item
+	(receiptID char(10),
+	upc char(10),
+	quantity char(10)
+	primary key (receiptID, upc),
+	foreign key (receiptID) references Order,
+	foreign key (upc) references Item);
+
+drop table if exists Customer;
+create table Customer
+	(cid char(10),
+	password char(100),
+	name char(100),
+	address char(100),
+	phone char(10),
+	primary key (cid));
 
 
 
