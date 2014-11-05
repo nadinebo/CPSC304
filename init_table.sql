@@ -19,6 +19,30 @@
 -- if some table name might exist as a SQL command, add '_'
 -- to its end (eg. 'return' = 'return_')
 
+-- Nicole --
+
+drop table if exists hasSong
+create table hasSong (
+upc int not null,
+title char(100) not null
+CONSTRAINT [PK_hasSong] PRIMARY KEY CLUSTERED 
+(
+	upc ASC,
+	title ASC
+)
+)
+
+drop table if exists Order
+create table Order (
+receiptId int primary key not null,
+date datetime not null,
+cid int foreign key references Customer not null,
+card# int not null,
+expiryDate int not null,
+expectedDate datetime not null,
+DeliveredDate datetime
+)
+
 
 -- Nadine --
 -- * Done in mySQL * --
@@ -62,8 +86,26 @@ create table lead_singer;
 	name char(100) not null,
 	primary key (upc, name));
 
-	
+-- Kevin --
+-- * Done in Sublime Text * --
 
+drop table if exists Purchase_Item;
+create table Purchase_Item
+	(receiptID char(10),
+	upc char(10),
+	quantity char(10)
+	primary key (receiptID, upc),
+	foreign key (receiptID) references Order,
+	foreign key (upc) references Item);
+
+drop table if exists Customer;
+create table Customer
+	(cid char(10),
+	password char(100),
+	name char(100),
+	address char(100),
+	phone char(10),
+	primary key (cid));
 
 
 
