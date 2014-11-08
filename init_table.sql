@@ -1,5 +1,7 @@
 create database Houns;
 
+-- TEST, CAN YOU SEE THIS? --
+
 use Houns;
 
 drop table if exists Customer;
