@@ -14,6 +14,8 @@
 		initLogic();
 		initPresentation();
 		echo "initComplete";
+		insertLeadSinger('384932647092','St.Vincent');
+		echo "insert comp";
 	?>
 </body>
 </html>
