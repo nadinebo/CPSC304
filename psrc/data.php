@@ -9,7 +9,6 @@ class Data
 	{
 			include 'objs/LeadSinger.php';
 
-			echo "Welcome to Houns ";
 			$server = '127.0.0.1';
 			$user = 'root';
 			$pass = '';
@@ -18,7 +17,6 @@ class Data
 			global $connection;
 			$connection = new mysqli($server, $user, $pass, $dbname);
 			mysql_select_db($dbname);
-			echo "Connection attempt made";
 		    
 		    if (!mysqli_connect_errno()) {
 			echo "You connected!";
@@ -31,7 +29,6 @@ class Data
 		    }	
 
 			//create references to the data objects
-			echo"constructing data objects";
 			global $LS;
 			$LS = new LeadSinger($connection);
 	}

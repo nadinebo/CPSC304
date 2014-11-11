@@ -1,18 +1,32 @@
 <?php
-	error_reporting(E_ALL);
+	
+	$Data = NULL;
 class Logic
 {
-//	include 'data.php';
-
-	public function initLogic()
+	public function __construct()
 	{
-		echo"Logic time";
-	}
+		include 'data.php';
 
+		global $Data;
+		$Data = new Data();
+	}
+	
+	public function newLeadSinger($UPC,$Name)
+	{
+		global $Data;
+		return $Data->insertLeadSinger($UPC,$Name);	
+	}	
+	
 	public function getLeadSingers()
 	{
-		echo "searching for those lead singners";
-		return queryAllLeadSingers();	
+		global $Data;
+		return $Data->queryAllLeadSingers();	
 	}	
-}
+	
+	public function removeLeadSingers($UPC,$Name)
+	{
+		global $Data;
+		return $Data->deleteLeadSinger($UPC,$Name);	
+	}
+}	
 ?>
