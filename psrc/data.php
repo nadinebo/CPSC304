@@ -8,6 +8,8 @@ class Data
 	public function __construct()
 	{
 			include 'objs/LeadSinger.php';
+			include 'objs/HasSong.php';
+			include 'objs/Order.php';
 
 			$server = '127.0.0.1';
 			$user = 'root';
@@ -31,6 +33,12 @@ class Data
 			//create references to the data objects
 			global $LS;
 			$LS = new LeadSinger($connection);
+			
+			global $O;
+			$O = new Order($connection);
+			
+			global $HS;
+			$HS = new HasSong($connection);
 	}
 
 	public function insertLeadSinger($UPC,$Name){
@@ -49,7 +57,46 @@ class Data
 		$LS->deleteLeadSinger($UPC,$Name);
 	}
 
+	public function insertOrder($date,$CID,$cardNum,$expiryDate,$expectedDate){
+		echo"orderinsertCalled DATA";
+		global $O;
+		$O->insertOrder($date,$CID,$cardNum,$expiryDate,$expectedDate);
+	}
+	
+	public function queryOrder($CID){
+		global $O;
+		return $O->queryOrder($CID);
+	}
 
+	public function queryAllOrders(){
+		global $O;
+		return $O->queryAllOrders();
+	}
 
+	public function deleteOrder($receiptID){
+		global $O;
+		$O->deleteOrder($receiptID);
+	}
+
+	public function insertHasSong($UPC,$title){
+		echo"HasSonginsertCalled DATA";
+		global $HS;
+		$HS->insertHasSong($UPC,$title);
+	}
+	
+	public function querySongTitles($UPC){
+		global $HS;
+		return $HS->querySongTitles($UPC);
+	}
+
+	public function queryAllSongTitles(){
+		global $HS;
+		return $HS->queryAllSongTitles();
+	}
+
+	public function deleteSongTitle($UPC,$title){
+		global $HS;
+		$HS->deleteSongTitle($UPC,$title);
+	}
 }
 ?>
