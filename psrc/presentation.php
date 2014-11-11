@@ -23,6 +23,8 @@ class Presentation
 		}
 		$Logic->removeLeadSingers('384932647092','St.Vincent');
 
+		$Logic->getAllOrders();
+		echo "getting all orders";
 	}
 }
 
