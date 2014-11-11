@@ -1,9 +1,18 @@
 <?php
-
-function initLogic()
+	error_reporting(E_ALL);
+class Logic
 {
+//	include 'data.php';
 
-	echo"Logic time";
+	public function initLogic()
+	{
+		echo"Logic time";
+	}
+
+	public function getLeadSingers()
+	{
+		echo "searching for those lead singners";
+		return queryAllLeadSingers();	
+	}	
 }
-
 ?>
