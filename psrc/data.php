@@ -10,6 +10,8 @@ class Data
 			include 'objs/LeadSinger.php';
 			include 'objs/HasSong.php';
 			include 'objs/Order.php';
+			include 'objs/Return_.php';
+			include 'objs/ReturnItem.php';
 
 			$server = '127.0.0.1';
 			$user = 'root';
@@ -39,6 +41,12 @@ class Data
 			
 			global $HS;
 			$HS = new HasSong($connection);
+			
+			global $R;
+			$R = new Return_($connection);
+			
+			global $RI;
+			$RI = new ReturnItem($connection);
 	}
 
 	public function insertLeadSinger($UPC,$Name){
@@ -97,6 +105,48 @@ class Data
 	public function deleteSongTitle($UPC,$title){
 		global $HS;
 		$HS->deleteSongTitle($UPC,$title);
+	}
+	
+	public function insertReturn($returnID,$date,$receiptID){
+		echo"returnInsert Called DATA";
+		global $R;
+		$R->insertReturn($returnID,$date,$receiptID);
+	}
+	
+	public function queryAllReturns(){
+		global $R;
+		return $R->queryAllReturns();
+	}
+	
+	public function queryReturn(){
+		global $R;
+		return $R->queryReturn();
+	}
+
+	public function deleteReturn($returnID){
+		global $R;
+		$R->deleteReturn($returnID);
+	}
+	
+	public function insertReturnItem($returnID,$UPC,$returnQuantity){
+		echo"returnItemInsert Called DATA";
+		global $RI;
+		$RI->insertReturn($returnID,$UPC,$returnQuantity);
+	}
+	
+	public function queryAllReturnItems(){
+		global $RI;
+		return $RI->queryAllReturnItems();
+	}
+	
+	public function queryReturnItem($returnID,$UPC){
+		global $RI;
+		return $RI->queryReturnItem($returnID,$UPC);
+	}
+
+	public function deleteReturnItem($returnID,$UPC){
+		global $RI;
+		$RI->deleteReturnItem($returnID,$UPC);
 	}
 }
 ?>

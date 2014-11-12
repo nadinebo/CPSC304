@@ -77,5 +77,54 @@ class Logic
 		return $Data->deleteSongTitle($UPC,$title);	
 	}
 	
+	
+	public function newReturn($returnID,$date,$receiptID)
+	{
+		global $Data;
+		return $Data->insertReturn($returnID,$date,$receiptID);	
+	}	
+	
+	public function getReturn($returnID)
+	{
+		global $Data;
+		return $Data->queryReturn($returnID);	
+	}	
+
+	public function getAllReturns()
+	{
+		global $Data;
+		return $Data->queryAllReturns();	
+	}
+		
+	public function removeReturn($returnID)
+	{
+		global $Data;
+		return $Data->deleteReturn($returnID);	
+	}
+	
+		public function newReturnItem($returnID,$UPC,$returnQuantity)
+	{
+		global $Data;
+		return $Data->insertReturnItem($returnID,$UPC,$returnQuantity);	
+	}	
+	
+	public function getReturnItem($returnID,$UPC)
+	{
+		global $Data;
+		return $Data->queryReturnItem($returnID,$UPC);	
+	}	
+
+	public function getAllReturnItems()
+	{
+		global $Data;
+		return $Data->queryAllReturnItems();	
+	}
+		
+	public function removeReturnItem($returnID,$UPC)
+	{
+		global $Data;
+		return $Data->deleteReturnItem($returnID,$UPC);	
+	}
+
 }	
 ?>
