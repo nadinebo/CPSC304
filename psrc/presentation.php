@@ -8,12 +8,12 @@ class Presentation
 		global $Logic;
 		$Logic = new Logic;
 	}
-
-	public function demo()
+	
+	public function singersd()
 	{
 		global $Logic;
 		$Logic->newLeadSinger('384932647092','St.Vincent');
-		echo "insert comp";
+		$Logic->newLeadSinger('222313441242','Michal Geera');
 		//testing using the layers as classes
 		$result = $Logic->getLeadSingers();
 		//a bit of test display for the sake of it
@@ -22,9 +22,14 @@ class Presentation
 			echo"<td>".$row['name']."</td>";
 		}
 		$Logic->removeLeadSingers('384932647092','St.Vincent');
+	}
 
-		$Logic->getAllOrders();
-		echo "getting all orders";
+	public function demo()
+	{
+		global $Logic;
+		$this->singersd();
+		//$Logic->getAllOrders();
+		//echo "getting all orders";
 		//insert first return
 		$Logic->newReturn('1234567890','11/11/2014','0011112014');
 		echo "insert a return";

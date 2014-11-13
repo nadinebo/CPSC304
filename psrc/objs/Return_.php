@@ -15,7 +15,8 @@ class Return_
 		echo "   adding a return   ";
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO Return_ (returnID,date,receiptID) Values (?,?,?)");
-		$stmt->bind_param("is", $returnID, $date, $receiptID);
+		$stmt->bind_param("isi", $returnID, $date, $receiptID);
+		echo "binded";
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);

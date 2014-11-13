@@ -16,7 +16,7 @@ create table Customer
 
 drop table if exists Item;
 create table Item
-	(upc int auto_increment not null,
+	(upc int not null,
 	title char(100),
 	type char(10) not null,
 	category char(100),

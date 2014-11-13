@@ -60,7 +60,7 @@ class Data
 		return $LS->queryAllLeadSingers();
 	}
 
-	public function deleteLeadinger($UPC,$Name){
+	public function deleteLeadSinger($UPC,$Name){
 		global $LS;
 		$LS->deleteLeadSinger($UPC,$Name);
 	}
