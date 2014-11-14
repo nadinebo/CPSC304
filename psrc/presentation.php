@@ -8,20 +8,49 @@ class Presentation
 		global $Logic;
 		$Logic = new Logic;
 	}
+
+
+	public function buildTable($tableName,$result,$schema){
+		
+		echo "<h2>".$tableName."</h2>";
+		echo "<table border=0 cellpadding =0 cellspacing=0>";
+		echo "<tr valine=center>";
+		for($i=0;$i<count($schema);$i++)
+		{
+			echo "<td class=rowheader>".$schema[$i]."</td>";
+		}
+		echo "</tr>";
+		
+		while($row = $result->fetch_assoc()){
+			for($i=0;$i<count($schema);$i++)
+			{
+				echo"<td>".$row[$schema[$i]]."</td>";
+			}
+			echo"</td></tr>";
+		}
+		echo"</table>";
+		echo"<br><br>";
+	}
 	
 	public function singersd()
 	{
 		global $Logic;
+		
 		$Logic->newLeadSinger('384932647092','St.Vincent');
 		$Logic->newLeadSinger('222313441242','Michal Geera');
+		
 		//testing using the layers as classes
 		$result = $Logic->getLeadSingers();
+		
+		$this->buildTable("Lead Singer",$result,['upc','name']);
+		//Create a table to display the singers
+
+		
 		//a bit of test display for the sake of it
-		while($row = $result->fetch_assoc()){
-			echo"<td>".$row['upc']."</td>";
-			echo"<td>".$row['name']."</td>";
-		}
-		$Logic->removeLeadSingers('384932647092','St.Vincent');
+
+
+		$Logic->removeLeadSingers('2147483647','St.Vincent');
+		$Logic->removeLeadSingers('2147483647','Michal Geera');
 	}
 
 	public function demo()

@@ -50,7 +50,6 @@ class Data
 	}
 
 	public function insertLeadSinger($UPC,$Name){
-		echo"leadSingerinsertCalled DATA";
 		global $LS;
 		$LS->insertLeadSinger($UPC,$Name);
 	}
