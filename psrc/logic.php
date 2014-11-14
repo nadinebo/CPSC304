@@ -44,10 +44,10 @@ class Logic
 		return $Data->deleteLeadSinger($UPC,$Name);	
 	}
 	
-	public function newOrder($date,$CID,$cardNum,$expiryDate,$expectedDate)
+	public function newOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate)
 	{
 		global $Data;
-		return $Data->insertOrder($date,$CID,$cardNum,$expiryDate,$expectedDate);	
+		return $Data->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate);	
 	}	
 	
 	public function getOrder($CID)

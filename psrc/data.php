@@ -93,10 +93,10 @@ class Data
 		$LS->deleteLeadSinger($UPC,$Name);
 	}
 
-	public function insertOrder($date,$CID,$cardNum,$expiryDate,$expectedDate){
+	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate){
 		echo"orderinsertCalled DATA";
 		global $O;
-		$O->insertOrder($date,$CID,$cardNum,$expiryDate,$expectedDate);
+		$O->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate);
 	}
 	
 	public function queryOrder($CID){

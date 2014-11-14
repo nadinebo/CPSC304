@@ -13,19 +13,19 @@ class Order_
 	}
 
 	//Basic manipulation functions
-	public function insertOrder($date,$CID,$cardNum,$expiryDate,$expectedDate)
+	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate)
 	{
 		echo "   creating a new order   ";
 		global $connection;
-		$stmt = $connection->prepare("INSERT INTO Order_ (date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?)");
-		$stmt->bind_param("siiss", $date, $CID, $cardNum, $expiryDate, $expectedDate);
+		$stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?)");
+		$stmt->bind_param("isiiss", $receiptID, $date, $CID, $cardNum, $expiryDate, $expectedDate);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
 		} else {
 			echo "<b>Successfully added new order for ".$CID."</b>";
-			$query = $queryOrder($CID);
-			return $query;
+			//$query = $queryOrder($CID);
+			//return $query;
 		}
 	}
 
