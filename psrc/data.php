@@ -14,13 +14,14 @@ class Data
 			include 'objs/ReturnItem.php';
 			include 'objs/Customer.php';
 			include 'objs/PurchaseItem.php';
+			echo "dinit";
 			include 'objs/Item.php';
 
 			$server = '127.0.0.1';
 			$user = 'root';
 			$pass = '';
 			$dbname = 'Houns';
-			
+		echo "conninit";	
 			global $connection;
 			$connection = new mysqli($server, $user, $pass, $dbname);
 			mysql_select_db($dbname);

@@ -29,7 +29,7 @@ class PurchaseItem
 	{
 		echo "   query a purchase   ";
 		global $connection;
-		if(!$result = $connection->query("Select * FROM PurchaseItem") {
+		if(!$result = $connection->query("Select * FROM PurchaseItem")) {
 			die('There was an error running the query on PurchaseItem[' .$db->error . ']');
 		} else {
 			echo "<b>Search is succesful for PurchaseItem";

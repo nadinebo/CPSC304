@@ -9,6 +9,7 @@
 		error_reporting(E_STRICT);
 		include 'presentation.php';
 		$P = new Presentation();
+		echo "pinit";
 		$P->demo();
 		echo "initComplete";
 		

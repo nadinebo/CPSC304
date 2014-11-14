@@ -6,6 +6,7 @@ class Presentation
 	{
 		include 'logic.php';
 		global $Logic;
+		echo "logicinit";
 		$Logic = new Logic;
 	}
 
@@ -70,6 +71,7 @@ class Presentation
 	public function demo()
 	{
 		global $Logic;
+		echo"entering demo";
 		$this->singersd();
 		$this->itemsd();
 		//$Logic->getAllOrders();
