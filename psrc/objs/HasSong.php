@@ -31,7 +31,7 @@ class HasSong
 		echo "   get the song titles for this item   ";
 		global $connection;
 		$stmt = $connection->prepare("Select title FROM HasSong WHERE upc=?");
-		$stmt->bind_param("is",$UPC);
+		$stmt->bind_param("i",$UPC);
 		$stmt->execute();
 		if($stmt->error) {
 			die('There was an error running the query [' .$db->error . ']');

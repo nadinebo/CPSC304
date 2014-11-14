@@ -17,7 +17,7 @@ class Order_
 		echo "   creating a new order   ";
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO Order_ (date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?)");
-		$stmt->bind_param("is", $date, $CID, $cardNum, $expiryDate, $expectedDate);
+		$stmt->bind_param("siiss", $date, $CID, $cardNum, $expiryDate, $expectedDate);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
@@ -33,7 +33,7 @@ class Order_
 		echo "   get the most recent order for this customer   ";
 		global $connection;
 		$stmt = $connection->query("Select max(receiptID), cid, max(date) FROM Order_ WHERE cid=?");
-		$stmt->bind_param("is",$CID);
+		$stmt->bind_param("i",$CID);
 		$stmt->execute();
 		if($stmt->error) {	
 			die('There was an error running the query [' .$db->error . ']');
@@ -60,7 +60,7 @@ class Order_
 		echo "  deleting order   ";
 		global $connection;
 		$stmt = $connection->prepare("DELETE FROM Order_ WHERE receiptID=?");
-		$stmt->bind_param("is",$UPC,$Name);
+		$stmt->bind_param("i",$receiptID);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
