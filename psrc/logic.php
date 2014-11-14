@@ -141,5 +141,41 @@ class Logic
 		return $Data->deleteReturnItem($returnID,$UPC);	
 	}
 
+	public function newCustomer($cid,$password,$name,$address,$phone)
+	{
+		global $Data;
+		return $Data->insertCustomer($cid,$password,$name,$address,$phone);	
+	}	
+	
+	public function getCustomers()
+	{
+		global $Data;
+		return $Data->queryAllCustomers();	
+	}	
+	
+	public function removeCustomer($cid)
+	{
+		global $Data;
+		return $Data->deleteCustomer($cid);	
+	}
+
+
+		public function newPurchaseItem($receiptID, $UPC, $purchaseQuantity)
+	{
+		global $Data;
+		return $Data->insertPurchaseItem($receiptID, $UPC, $purchaseQuantity);	
+	}	
+	
+	public function getPurchaseItems()
+	{
+		global $Data;
+		return $Data->queryAllPurchaseItems();	
+	}	
+	
+	public function removePurchaseItem($receiptID,$UPC)
+	{
+		global $Data;
+		return $Data->deletePurchaseItem($receiptID$UPC);	
+	}
 }	
 ?>
