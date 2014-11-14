@@ -32,6 +32,20 @@ class Presentation
 		echo"<br><br>";
 	}
 	
+	public function Itemsd()
+	{
+		global $Logic;
+		
+		$Logic->newItem('384932647092','St.Vincent','CD','POP','muhrecords',2014,20,1);
+		
+		//testing using the layers as classes
+		$result = $Logic->getItems();
+		
+		$this->buildTable("Items",$result,['upc','title','type','category','company','year','price','stock']);
+		//Create a table to display the singers
+		$Logic->removeItem('2147483647');
+	}
+
 	public function singersd()
 	{
 		global $Logic;
@@ -57,6 +71,7 @@ class Presentation
 	{
 		global $Logic;
 		$this->singersd();
+		$this->itemsd();
 		//$Logic->getAllOrders();
 		//echo "getting all orders";
 		//insert first return
