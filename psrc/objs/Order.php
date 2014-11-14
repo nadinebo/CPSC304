@@ -47,7 +47,7 @@ class Order
 	{
 		echo "   query orders   ";
 		global $connection;
-		if(!$result = $connection->query("Select * From `Order`")) {
+		if(!$result = $connection->query("Select * From Order")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
 			echo "<b>Search successful<\b>";

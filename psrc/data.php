@@ -14,6 +14,7 @@ class Data
 			include 'objs/ReturnItem.php';
 			include 'objs/Customer.php';
 			include 'objs/PurchaseItem.php';
+			include 'objs/Item.php';
 
 			$server = '127.0.0.1';
 			$user = 'root';
@@ -50,6 +51,9 @@ class Data
 			global $RI;
 			$RI = new ReturnItem($connection);
 
+			global $I;
+			$I = new Item($connection);
+			
 			global $PI;
 			$PI = new PurchaseItem($connection);
 
@@ -57,8 +61,22 @@ class Data
 			$C = new Customer($connection);
 	}
 
+	public function insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock){
+		global $I;
+		$I->insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock);
+	}
+	
+	public function queryAllItems(){
+		global $I;
+		return $I->queryAllItems();
+	}
+
+	public function deleteItem($UPC){
+		global $I;
+		$I->deleteItem($UPC);
+	}
+
 	public function insertLeadSinger($UPC,$Name){
-		echo"leadSingerinsertCalled DATA";
 		global $LS;
 		$LS->insertLeadSinger($UPC,$Name);
 	}

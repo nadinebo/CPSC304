@@ -1,8 +1,9 @@
+
 <?php
 
 $connection = NULL;
 
-class LeadSinger
+class Item 
 {
 	public function __construct($conn)
 	{
@@ -12,11 +13,11 @@ class LeadSinger
 	}
 
 	//Basic manipulation functions
-	public function insertLeadSinger($UPC,$Name)
+	public function insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock)
 	{
 		global $connection;
-		$stmt = $connection->prepare("INSERT INTO LeadSinger (upc,name) Values (?,?)");
-		$stmt->bind_param("is", $UPC, $Name);
+		$stmt = $connection->prepare("INSERT INTO Item (upc,title,type,category,company,year,price,stock) Values (?,?,?,?,?,?,?,?)");
+		$stmt->bind_param("issssiii", $UPC, $title,$type,$category,$company,$year,$price,$stock);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);
@@ -25,10 +26,10 @@ class LeadSinger
 		}
 	}
 
-	public function queryAllLeadSingers()
+	public function queryAllItems()
 	{
 		global $connection;
-		if(!$result = $connection->query("Select * From LeadSinger")) {
+		if(!$result = $connection->query("Select * From Item")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
 			echo "<b>Search succussfull</b><br>";
@@ -36,11 +37,11 @@ class LeadSinger
 		return $result;
 	}
 
-	public function deleteLeadSinger($UPC,$Name)
+	public function deleteItem($UPC)
 	{
 		global $connection;
-		$stmt = $connection->prepare("DELETE FROM LeadSinger WHERE upc=? AND name=?");
-		$stmt->bind_param("is",$UPC,$Name);
+		$stmt = $connection->prepare("DELETE FROM Item WHERE upc=?");
+		$stmt->bind_param("i",$UPC);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);

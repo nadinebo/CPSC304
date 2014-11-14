@@ -11,6 +11,21 @@ class Logic
 		$Data = new Data();
 	}
 	
+	public function newItem($UPC,$title,$type,$category,$company,$year,$price,$stock){
+		global $Data;
+		$Data->insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock);
+	}
+	
+	public function getItems(){
+		global $Data;
+		return $Data->queryAllItems();
+	}
+
+	public function removeItem($UPC){
+		global $Data;
+		$Data->deleteItem($UPC);
+	}
+	
 	public function newLeadSinger($UPC,$Name)
 	{
 		global $Data;
@@ -160,7 +175,7 @@ class Logic
 	public function removePurchaseItem($receiptID,$UPC)
 	{
 		global $Data;
-		return $Data->deletePurchaseItem($receiptID$UPC);	
+		return $Data->deletePurchaseItem($receiptID,$UPC);	
 	}
 }	
 ?>
