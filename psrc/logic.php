@@ -175,7 +175,7 @@ class Logic
 	public function removePurchaseItem($receiptID,$UPC)
 	{
 		global $Data;
-		return $Data->deletePurchaseItem($receiptID$UPC);	
+		return $Data->deletePurchaseItem($receiptID,$UPC);	
 	}
 }	
 ?>
