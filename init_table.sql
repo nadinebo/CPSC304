@@ -1,7 +1,5 @@
 create database Houns;
 
--- TEST, CAN YOU SEE THIS? --
-
 use Houns;
 
 drop table if exists Customer;
@@ -14,8 +12,8 @@ create table Customer
 	primary key (cid));
 
 
-drop table if exists Item;
-create table Item
+drop table if exists Item_;
+create table Item_
 	(upc int not null,
 	title char(100),
 	type char(10) not null,
@@ -39,11 +37,9 @@ create table hasSong (
 	upc int not null,
 	title char(100) not null,
 	primary key (upc, title),
-	foreign key (upc) references Item (upc) on delete cascade on update cascade);
+	foreign key (upc) references Item_ (upc) on delete cascade on update cascade);
 
 
---drop table if exists `Order`;
---create table `Order` (
 drop table if exists Order_;
 create table Order_ (
 	receiptId int auto_increment not null,
@@ -63,15 +59,12 @@ create table PurchaseItem
 	upc int not null,
 	quantity int not null,
 	primary key (receiptID, upc),
---	foreign key (receiptID) references `Order` (receiptID) on delete cascade on update cascade,
 	foreign key (receiptID) references Order_ (receiptID) on delete cascade on update cascade,
-	foreign key (upc) references Item (upc) on delete cascade on update cascade);
+	foreign key (upc) references Item_ (upc) on delete cascade on update cascade);
 
 
---drop table if exists `Return`;
---create table `Return`
 drop table if exists Return_;
-create table Return_(
+create table Return_
 	(retID int auto_increment not null,
 	returnDate date not null,
 	receiptID int not null unique,
@@ -86,9 +79,8 @@ create table ReturnItem
 	returnQuantity int not null,
 	upc int not null,
 	primary key (retID, upc),
---	foreign key (retID) references `Return` (retID) on delete cascade on update cascade,
 	foreign key (retID) references Return_ (retID) on delete cascade on update cascade,
-	foreign key (upc) references Item (upc) on delete cascade on update cascade);
+	foreign key (upc) references Item_ (upc) on delete cascade on update cascade);
 
 
 commit;
