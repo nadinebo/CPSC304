@@ -10,18 +10,18 @@ class Return_
 	}
 	
 	
-	public function insertReturn($returnID,$date,$receiptID)
+	public function insertReturn($retID,$returnDate,$receiptID)
 	{
 		echo "   adding a return   ";
 		global $connection;
-		$stmt = $connection->prepare("INSERT INTO Return_ (returnID,date,receiptID) Values (?,?,?)");
-		$stmt->bind_param("isi", $returnID, $date, $receiptID);
-		echo "binded";
+		$stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) Values (?,?,?)");
+		//$stmt = $connection->prepare("INSERT INTO `Return` (returnID,date,receiptID) Values (?,?,?)");
+		$stmt->bind_param("sss", $retID, $returnDate, $receiptID);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
 		} else {
-			echo "<b>Successfully added return #".$returnID."</b>";
+			echo "<b>Successfully added return #".$retID."</b>";
 		}
 	}
 	
@@ -31,20 +31,22 @@ class Return_
 		echo "   query a return   ";
 		global $connection;
 		if(!$result = $connection->query("Select * From Return_")) {
-			die('An error occured while running the query on Return_[' .$db->error . ']');
+		//if(!$result = $connection->query("Select * From `Return`")) {
+			die('An error occured while running the query on Return[' .$db->error . ']');
 		} else {
-			echo "<b>Search is succussfull for Return_<\b>";
+			echo "<b>Search is succussfull for Return<\b>";
 		}
 		return $result;
 	}
 	
 	
-		public function queryReturn($returnID)
+		public function queryReturn($retID)
 	{
 		echo "   get the date and receiptID for the return   ";
 		global $connection;
-		$stmt = $connection->prepare("Select date, receiptID FROM Return_ WHERE returnID=?");
-		$stmt->bind_param("is",$returnID);
+		$stmt = $connection->prepare("Select returnDate, receiptID FROM Return_ WHERE retID=?");
+		//$stmt = $connection->prepare("Select date, receiptID FROM `Return_ WHERE returnID=?");
+		$stmt->bind_param("s",$retID);
 		$stmt->execute();
 		if($stmt->error) {
 			die('There was an error running the query [' .$db->error . ']');
@@ -55,17 +57,18 @@ class Return_
 	}
 	
 	
-	public function deleteReturn($returnID)
+	public function deleteReturn($retID)
 	{
 		echo "  deleting a return   ";
 		global $connection;
-		$stmt = $connection->prepare("DELETE FROM Return_ WHERE returnID=?");
-		$stmt->bind_param("is",$returnID);
+		$stmt = $connection->prepare("DELETE FROM Return_ WHERE retID=?");
+		//$stmt = $connection->prepare("DELETE FROM `Return` WHERE returnID=?");
+		$stmt->bind_param("s",$retID);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
 		} else {
-			echo "<b>Successfully deleted the return #".$returnID."</b>";
+			echo "<b>Successfully deleted the return #".$retID."</b>";
 		}
 	}
 }

@@ -10,12 +10,12 @@ class ReturnItem
 	}
 	
 	
-	public function insertReturnItem($returnID,$UPC,$returnQuantity)
+	public function insertReturnItem($retID,$UPC,$returnQuantity)
 	{
 		echo "   adding a return item  ";
 		global $connection;
-		$stmt = $connection->prepare("INSERT INTO ReturnItem (returnID,UPC,returnQuantity) Values (?,?,?)");
-		$stmt->bind_param("is", $returnID, $UPC, $returnQuantity);
+		$stmt = $connection->prepare("INSERT INTO ReturnItem (retID,UPC,returnQuantity) Values (?,?,?)");
+		$stmt->bind_param("sss", $retID, $UPC, $returnQuantity);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
@@ -38,12 +38,12 @@ class ReturnItem
 	}
 	
 	
-		public function queryReturnItem($returnID, $UPC)
+		public function queryReturnItem($retID, $UPC)
 	{
 		echo "   get the quantity for the return item  ";
 		global $connection;
-		$stmt = $connection->prepare("Select returnQuantity FROM Return_ WHERE returnID=? AND upc=?");
-		$stmt->bind_param("is",$returnID, $UPC);
+		$stmt = $connection->prepare("Select returnQuantity FROM Return_ WHERE retID=? AND upc=?");
+		$stmt->bind_param("ss",$retID, $UPC);
 		$stmt->execute();
 		if($stmt->error) {
 			die('There was an error running the query [' .$db->error . ']');
@@ -54,12 +54,12 @@ class ReturnItem
 	}
 	
 	
-	public function deleteReturnItem($returnID, $UPC)
+	public function deleteReturn($retID, $UPC)
 	{
 		echo "  deleting a return item   ";
 		global $connection;
-		$stmt = $connection->prepare("DELETE FROM ReturnItem WHERE returnID=? AND upc=?");
-		$stmt->bind_param("is",$returnID, $UPC);
+		$stmt = $connection->prepare("DELETE FROM ReturnItem WHERE retID=? AND upc=?");
+		$stmt->bind_param("ss",$retID, $UPC);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
