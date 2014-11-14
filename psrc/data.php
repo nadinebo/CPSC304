@@ -135,10 +135,10 @@ class Data
 		$HS->deleteSongTitle($UPC,$title);
 	}
 	
-	public function insertReturn($returnID,$date,$receiptID){
+	public function insertReturn($retID,$returnDate,$receiptID){
 		echo"returnInsert Called DATA";
 		global $R;
-		$R->insertReturn($returnID,$date,$receiptID);
+		$R->insertReturn($retID,$returnDate,$receiptID);
 	}
 	
 	public function queryAllReturns(){
@@ -151,15 +151,15 @@ class Data
 		return $R->queryReturn();
 	}
 
-	public function deleteReturn($returnID){
+	public function deleteReturn($retID){
 		global $R;
-		$R->deleteReturn($returnID);
+		$R->deleteReturn($retID);
 	}
 	
-	public function insertReturnItem($returnID,$UPC,$returnQuantity){
+	public function insertReturnItem($retID,$UPC,$returnQuantity){
 		echo"returnItemInsert Called DATA";
 		global $RI;
-		$RI->insertReturn($returnID,$UPC,$returnQuantity);
+		$RI->insertReturn($retID,$UPC,$returnQuantity);
 	}
 	
 	public function queryAllReturnItems(){
@@ -167,14 +167,14 @@ class Data
 		return $RI->queryAllReturnItems();
 	}
 	
-	public function queryReturnItem($returnID,$UPC){
+	public function queryReturnItem($retID,$UPC){
 		global $RI;
-		return $RI->queryReturnItem($returnID,$UPC);
+		return $RI->queryReturnItem($retID,$UPC);
 	}
 
-	public function deleteReturnItem($returnID,$UPC){
+	public function deleteReturnItem($retID,$UPC){
 		global $RI;
-		$RI->deleteReturnItem($returnID,$UPC);
+		$RI->deleteReturnItem($retID,$UPC);
 	}
 
 	public function insertCustomer($cid,$password,$name,$address,$phone)

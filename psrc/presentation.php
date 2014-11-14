@@ -37,22 +37,26 @@ class Presentation
 	{
 		global $Logic;
 		
-		$Logic->newItem('384932647092','St.Vincent','CD','POP','muhrecords',2014,20,1);
+		//upc 
+		$Logic->newItem('38493','St.Vincent','CD','POP','muhrecords',2014,20,1);
+		//Added this
+		$Logic->newItem('11111','test1','CD','POP','muhrecords',2014,20,10);
+		$Logic->newItem('22222','test2','CD','POP','muhrecords',2014,20,1);
 		
 		//testing using the layers as classes
 		$result = $Logic->getItems();
 		
 		$this->buildTable("Items",$result,['upc','title','type','category','company','year','price','stock']);
 		//Create a table to display the singers
-		$Logic->removeItem('2147483647');
+		$Logic->removeItem('21474');
 	}
 
 	public function singersd()
 	{
 		global $Logic;
 		
-		$Logic->newLeadSinger('384932647092','St.Vincent');
-		$Logic->newLeadSinger('222313441242','Michal Geera');
+		$Logic->newLeadSinger('38493','St.Vincent');
+		$Logic->newLeadSinger('22231','Michal Geera');
 		
 		//testing using the layers as classes
 		$result = $Logic->getLeadSingers();
@@ -64,8 +68,8 @@ class Presentation
 		//a bit of test display for the sake of it
 
 
-		$Logic->removeLeadSingers('2147483647','St.Vincent');
-		$Logic->removeLeadSingers('2147483647','Michal Geera');
+		$Logic->removeLeadSingers('38493','St.Vincent');
+		$Logic->removeLeadSingers('22231','Michal Geera');
 	}
 
 	public function demo()
@@ -76,11 +80,20 @@ class Presentation
 		$this->itemsd();
 		//$Logic->getAllOrders();
 		//echo "getting all orders";
+		
+		
+		//$Logic->newOrder(
+		
+		
+		
+		
+		
 		//insert first return
-		$Logic->newReturn('1234567890','11/11/2014','0011112014');
+		//retID 12345 returnDate receiptID
+		$Logic->newReturn('12345','2014-11-11 01:02:03','12014');
 		echo "insert a return";
 		//insert second return
-		$Logic->newReturn('0987654321','10/11/2014','0010112014');
+		$Logic->newReturn('09876','2014-11-10 03:02:01','11014');
 		echo "insert a return";
 
 		$result = $Logic->getAllReturns();
@@ -90,10 +103,11 @@ class Presentation
 			echo"<td>".$row['date']."</td>";
 			echo"<td>".$row['receiptID']."</td><td>";
 		}
-		$Logic->removeReturn('0987654321');
+		//$Logic->removeReturn('09876');
 		
-		
-		$Logic->newReturnItem('1234567890','1111111111','1');
+		//retID 12345 upc 11111
+		$Logic->newReturnItem('12345','11111','1');
+		$Logic->newReturnItem('09876','22222','1');
 		echo "insert a return";
 
 		$result = $Logic->getAllReturnItems();
@@ -129,10 +143,11 @@ class Presentation
 
 		//testing PurchaseItem
 		//insert first PurchaseItem
-		$Logic->newPurchaseItem('1000', '1234', '5');
+		//receiptID 12014 upc 11111
+		$Logic->newPurchaseItem('12014', '11111', '5');
 		echo "insert a PurchaseItem";
 		//insert second PurchaseItem
-		$Logic->newPurchaseItem('2000', '2345', '5');
+		$Logic->newPurchaseItem('11014', '22222', '5');
 		echo "insert a PurchaseItem";
 
 		$result = $Logic->getPurchaseItems();
@@ -142,8 +157,8 @@ class Presentation
 			echo"<td>".$row['cid']."</td>";
 			echo"<td>".$row['purchaseQuantity']."</td>";
 		}
-		$Logic->removePurchaseItem('1000','1234');
-		$Logic->removePurchaseItem('2000','2345');
+		//$Logic->removePurchaseItem('1000','1234');
+		//$Logic->removePurchaseItem('2000','2345');
 	}
 }
 

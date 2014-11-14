@@ -93,16 +93,16 @@ class Logic
 	}
 	
 	
-	public function newReturn($returnID,$date,$receiptID)
+	public function newReturn($retID,$returnDate,$receiptID)
 	{
 		global $Data;
-		return $Data->insertReturn($returnID,$date,$receiptID);	
+		return $Data->insertReturn($retID,$returnDate,$receiptID);	
 	}	
 	
-	public function getReturn($returnID)
+	public function getReturn($retID)
 	{
 		global $Data;
-		return $Data->queryReturn($returnID);	
+		return $Data->queryReturn($retID);	
 	}	
 
 	public function getAllReturns()
@@ -111,22 +111,22 @@ class Logic
 		return $Data->queryAllReturns();	
 	}
 		
-	public function removeReturn($returnID)
+	public function removeReturn($retID)
 	{
 		global $Data;
-		return $Data->deleteReturn($returnID);	
+		return $Data->deleteReturn($retID);	
 	}
 	
-		public function newReturnItem($returnID,$UPC,$returnQuantity)
+		public function newReturnItem($retID,$UPC,$returnQuantity)
 	{
 		global $Data;
-		return $Data->insertReturnItem($returnID,$UPC,$returnQuantity);	
+		return $Data->insertReturnItem($retID,$UPC,$returnQuantity);	
 	}	
 	
-	public function getReturnItem($returnID,$UPC)
+	public function getReturnItem($retID,$UPC)
 	{
 		global $Data;
-		return $Data->queryReturnItem($returnID,$UPC);	
+		return $Data->queryReturnItem($retID,$UPC);	
 	}	
 
 	public function getAllReturnItems()
@@ -135,10 +135,10 @@ class Logic
 		return $Data->queryAllReturnItems();	
 	}
 		
-	public function removeReturnItem($returnID,$UPC)
+	public function removeReturnItem($retID,$UPC)
 	{
 		global $Data;
-		return $Data->deleteReturnItem($returnID,$UPC);	
+		return $Data->deleteReturnItem($retID,$UPC);	
 	}
 
 	public function newCustomer($cid,$password,$name,$address,$phone)
