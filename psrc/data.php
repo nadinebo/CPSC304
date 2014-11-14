@@ -12,6 +12,8 @@ class Data
 			include 'objs/Order.php';
 			include 'objs/Return_.php';
 			include 'objs/ReturnItem.php';
+			include 'objs/Customer.php';
+			include 'objs/PurchaseItem.php';
 
 			$server = '127.0.0.1';
 			$user = 'root';
