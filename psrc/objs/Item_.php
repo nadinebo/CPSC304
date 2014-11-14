@@ -3,7 +3,7 @@
 
 $connection = NULL;
 
-class Item 
+class Item_ 
 {
 	public function __construct($conn)
 	{
@@ -16,7 +16,7 @@ class Item
 	public function insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock)
 	{
 		global $connection;
-		$stmt = $connection->prepare("INSERT INTO Item (upc,title,type,category,company,year,price,stock) Values (?,?,?,?,?,?,?,?)");
+		$stmt = $connection->prepare("INSERT INTO Item_ (upc,title,type,category,company,year,price,stock) Values (?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("issssiii", $UPC, $title,$type,$category,$company,$year,$price,$stock);
 		$stmt->execute();
 		if($stmt->error) {
@@ -29,7 +29,7 @@ class Item
 	public function queryAllItems()
 	{
 		global $connection;
-		if(!$result = $connection->query("Select * From Item")) {
+		if(!$result = $connection->query("Select * From Item_")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
 			echo "<b>Search succussfull</b><br>";
@@ -40,7 +40,7 @@ class Item
 	public function deleteItem($UPC)
 	{
 		global $connection;
-		$stmt = $connection->prepare("DELETE FROM Item WHERE upc=?");
+		$stmt = $connection->prepare("DELETE FROM Item_ WHERE upc=?");
 		$stmt->bind_param("i",$UPC);
 		$stmt->execute();
 		if($stmt->error) {

@@ -9,13 +9,12 @@ class Data
 	{
 			include 'objs/LeadSinger.php';
 			include 'objs/HasSong.php';
-			include 'objs/Order.php';
+			include 'objs/Order_.php';
 			include 'objs/Return_.php';
 			include 'objs/ReturnItem.php';
 			include 'objs/Customer.php';
 			include 'objs/PurchaseItem.php';
-			echo "dinit";
-			include 'objs/Item.php';
+			include 'objs/Item_.php';
 
 			$server = '127.0.0.1';
 			$user = 'root';
@@ -41,7 +40,7 @@ class Data
 			$LS = new LeadSinger($connection);
 			
 			global $O;
-			$O = new Order($connection);
+			$O = new Order_($connection);
 			
 			global $HS;
 			$HS = new HasSong($connection);
@@ -53,13 +52,15 @@ class Data
 			$RI = new ReturnItem($connection);
 
 			global $I;
-			$I = new Item($connection);
+			$I = new Item_($connection);
 			
+			echo "data init";
 			global $PI;
 			$PI = new PurchaseItem($connection);
 
 			global $C;
 			$C = new Customer($connection);
+
 	}
 
 	public function insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock){
