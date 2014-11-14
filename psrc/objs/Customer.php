@@ -17,7 +17,7 @@ class Customer
 		echo "   inserting customer   ";
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO Customer (cid,password,name,address,phone) Values (?,?,?,?,?)");
-		$stmt->bind_param("is", $cid, $password, $name, $address, $phone);
+		$stmt->bind_param("issss", $cid, $password, $name, $address, $phone);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
@@ -43,7 +43,7 @@ class Customer
 		echo "   deleting customer   ";
 		global $connection;
 		$stmt = $connection->prepare("DELETE FROM Customer WHERE cid=?");
-		$stmt->bind_param("is",$cid);
+		$stmt->bind_param("i",$cid);
 		$stmt->execute();
 		if ($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);

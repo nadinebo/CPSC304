@@ -82,8 +82,27 @@ class Presentation
 		//echo "getting all orders";
 		
 		
-		//$Logic->newOrder(
 		
+		
+		$Logic->newCustomer('0001','ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
+		echo "insert a customer";
+		//insert second return
+		$Logic->newCustomer('0002','ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
+		echo "insert a customer";
+		
+		$result = $Logic->getCustomers();
+
+		while($row = $result->fetch_assoc()){
+			echo"<td>".$row['cid']."</td>";
+			echo"<td>".$row['password']."</td>";
+			echo"<td>".$row['name']."</td>";
+			echo"<td>".$row['address']."</td>";
+			echo"<td>".$row['phone']."</td>";
+		}
+		
+		//newOrder($date,$CID,$cardNum,$expiryDate,$expectedDate)
+		$Logic->newOrder('2014-11-01 01:02:03','0001','45678','2017-11-01 01:02:03','2014-12-01 01:02:03');
+		$Logic->newOrder('2014-11-01 01:02:03','0002','45123','2015-11-01 01:02:03','2014-12-01 01:02:03');
 		
 		
 		
@@ -122,7 +141,7 @@ class Presentation
 
 		//testing Customer
 		//insert first customer
-		$Logic->newCustomer('0001','ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
+/*		$Logic->newCustomer('0001','ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
 		echo "insert a customer";
 		//insert second return
 		$Logic->newCustomer('0002','ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
@@ -136,9 +155,9 @@ class Presentation
 			echo"<td>".$row['name']."</td>";
 			echo"<td>".$row['address']."</td>";
 			echo"<td>".$row['phone']."</td>";
-		}
-		$Logic->removeCustomer('0001');
-		$Logic->removeCustomer('0002');
+		}*/
+		//$Logic->removeCustomer('0001');
+		//$Logic->removeCustomer('0002');
 
 
 		//testing PurchaseItem
