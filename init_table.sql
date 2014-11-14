@@ -68,7 +68,6 @@ create table Return_
 	(retID int auto_increment not null,
 	returnDate date not null,
 	receiptID int not null unique,
-	storeName char(100) not null unique,
 	primary key (retID),
 	foreign key (receiptID) references PurchaseItem (receiptID) on delete cascade on update cascade);
 
