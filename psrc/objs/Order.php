@@ -2,7 +2,7 @@
 
 $connection = NULL;
 
-class Order
+class Order_
 {
 	public function __construct($conn)
 	{
@@ -16,7 +16,7 @@ class Order
 	{
 		echo "   creating a new order   ";
 		global $connection;
-		$stmt = $connection->prepare("INSERT INTO `Order` (date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?)");
+		$stmt = $connection->prepare("INSERT INTO Order_ (date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?)");
 		$stmt->bind_param("is", $date, $CID, $cardNum, $expiryDate, $expectedDate);
 		$stmt->execute();
 		if($stmt->error) {
@@ -32,7 +32,7 @@ class Order
 	{
 		echo "   get the most recent order for this customer   ";
 		global $connection;
-		$stmt = $connection->query("Select max(receiptID), cid, max(date) FROM `Order` WHERE cid=?");
+		$stmt = $connection->query("Select max(receiptID), cid, max(date) FROM Order_ WHERE cid=?");
 		$stmt->bind_param("is",$CID);
 		$stmt->execute();
 		if($stmt->error) {	
@@ -47,7 +47,7 @@ class Order
 	{
 		echo "   query orders   ";
 		global $connection;
-		if(!$result = $connection->query("Select * From Order")) {
+		if(!$result = $connection->query("Select * From Order_")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
 			echo "<b>Search successful<\b>";
@@ -59,7 +59,7 @@ class Order
 	{
 		echo "  deleting order   ";
 		global $connection;
-		$stmt = $connection->prepare("DELETE FROM `Order` WHERE receiptID=?");
+		$stmt = $connection->prepare("DELETE FROM Order_ WHERE receiptID=?");
 		$stmt->bind_param("is",$UPC,$Name);
 		$stmt->execute();
 		if($stmt->error) {
