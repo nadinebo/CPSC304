@@ -181,7 +181,7 @@ class Data
 	{
 		echo"customerInsertCalled DATA";
 		global $C;
-		$C->insertCusotmer($cid,$password,$name,$address,$phone);
+		$C->insertCustomer($cid,$password,$name,$address,$phone);
 	}
 	
 	public function queryAllCustomers()
