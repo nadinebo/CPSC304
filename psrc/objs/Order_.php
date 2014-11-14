@@ -6,6 +6,7 @@ class Order_
 {
 	public function __construct($conn)
 	{
+		echo "con";
 		global $connection;
 		$connection  = $conn;
 		error_reporting(E_STRICT);
