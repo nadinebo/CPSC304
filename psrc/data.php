@@ -47,6 +47,12 @@ class Data
 			
 			global $RI;
 			$RI = new ReturnItem($connection);
+
+			global $PI;
+			$PI = new PurchaseItem($connection);
+
+			global $C;
+			$C = new Customer($connection);
 	}
 
 	public function insertLeadSinger($UPC,$Name){
@@ -60,7 +66,7 @@ class Data
 		return $LS->queryAllLeadSingers();
 	}
 
-	public function deleteLeadinger($UPC,$Name){
+	public function deleteLeadSinger($UPC,$Name){
 		global $LS;
 		$LS->deleteLeadSinger($UPC,$Name);
 	}
@@ -148,5 +154,44 @@ class Data
 		global $RI;
 		$RI->deleteReturnItem($returnID,$UPC);
 	}
+
+	public function insertCustomer($cid,$password,$name,$address,$phone)
+	{
+		echo"customerInsertCalled DATA";
+		global $C;
+		$C->insertCusotmer($cid,$password,$name,$address,$phone);
+	}
+	
+	public function queryAllCustomers()
+	{
+		global $C;
+		return $C->queryAllCustomers();
+	}
+
+	public function deleteCustomer($cid)
+	{
+		global $C;
+		$C->deleteCustomer($cid);
+	}
+
+	public function insertPurchaseItem($receiptID,$UPC,$purchaseQuantity)
+	{
+		echo"purchaseItemInsertCalled DATA";
+		global $PI;
+		$PI->insertPurchaseItem($receiptID,$UPC,$purchaseQuantity);
+	}
+	
+	public function queryAllPurchaseItems()
+	{
+		global $PI;
+		return $PI->queryAllPurchaseItems();
+	}
+
+	public function deletePurchaseItem($receiptID,$UPC)
+	{
+		global $PI;
+		$PI->deletePurchaseItem($receiptID,$UPC);
+	}
+
 }
 ?>

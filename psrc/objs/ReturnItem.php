@@ -54,7 +54,7 @@ class ReturnItem
 	}
 	
 	
-	public function deleteReturn($returnID, $UPC)
+	public function deleteReturnItem($returnID, $UPC)
 	{
 		echo "  deleting a return item   ";
 		global $connection;

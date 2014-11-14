@@ -11,10 +11,12 @@ Nadine (Return, ReturnItem)
 
 
 
-2) Java files:
-Write getters and setters for every attributes of the schema
-Basically class = relation name, fields = attributes
-
-———————————
-
-DEADLINE #2:
+2) User Stories:
+	1. Online Order: “To buy online… and the quantity”. (Stew)
+	2. Online Order: “If the information… any number of items” (Kevin)
+	3. Online Order: “When the customer is ready... ” to the end of the bullet point (Kevin)
+	4. Customer Registration (Nicole)
+	5. Return (Nadine)
+	6. Adding Items (Nadine)
+	7. Daily Sales Report (Nicole)
+	8. Top Selling Items (Stew)
