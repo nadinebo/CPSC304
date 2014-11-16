@@ -10,7 +10,6 @@ class Presentation
 		$Logic = new Logic;
 	}
 
-
 	public function buildTable($tableName,$result,$schema){
 		
 		echo "<h2>".$tableName."</h2>";
