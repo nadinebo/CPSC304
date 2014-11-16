@@ -32,22 +32,37 @@ class Presentation
 		echo"<br><br>";
 	}
 	
+	public function BuildAddForm($schema){
+		echo "<form id=\"add\" name=\"add\" method=\"post\" action=\"";
+			echo htmlspecialchars($_SERVER["PHP_SELF"]);
+		echo"\">";
+    		echo"<table border=0 cellpadding=0 cellspacing=0>";
+		for($i=0;$i<count($schema);$i++)
+		{
+			echo "<tr><td>".$schema[$i]."</td><td><input type=\"text\" size=30 name=\"new_".$schema[$i]."\"</td></tr>";
+		}
+        	echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"ADD\"></td></tr>";
+    		echo"</table>";
+		echo"</form>";
+	}
+	
 	public function Itemsd()
 	{
 		global $Logic;
 		
-		//upc 
-		$Logic->newItem('38493','St.Vincent','CD','POP','muhrecords',2014,20,1);
 		//Added this
+		$Logic->newItem('38493','St.Vincent','CD','POP','muhrecords',2014,20,1);
 		$Logic->newItem('11111','test1','CD','POP','muhrecords',2014,20,10);
 		$Logic->newItem('22222','test2','CD','POP','muhrecords',2014,20,1);
-		
 		//testing using the layers as classes
 		$result = $Logic->getItems();
-		
-		$this->buildTable("Items",$result,['upc','title','type','category','company','year','price','stock']);
+		$schema = ['upc','title','type','category','company','year','price','stock'];
+		$this->buildTable("Items",$result,$schema);
+		$this->buildAddForm($schema);
 		//Create a table to display the singers
-		$Logic->removeItem('21474');
+		$Logic->removeItem('38493');
+		$Logic->removeItem('11111');
+		$Logic->removeItem('22222');
 	}
 
 	public function singersd()
@@ -59,15 +74,9 @@ class Presentation
 		
 		//testing using the layers as classes
 		$result = $Logic->getLeadSingers();
-		
-		$this->buildTable("Lead Singer",$result,['upc','name']);
-		//Create a table to display the singers
-
-		
-		//a bit of test display for the sake of it
-
-
-		$Logic->removeLeadSingers('38493','St.Vincent');
+		$schema = ['upc','name'];	
+		$this->buildTable("Lead Singer",$result,$schema);
+		$this->buildAddForm($schema);
 		$Logic->removeLeadSingers('22231','Michal Geera');
 	}
 
@@ -75,8 +84,10 @@ class Presentation
 	{
 		global $Logic;
 		echo"entering demo";
+		ob_start();	
 		$this->singersd();
 		$this->itemsd();
+		ob_end_clean();
 		//$Logic->getAllOrders();
 		//echo "getting all orders";
 		

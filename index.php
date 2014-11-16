@@ -10,11 +10,27 @@
 -->
     <link href="src/cals.css" rel="stylesheet" type="text/css">
 
+<script>
+function formSubmit(titleId) {
+    'use strict';
+    if (confirm('Are you sure you want to delete this title?')) {
+      // Set the value of a hidden HTML element in this form
+      var form = document.getElementById('delete');
+      form.title_id.value = titleId;
+      // Post this form
+      form.submit();
+    }
+}
+</script>
+
+</head>
+
+<body>
+
 <?php
-	echo "this is php4real";
 	include 'src/presentation.php';
 	$P = new Presentation();
 	$P->demo();
 ?>
-</head>
+</body>
 </html>
