@@ -16,8 +16,13 @@ class Order_
 	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate)
 	{
 		global $connection;
+<<<<<<< HEAD
 		$stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate,deliveredDate) Values (?,?,?,?,?,?,?)");
 		$stmt->bind_param("isiisss", $receiptID, $date, $CID, $cardNum, $expiryDate, $expectedDate,$deliveredDate);
+=======
+		$stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?,?)");
+		$stmt->bind_param("isiiss", $receiptID, $date, $CID, $cardNum, $expiryDate, $expectedDate);
+>>>>>>> newestNadine
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
