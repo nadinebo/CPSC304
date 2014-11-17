@@ -29,7 +29,7 @@ class ReturnItem
 	{
 		echo "   query a return   ";
 		global $connection;
-		if(!$result = $connection->query("Select * From ReturnItem")) {
+		if(!$result = $connection->query("Select retID,returnQuantity,upc From ReturnItem")) {
 			die('An error occured while running the query on ReturnItem[' .$db->error . ']');
 		} else {
 			echo "<b>Search is succussfull for ReturnItem<\b>";

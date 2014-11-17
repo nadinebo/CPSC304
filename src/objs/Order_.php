@@ -13,60 +13,37 @@ class Order_
 	}
 
 	//Basic manipulation functions
-	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate)
+	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate)
 	{
-		echo "   creating a new order   ";
 		global $connection;
-		$stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?)");
-		$stmt->bind_param("isiiss", $receiptID, $date, $CID, $cardNum, $expiryDate, $expectedDate);
+		$stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate,deliveredDate) Values (?,?,?,?,?,?,?)");
+		$stmt->bind_param("isiisss", $receiptID, $date, $CID, $cardNum, $expiryDate, $expectedDate,$deliveredDate);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
-		} else {
-			echo "<b>Successfully added new order for ".$CID."</b>";
-			//$query = $queryOrder($CID);
-			//return $query;
 		}
-	}
-
-	public function queryOrder($CID)
-	{
-		echo "   get the most recent order for this customer   ";
-		global $connection;
-		$stmt = $connection->query("Select max(receiptID), cid, max(date) FROM Order_ WHERE cid=?");
-		$stmt->bind_param("i",$CID);
-		$stmt->execute();
-		if($stmt->error) {	
-			die('There was an error running the query [' .$db->error . ']');
-		} else {
-			echo "<b>Search successful<\b>";
-		}
-		return $result;
 	}
 
 	public function queryAllOrders()
 	{
-		echo "   query orders   ";
 		global $connection;
-		if(!$result = $connection->query("Select * From Order_")) {
+		if(!$result = $connection->query("SELECT receiptID,date,cid,cardNum,expiryDate,expectedDate,deliveredDate From Order_")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
-			echo "<b>Search successful<\b>";
+			return $result;
 		}
-		return $result;
 	}
 
 	public function deleteOrder($receiptID)
 	{
-		echo "  deleting order   ";
 		global $connection;
 		$stmt = $connection->prepare("DELETE FROM Order_ WHERE receiptID=?");
 		$stmt->bind_param("i",$receiptID);
 		$stmt->execute();
 		if($stmt->error) {
-			printf("<b>Error: %s. </b>\n", $stmt->error);
+			echo "<br>Nothing to delete";
 		} else {
-			echo "<b>Successfully deleted ".$receiptID."</b>";
+			echo "<br>Successfully deleted order ".$receiptID."<br>";
 		}
 	}
 }

@@ -15,8 +15,8 @@ class PurchaseItem
 	{
 		echo "   adding a purchased item   ";
 		global $connection;
-		$stmt = $connection->prepare("INSERT INTO PurchaseItem (receiptID, UPC, purchaseQuantity) Values (?,?,?)");
-		$stmt->bind_param("is", $receiptID, $UPC, $purchaseQuantity);
+		$stmt = $connection->prepare("INSERT INTO PurchaseItem (receiptID,upc,quantity) Values (?,?,?)");
+		$stmt->bind_param("isi", $receiptID, $UPC, $purchaseQuantity);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b\n", $stmt->error);
@@ -29,7 +29,7 @@ class PurchaseItem
 	{
 		echo "   query a purchase   ";
 		global $connection;
-		if(!$result = $connection->query("Select * FROM PurchaseItem")) {
+		if(!$result = $connection->query("SELECT receiptID,upc,Quantity FROM PurchaseItem")) {
 			die('There was an error running the query on PurchaseItem[' .$db->error . ']');
 		} else {
 			echo "<b>Search is succesful for PurchaseItem";
@@ -40,7 +40,7 @@ class PurchaseItem
 	{
 		echo "   delete a purchased item   ";
 		global $connection;
-		$stmt = $connection->prepare("DELETE FROM PurchaseItem WHERE receiptID=? AND UPC=?");
+		$stmt = $connection->prepare("DELETE FROM PurchaseItem WHERE receiptID=? AND upc=?");
 		$stmt->bind_param("is",$receiptID,$UPC);
 		$stmt->execute();
 		if ($stmt->error) {
@@ -49,5 +49,18 @@ class PurchaseItem
 			echo "<b>Successfully deleted purchase item #".$UPC."</b>";
 		}
 	}
+	
+	
+	public function dailySales($reportDate)
+	{
+		global $connection;
+		if(!$result = $connection->execute("CALL dailySales($reportDate)"))
+		{
+			die('There was an error running the query [' .$db->error . ']');
+		} else {
+				return $result;
+		}
+	}
+	
 }
 ?>

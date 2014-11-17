@@ -23,7 +23,7 @@ class Data
 		echo "conninit";	
 			global $connection;
 			$connection = new mysqli($server, $user, $pass, $dbname);
-			mysql_select_db($dbname);
+			//mysql_select_db($dbname);
 		    
 		    if (!mysqli_connect_errno()) {
 			echo "You connected!";
@@ -93,17 +93,11 @@ class Data
 		$LS->deleteLeadSinger($UPC,$Name);
 	}
 
-	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate){
-		echo"orderinsertCalled DATA";
+	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate){
 		global $O;
-		$O->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate);
+		$O->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate);
 	}
 	
-	public function queryOrder($CID){
-		global $O;
-		return $O->queryOrder($CID);
-	}
-
 	public function queryAllOrders(){
 		global $O;
 		return $O->queryAllOrders();
@@ -115,14 +109,8 @@ class Data
 	}
 
 	public function insertHasSong($UPC,$title){
-		echo"HasSonginsertCalled DATA";
 		global $HS;
 		$HS->insertHasSong($UPC,$title);
-	}
-	
-	public function querySongTitles($UPC){
-		global $HS;
-		return $HS->querySongTitles($UPC);
 	}
 
 	public function queryAllSongTitles(){
@@ -213,6 +201,12 @@ class Data
 	{
 		global $PI;
 		$PI->deletePurchaseItem($receiptID,$UPC);
+	}
+
+	public function dailySales($reportDate)
+	{
+		global $PI;
+		$PI->dailySales($reportDate);
 	}
 
 }

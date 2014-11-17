@@ -44,16 +44,10 @@ class Logic
 		return $Data->deleteLeadSinger($UPC,$Name);	
 	}
 	
-	public function newOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate)
+	public function newOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate)
 	{
 		global $Data;
-		return $Data->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate);	
-	}	
-	
-	public function getOrder($CID)
-	{
-		global $Data;
-		return $Data->queryOrder($CID);	
+		return $Data->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate);	
 	}	
 
 	public function getAllOrders()
@@ -72,12 +66,6 @@ class Logic
 	{
 		global $Data;
 		return $Data->insertHasSong($UPC,$title);	
-	}	
-	
-	public function getSongTitles($UPC)
-	{
-		global $Data;
-		return $Data->querySongTitles($UPC);	
 	}	
 
 	public function getAllSongTitles()
@@ -177,5 +165,12 @@ class Logic
 		global $Data;
 		return $Data->deletePurchaseItem($receiptID,$UPC);	
 	}
+	
+	public function dailySales($reportDate)
+	{
+		global $Data;
+		return $Data->dailySales($reportDate);	
+	}
+	
 }	
 ?>
