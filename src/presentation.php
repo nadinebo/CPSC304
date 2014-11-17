@@ -123,6 +123,46 @@ class Presentation
 		
 	}
 
+	public function processReturns()
+	{
+		global $Logic;
+		
+		// Setup variables for testing
+		$UPC = '38493';		
+		$cid = 555;
+		$date = date('Y-m-d');		
+		$receiptID = 1;
+		$returnID = 1;
+
+		$nextWeek = time() + (7 * 24 * 60 * 60);
+		$nextWeek = date('Y-m-d', $nextWeek);
+		
+		$twoWeeks = time() + (14 * 24 * 60 * 60);
+		$twoWeeks = date('Y-m-d', $twoWeeks);
+		
+		// create records for testing
+		$Logic->newCustomer($cid,'password','Nicole','Cornwall Street','604-837-9964');
+		$Logic->newItem($UPC,'St.Vincent','CD','POP','muhrecords',2014,20,1);
+		$Logic->newOrder($receiptID,$date,$cid,1234,'0101',$nextWeek,$twoWeeks);
+		$Logic->newPurchaseItem($receiptID,$UPC,'1');
+		$Logic->newReturn($returnID,$date,$receiptID);
+		$Logic->newReturnItem($returnID,'1',$UPC);
+		
+		// build a table to show the return	
+		$result = $Logic->getAllReturnItems();
+		$schema = array('retID','returnQuantity','upc');
+		$this->buildTable("All Returns",$result,$schema);
+		
+		// remove test records
+		$Logic->removeReturnItem($returnID,$UPC);
+		$Logic->removeReturn($returnID);
+		$Logic->removePurchaseItem($receiptID,$UPC);
+		$Logic->removeOrder($receiptID);
+		$Logic->removeItem($UPC);
+		$Logic->removeCustomer($cid);
+		
+	}
+
 	public function demo()
 	{
 		global $Logic;
@@ -133,6 +173,7 @@ class Presentation
 		ob_end_clean();
 		$this->orders();
 		$this->songs();
+		//$this->processReturns();
 		
 		$Logic->newCustomer('0001','ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
 		echo "insert a customer";
