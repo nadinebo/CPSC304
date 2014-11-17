@@ -26,6 +26,8 @@ class Presentation
 			{
 				echo"<td>".$row[$schema[$i]]."</td>";
 			}
+			echo "<td>";
+       			echo "<a href=\"javascript:formSubmit('".$row['title_id']."');\">DELETE</a>";
 			echo"</td></tr>";
 		}
 		echo"</table>";
@@ -84,8 +86,8 @@ class Presentation
 	{
 		global $Logic;
 		echo"entering demo";
-		ob_start();	
 		$this->singersd();
+		ob_start();	
 		$this->itemsd();
 		ob_end_clean();
 		//$Logic->getAllOrders();
