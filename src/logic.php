@@ -160,10 +160,10 @@ class Logic
 	}
 
 
-		public function newPurchaseItem($receiptID, $UPC, $purchaseQuantity)
+		public function newPurchaseItem($receiptID, $UPC, $quantity)
 	{
 		global $Data;
-		return $Data->insertPurchaseItem($receiptID, $UPC, $purchaseQuantity);	
+		return $Data->insertPurchaseItem($receiptID, $UPC, $quantity);	
 	}	
 	
 	public function getPurchaseItems()

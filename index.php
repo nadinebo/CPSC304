@@ -31,6 +31,7 @@ function formSubmit(titleId) {
 	include 'src/presentation.php';
 	$P = new Presentation();
 	$P->demo();
+	echo " *** DONE! *** ";
 ?>
 </body>
 </html>

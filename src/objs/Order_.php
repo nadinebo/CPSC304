@@ -17,7 +17,7 @@ class Order_
 	{
 		echo "   creating a new order   ";
 		global $connection;
-		$stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?)");
+		$stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?,?)");
 		$stmt->bind_param("isiiss", $receiptID, $date, $CID, $cardNum, $expiryDate, $expectedDate);
 		$stmt->execute();
 		if($stmt->error) {

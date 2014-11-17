@@ -159,7 +159,7 @@ class Data
 	public function insertReturnItem($retID,$UPC,$returnQuantity){
 		echo"returnItemInsert Called DATA";
 		global $RI;
-		$RI->insertReturn($retID,$UPC,$returnQuantity);
+		$RI->insertReturnItem($retID,$UPC,$returnQuantity);
 	}
 	
 	public function queryAllReturnItems(){
@@ -196,11 +196,11 @@ class Data
 		$C->deleteCustomer($cid);
 	}
 
-	public function insertPurchaseItem($receiptID,$UPC,$purchaseQuantity)
+	public function insertPurchaseItem($receiptID,$UPC,$quantity)
 	{
 		echo"purchaseItemInsertCalled DATA";
 		global $PI;
-		$PI->insertPurchaseItem($receiptID,$UPC,$purchaseQuantity);
+		$PI->insertPurchaseItem($receiptID,$UPC,$quantity);
 	}
 	
 	public function queryAllPurchaseItems()
