@@ -16,7 +16,7 @@ class Return_
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) Values (?,?,?)");
 		//$stmt = $connection->prepare("INSERT INTO `Return` (returnID,date,receiptID) Values (?,?,?)");
-		$stmt->bind_param("sss", $retID, $returnDate, $receiptID);
+		$stmt->bind_param("isi", $retID, $returnDate, $receiptID);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
@@ -34,7 +34,7 @@ class Return_
 		//if(!$result = $connection->query("Select * From `Return`")) {
 			die('An error occured while running the query on Return[' .$db->error . ']');
 		} else {
-			echo "<b>Search is succussfull for Return<\b>";
+			echo "<b>Search is succussfull for Return</b>";
 		}
 		return $result;
 	}
@@ -46,7 +46,7 @@ class Return_
 		global $connection;
 		$stmt = $connection->prepare("Select returnDate, receiptID FROM Return_ WHERE retID=?");
 		//$stmt = $connection->prepare("Select date, receiptID FROM `Return_ WHERE returnID=?");
-		$stmt->bind_param("s",$retID);
+		$stmt->bind_param("i",$retID);
 		$stmt->execute();
 		if($stmt->error) {
 			die('There was an error running the query [' .$db->error . ']');
@@ -63,7 +63,7 @@ class Return_
 		global $connection;
 		$stmt = $connection->prepare("DELETE FROM Return_ WHERE retID=?");
 		//$stmt = $connection->prepare("DELETE FROM `Return` WHERE returnID=?");
-		$stmt->bind_param("s",$retID);
+		$stmt->bind_param("i",$retID);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);

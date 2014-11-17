@@ -15,7 +15,7 @@ class ReturnItem
 		echo "   adding a return item  ";
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO ReturnItem (retID,UPC,returnQuantity) Values (?,?,?)");
-		$stmt->bind_param("sss", $retID, $UPC, $returnQuantity);
+		$stmt->bind_param("iii", $retID, $UPC, $returnQuantity);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
@@ -32,7 +32,7 @@ class ReturnItem
 		if(!$result = $connection->query("Select * From ReturnItem")) {
 			die('An error occured while running the query on ReturnItem[' .$db->error . ']');
 		} else {
-			echo "<b>Search is succussfull for ReturnItem<\b>";
+			echo "<b>Search is succussfull for ReturnItem</b>";
 		}
 		return $result;
 	}
@@ -43,12 +43,12 @@ class ReturnItem
 		echo "   get the quantity for the return item  ";
 		global $connection;
 		$stmt = $connection->prepare("Select returnQuantity FROM Return_ WHERE retID=? AND upc=?");
-		$stmt->bind_param("ss",$retID, $UPC);
+		$stmt->bind_param("ii",$retID, $UPC);
 		$stmt->execute();
 		if($stmt->error) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
-			echo "<b>Search is successful for ReturnItem<\b>";
+			echo "<b>Search is successful for ReturnItem</b>";
 		}
 		return $result;
 	}
@@ -59,7 +59,7 @@ class ReturnItem
 		echo "  deleting a return item   ";
 		global $connection;
 		$stmt = $connection->prepare("DELETE FROM ReturnItem WHERE retID=? AND upc=?");
-		$stmt->bind_param("ss",$retID, $UPC);
+		$stmt->bind_param("ii",$retID, $UPC);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);

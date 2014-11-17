@@ -18,7 +18,11 @@ class Order_
 		echo "<br>   creating a new order   ";
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?,?)");
+<<<<<<< HEAD
 		$stmt->bind_param("ssiiss", $receiptID, $date, $CID, $cardNum, $expiryDate, $expectedDate);
+=======
+		$stmt->bind_param("isiiss", $receiptID, $date, $CID, $cardNum, $expiryDate, $expectedDate);
+>>>>>>> newestNadine
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
