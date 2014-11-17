@@ -23,7 +23,7 @@ class Data
 		echo "conninit";	
 			global $connection;
 			$connection = new mysqli($server, $user, $pass, $dbname);
-			mysql_select_db($dbname);
+			//mysql_select_db($dbname);
 		    
 		    if (!mysqli_connect_errno()) {
 			echo "You connected!";
@@ -94,7 +94,6 @@ class Data
 	}
 
 	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate){
-		echo"orderinsertCalled DATA";
 		global $O;
 		$O->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate);
 	}
@@ -115,7 +114,6 @@ class Data
 	}
 
 	public function insertHasSong($UPC,$title){
-		echo"HasSonginsertCalled DATA";
 		global $HS;
 		$HS->insertHasSong($UPC,$title);
 	}

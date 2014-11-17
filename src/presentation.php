@@ -56,7 +56,7 @@ class Presentation
 		$Logic->newItem('22222','test2','CD','POP','muhrecords',2014,20,1);
 		//testing using the layers as classes
 		$result = $Logic->getItems();
-		$schema = ['upc','title','type','category','company','year','price','stock'];
+		$schema = array('upc','title','type','category','company','year','price','stock');
 		$this->buildTable("Items",$result,$schema);
 		$this->buildAddForm($schema);
 		//Create a table to display the singers
@@ -74,7 +74,7 @@ class Presentation
 		
 		//testing using the layers as classes
 		$result = $Logic->getLeadSingers();
-		$schema = ['upc','name'];	
+		$schema = array('upc','name');	
 		$this->buildTable("Lead Singer",$result,$schema);
 		$this->buildAddForm($schema);
 		$Logic->removeLeadSingers('22231','Michal Geera');
@@ -88,16 +88,11 @@ class Presentation
 		$this->singersd();
 		$this->itemsd();
 		ob_end_clean();
-		//$Logic->getAllOrders();
-		//echo "getting all orders";
 		
-		
-		
-		
-		$Logic->newCustomer('0001','ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
+		//$Logic->newCustomer('0001','ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
 		echo "insert a customer";
 		//insert second return
-		$Logic->newCustomer('0002','ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
+	//	$Logic->newCustomer('0002','ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
 		echo "insert a customer";
 		
 		$result = $Logic->getCustomers();
@@ -110,11 +105,26 @@ class Presentation
 			echo"<td>".$row['phone']."</td>";
 		}
 		
-		//newOrder($date,$CID,$cardNum,$expiryDate,$expectedDate)
-		$Logic->newOrder('2014-11-01 01:02:03','0001','45678','2017-11-01 01:02:03','2014-12-01 01:02:03');
-		$Logic->newOrder('2014-11-01 01:02:03','0002','45123','2015-11-01 01:02:03','2014-12-01 01:02:03');
+		$mysqldate = date ("Y-m-d H:i:s", $phptime);
+		$expdDate = date($mysqldate,strtotime('+1 week'));
+
+		//Show all orders in the system before adding a new one
+		$result = $Logic->getAllOrders();
+		$schema = array('receiptID','date','cid','cardNum','expiryDate','expectedDate','deliveredDate');
+		$this->buildTable("Orders",$result,$schema);
 		
+		//Insert a new order (only once per ID, primary key constraint)
+		//$Logic->newOrder(1,$mysqldate,1,'0001',$mysqldate,$expdDate);
 		
+		//$result = $Logic->getOrder(1);
+		//$schema = array('receiptID','cid','date');
+		//$this->buildTable("All Orders for Customer 1",$result,$schema);
+		
+		//$Logic->deleteOrder(1);
+		
+		//newOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate)
+		//$Logic->newOrder('2014-11-01 01:02:03','0001','45678','2017-11-01 01:02:03','2014-12-01 01:02:03');
+		//$Logic->newOrder('2014-11-01 01:02:03','0002','45123','2015-11-01 01:02:03','2014-12-01 01:02:03');
 		
 		
 		//insert first return
