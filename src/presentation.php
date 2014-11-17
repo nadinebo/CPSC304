@@ -89,14 +89,6 @@ class Presentation
 		$this->singersd();
 		$this->itemsd();
 		ob_end_clean();
-<<<<<<< HEAD
-		
-		//$Logic->newCustomer('0001','ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
-		echo "insert a customer";
-		//insert second return
-	//	$Logic->newCustomer('0002','ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
-		echo "insert a customer";
-=======
 
 		$Logic->removeCustomer(1000);
 		$Logic->removeCustomer(2000);
@@ -108,7 +100,7 @@ class Presentation
 		echo "insert a customer ";
 		//$Logic->removeCustomer(1000);
 		//$Logic->removeCustomer(2000);
->>>>>>> newestNadine
+
 		
 		$result = $Logic->getCustomers();
 		while($row = $result->fetch_assoc()){
@@ -119,7 +111,7 @@ class Presentation
 			echo"<td>".$row['phone']."</td>";
 		}
 		
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 		$mysqldate = date ("Y-m-d H:i:s", $phptime);
 		$expdDate = date($mysqldate,strtotime('+1 week'));
 
@@ -140,7 +132,7 @@ class Presentation
 		//newOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate)
 		//$Logic->newOrder('2014-11-01 01:02:03','0001','45678','2017-11-01 01:02:03','2014-12-01 01:02:03');
 		//$Logic->newOrder('2014-11-01 01:02:03','0002','45123','2015-11-01 01:02:03','2014-12-01 01:02:03');
-=======
+======= */
 		$Logic->removeOrder(12014);
 		$Logic->removeOrder(11014);
 		
@@ -150,7 +142,6 @@ class Presentation
 		
 		$Logic->removePurchaseItem(12014,11111);
 		$Logic->removePurchaseItem(11014,11111);
->>>>>>> newestNadine
 		
 		echo "insert a PurchaseItem";
 		$Logic->newPurchaseItem(12014,11111,5);
