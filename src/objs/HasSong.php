@@ -14,56 +14,36 @@ class HasSong
 	//Basic manipulation functions
 	public function insertHasSong($UPC,$title)
 	{
-		echo "   inserting song title   ";
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO HasSong (upc,title) Values (?,?)");
 		$stmt->bind_param("is", $UPC, $title);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
-		} else {
-			echo "<b>Successfully added ".$title."</b>";
-		}
-	}
-
-	public function querySongTitles($UPC)
-	{
-		echo "   get the song titles for this item   ";
-		global $connection;
-		$stmt = $connection->prepare("Select title FROM HasSong WHERE upc=?");
-		$stmt->bind_param("i",$UPC);
-		$stmt->execute();
-		if($stmt->error) {
-			die('There was an error running the query [' .$db->error . ']');
-		} else {
-			echo "<b>Search successful<\b>";
-		}
-		return $result;
+		} 
 	}
 
 	public function queryAllSongTitles()
 	{
-		echo "   query song titles   ";
 		global $connection;
-		if(!$result = $connection->query("Select * From HasSong")) {
+		if(!$result = $connection->query("Select upc,title From HasSong")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
-			echo "<b>Search successful<\b>";
+			return $result;
 		}
-		return $result;
+		
 	}
 
 	public function deleteSongTitle($UPC,$title)
 	{
-		echo "  deleting song title   ";
 		global $connection;
 		$stmt = $connection->prepare("DELETE FROM HasSong WHERE upc=? AND title=?");
 		$stmt->bind_param("is",$UPC,$title);
 		$stmt->execute();
 		if($stmt->error) {
-			printf("<b>Error: %s. </b>\n", $stmt->error);
+			echo "<br>Nothing to delete";
 		} else {
-			echo "<b>Successfully deleted ".$title."</b>";
+			echo "<br>Successfully deleted song <i>".$title."</i><br>";
 		}
 	}
 }

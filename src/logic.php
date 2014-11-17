@@ -67,12 +67,6 @@ class Logic
 		global $Data;
 		return $Data->insertHasSong($UPC,$title);	
 	}	
-	
-	public function getSongTitles($UPC)
-	{
-		global $Data;
-		return $Data->querySongTitles($UPC);	
-	}	
 
 	public function getAllSongTitles()
 	{

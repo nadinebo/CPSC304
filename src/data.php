@@ -112,11 +112,6 @@ class Data
 		global $HS;
 		$HS->insertHasSong($UPC,$title);
 	}
-	
-	public function querySongTitles($UPC){
-		global $HS;
-		return $HS->querySongTitles($UPC);
-	}
 
 	public function queryAllSongTitles(){
 		global $HS;

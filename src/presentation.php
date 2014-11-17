@@ -104,6 +104,25 @@ class Presentation
 		
 	}
 
+	public function songs()
+	{
+		global $Logic;
+		
+		$UPC = '38493';
+		$title = 'I prefer your love';
+		$Logic->newItem('38493','St.Vincent','CD','POP','muhrecords',2014,20,1);
+		
+		$Logic->newSongTitle($UPC,$title);
+		
+		$result = $Logic->getAllSongTitles();
+		$schema = array('upc','title');
+		$this->buildTable("All Songs",$result,$schema);
+		
+		$Logic->removeSongTitle($UPC,$title);
+		$Logic->removeItem('38493');
+		
+	}
+
 	public function demo()
 	{
 		global $Logic;
@@ -113,6 +132,7 @@ class Presentation
 		$this->itemsd();
 		ob_end_clean();
 		$this->orders();
+		$this->songs();
 		
 		$Logic->newCustomer('0001','ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
 		echo "insert a customer";
