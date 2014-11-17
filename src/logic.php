@@ -165,5 +165,12 @@ class Logic
 		global $Data;
 		return $Data->deletePurchaseItem($receiptID,$UPC);	
 	}
+	
+	public function dailySales($reportDate)
+	{
+		global $Data;
+		return $Data->dailySales($reportDate);	
+	}
+	
 }	
 ?>

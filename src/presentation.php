@@ -163,6 +163,46 @@ class Presentation
 		
 	}
 
+	public function SalesReport()
+	{
+		global $Logic;
+		
+		// Setup variables for testing
+		$UPC = '38493';		
+		$cid = 555;
+		$date = date('Y-m-d');		
+		$receiptID1 = 1;	
+		$receiptID2 = 2;
+
+		$nextWeek = time() + (7 * 24 * 60 * 60);
+		$nextWeek = date('Y-m-d', $nextWeek);
+		
+		$twoWeeks = time() + (14 * 24 * 60 * 60);
+		$twoWeeks = date('Y-m-d', $twoWeeks);
+		
+		// create records for testing
+		$Logic->newCustomer($cid,'password','Nicole','Cornwall Street','604-837-9964');
+		$Logic->newItem($UPC,'St.Vincent','CD','POP','muhrecords',2014,20,1);
+		$Logic->newOrder($receiptID1,$date,$cid,1234,'0101',$nextWeek,$twoWeeks);
+		$Logic->newOrder($receiptID2,$date,$cid,1234,'0101',$nextWeek,$twoWeeks);
+		$Logic->newPurchaseItem($receiptID1,$UPC,'1');
+		$Logic->newPurchaseItem($receiptID2,$UPC,'1');
+		
+		// build a table to show the return	
+		$result = $Logic->dailySales($date);
+		$schema = array('upc','category','price','quantity','total');
+		$this->buildTable("Daily Sales",$result,$schema);
+		
+		// remove test records
+		$Logic->removePurchaseItem($receiptID1,$UPC);
+		$Logic->removePurchaseItem($receiptID2,$UPC);
+		$Logic->removeOrder($receiptID1);
+		$Logic->removeOrder($receiptID2);
+		$Logic->removeItem($UPC);
+		$Logic->removeCustomer($cid);
+		
+	}
+
 	public function demo()
 	{
 		global $Logic;
@@ -174,6 +214,7 @@ class Presentation
 		$this->orders();
 		$this->songs();
 		//$this->processReturns();
+		//$this->SalesReport();
 		
 		$Logic->newCustomer('0001','ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
 		echo "insert a customer";

@@ -203,5 +203,11 @@ class Data
 		$PI->deletePurchaseItem($receiptID,$UPC);
 	}
 
+	public function dailySales($reportDate)
+	{
+		global $PI;
+		$PI->dailySales($reportDate);
+	}
+
 }
 ?>

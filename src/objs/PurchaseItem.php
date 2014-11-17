@@ -49,5 +49,18 @@ class PurchaseItem
 			echo "<b>Successfully deleted purchase item #".$UPC."</b>";
 		}
 	}
+	
+	
+	public function dailySales($reportDate)
+	{
+		global $connection;
+		if(!$result = $connection->execute("CALL dailySales($reportDate)"))
+		{
+			die('There was an error running the query [' .$db->error . ']');
+		} else {
+				return $result;
+		}
+	}
+	
 }
 ?>
