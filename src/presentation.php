@@ -80,6 +80,30 @@ class Presentation
 		$Logic->removeLeadSingers('22231','Michal Geera');
 	}
 
+	public function orders()
+	{
+		global $Logic;
+		
+		$date = date('Y-m-d');
+		
+		$nextWeek = time() + (7 * 24 * 60 * 60);
+		$nextWeek = date('Y-m-d', $nextWeek);
+		
+		$twoWeeks = time() + (14 * 24 * 60 * 60);
+		$twoWeeks = date('Y-m-d', $twoWeeks);
+		
+		$receiptID = 1;
+		
+		$Logic->newOrder($receiptID,$date,2,1234,'0101',$nextWeek,$twoWeeks);
+		
+		$result = $Logic->getAllOrders();
+		$schema = array('receiptID','date','cid','cardNum','expiryDate','expectedDate','deliveredDate');
+		$this->buildTable("All Orders",$result,$schema);
+		
+		$Logic->removeOrder($receiptID);
+		
+	}
+
 	public function demo()
 	{
 		global $Logic;
@@ -88,11 +112,12 @@ class Presentation
 		$this->singersd();
 		$this->itemsd();
 		ob_end_clean();
+		$this->orders();
 		
-		//$Logic->newCustomer('0001','ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
+		$Logic->newCustomer('0001','ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
 		echo "insert a customer";
 		//insert second return
-	//	$Logic->newCustomer('0002','ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
+		$Logic->newCustomer('0002','ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
 		echo "insert a customer";
 		
 		$result = $Logic->getCustomers();
@@ -104,28 +129,6 @@ class Presentation
 			echo"<td>".$row['address']."</td>";
 			echo"<td>".$row['phone']."</td>";
 		}
-		
-		$mysqldate = date ("Y-m-d H:i:s", $phptime);
-		$expdDate = date($mysqldate,strtotime('+1 week'));
-
-		//Show all orders in the system before adding a new one
-		$result = $Logic->getAllOrders();
-		$schema = array('receiptID','date','cid','cardNum','expiryDate','expectedDate','deliveredDate');
-		$this->buildTable("Orders",$result,$schema);
-		
-		//Insert a new order (only once per ID, primary key constraint)
-		//$Logic->newOrder(1,$mysqldate,1,'0001',$mysqldate,$expdDate);
-		
-		//$result = $Logic->getOrder(1);
-		//$schema = array('receiptID','cid','date');
-		//$this->buildTable("All Orders for Customer 1",$result,$schema);
-		
-		//$Logic->deleteOrder(1);
-		
-		//newOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate)
-		//$Logic->newOrder('2014-11-01 01:02:03','0001','45678','2017-11-01 01:02:03','2014-12-01 01:02:03');
-		//$Logic->newOrder('2014-11-01 01:02:03','0002','45123','2015-11-01 01:02:03','2014-12-01 01:02:03');
-		
 		
 		//insert first return
 		//retID 12345 returnDate receiptID

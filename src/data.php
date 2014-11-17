@@ -93,16 +93,11 @@ class Data
 		$LS->deleteLeadSinger($UPC,$Name);
 	}
 
-	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate){
+	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate){
 		global $O;
-		$O->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate);
+		$O->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate);
 	}
 	
-	public function queryOrder($CID){
-		global $O;
-		return $O->queryOrder($CID);
-	}
-
 	public function queryAllOrders(){
 		global $O;
 		return $O->queryAllOrders();
