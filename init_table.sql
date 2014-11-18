@@ -6,7 +6,8 @@ use Houns;
 
 drop table if exists Customer;
 create table Customer
-	(cid int auto_increment not null,
+	/*(cid int auto_increment not null,*/
+	(cid int not null,
 	password char(32) not null,
 	name char(100),
 	address char(100),
@@ -44,7 +45,8 @@ create table hasSong (
 
 drop table if exists Order_;
 create table Order_ (
-	receiptId int auto_increment not null,
+	/* receiptId int auto_increment not null, */
+	receiptId int not null,
 	date date not null,
 	cid int not null,
 	cardNum int not null,
@@ -67,7 +69,8 @@ create table PurchaseItem
 
 drop table if exists Return_;
 create table Return_
-	(retID int auto_increment not null,
+	/* (retID int auto_increment not null, */
+	(retID int not null,
 	returnDate date not null,
 	receiptID int not null unique,
 	primary key (retID),

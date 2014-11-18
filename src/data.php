@@ -20,13 +20,13 @@ class Data
 			$user = 'root';
 			$pass = '';
 			$dbname = 'Houns';
-		echo "conninit";	
+		
 			global $connection;
 			$connection = new mysqli($server, $user, $pass, $dbname);
 			//mysql_select_db($dbname);
 		    
 		    if (!mysqli_connect_errno()) {
-			echo "You connected!";
+			echo "<b>Welcome!</b>";
 		    }
 		
 		// Check that the connection was successful, otherwise exit
@@ -54,7 +54,7 @@ class Data
 			global $I;
 			$I = new Item_($connection);
 			
-			echo "data init";
+			//echo "data init";
 			global $PI;
 			$PI = new PurchaseItem($connection);
 
@@ -124,7 +124,7 @@ class Data
 	}
 	
 	public function insertReturn($retID,$returnDate,$receiptID){
-		echo"returnInsert Called DATA";
+		//echo"returnInsert Called DATA";
 		global $R;
 		$R->insertReturn($retID,$returnDate,$receiptID);
 	}
@@ -145,7 +145,7 @@ class Data
 	}
 	
 	public function insertReturnItem($retID,$UPC,$returnQuantity){
-		echo"returnItemInsert Called DATA";
+		//echo"returnItemInsert Called DATA";
 		global $RI;
 		$RI->insertReturnItem($retID,$UPC,$returnQuantity);
 	}
@@ -167,7 +167,7 @@ class Data
 
 	public function insertCustomer($cid,$password,$name,$address,$phone)
 	{
-		echo"customerInsertCalled DATA";
+		//echo"customerInsertCalled DATA";
 		global $C;
 		$C->insertCustomer($cid,$password,$name,$address,$phone);
 	}
@@ -186,7 +186,7 @@ class Data
 
 	public function insertPurchaseItem($receiptID,$UPC,$quantity)
 	{
-		echo"purchaseItemInsertCalled DATA";
+		//echo"purchaseItemInsertCalled DATA";
 		global $PI;
 		$PI->insertPurchaseItem($receiptID,$UPC,$quantity);
 	}
