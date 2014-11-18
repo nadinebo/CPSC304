@@ -1,3 +1,5 @@
+drop database if exists Houns;
+
 create database Houns;
 
 use Houns;

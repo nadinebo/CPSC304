@@ -13,9 +13,10 @@ class HasSong
 
 	//Basic manipulation functions
 	public function insertHasSong($UPC,$title)
-	{
+	{	
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO HasSong (upc,title) Values (?,?)");
+		echo "has song";
 		$stmt->bind_param("is", $UPC, $title);
 		$stmt->execute();
 		if($stmt->error) {

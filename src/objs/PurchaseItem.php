@@ -11,7 +11,7 @@ class PurchaseItem
 		error_reporting(E_STRICT);
 	}
 
-	public function insertPurchaseItem($receiptID, $UPC, $purchaseQuantity) 
+	public function insertPurchaseItem($receiptID, $UPC, $quantity) 
 	{
 		echo "   adding a purchased item   ";
 		global $connection;
@@ -32,7 +32,7 @@ class PurchaseItem
 		if(!$result = $connection->query("SELECT receiptID,upc,Quantity FROM PurchaseItem")) {
 			die('There was an error running the query on PurchaseItem[' .$db->error . ']');
 		} else {
-			echo "<b>Search is succesful for PurchaseItem";
+			echo "<b>Search is succesful for PurchaseItem</b>";
 		}
 	}
 
