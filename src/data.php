@@ -60,6 +60,100 @@ class Data
 
 			global $C;
 			$C = new Customer($connection);
+			
+			
+			
+			//Added this
+			
+			    // Check that the connection was successful, otherwise exit
+    if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+      if (isset($_POST["submitDelete"]) && $_POST["submitDelete"] == "DELETE") {
+       /*
+          Delete the selected item
+        */
+  /*     
+       // Create a delete query prepared statement with a ? for the title_id
+       $stmt = $connection->prepare("DELETE FROM titles WHERE title_id=?");
+       $deleteTitleID = $_POST['title_id'];
+       // Bind the title_id parameter, 's' indicates a string value
+       $stmt->bind_param("s", $deleteTitleID);
+       
+       // Execute the delete statement
+       $stmt->execute();
+          
+       if($stmt->error) {
+         printf("<b>Error: %s.</b>\n", $stmt->error);
+       } else {
+         echo "<b>Successfully deleted ".$deleteTitleID."</b>";
+       }*/
+            
+     // } elseif (isset($_POST["submit"]) && $_POST["submit"] ==  "ADD") { 
+           
+       } elseif (isset($_POST["submit"])){
+        if( $_POST["submit"] ==  "Add Item") {   
+
+        	$UPC = $_POST["new_upc"];
+        	$title = $_POST["new_title"];
+        	$type = $_POST["new_type"];
+        	$category = $_POST["new_category"];
+        	$company = $_POST["new_company"];
+        	$year = $_POST["new_year"];
+        	$price = $_POST["new_price"];
+        	$stock = $_POST["new_stock"];
+
+       	 	$stmt = $connection->prepare("INSERT INTO Item_ (upc, title, type, category, company, year, price, stock) VALUES (?,?,?,?,?,?,?,?)");
+          
+        	$stmt->bind_param("issssiii", $UPC, $title, $type, $category, $company, $year, $price, $stock);
+        }
+
+      //}
+      
+      elseif($_POST["submit"] ==  "Add Lead Singers"){
+       	$UPC = $_POST["new_upc"];
+        $name = $_POST["new_name"];
+      
+        $stmt = $connection->prepare("INSERT INTO LeadSinger (upc, name) VALUES (?,?)");
+          
+        $stmt->bind_param("is", $UPC, $name);
+        
+      }
+      
+    	elseif($_POST["submit"] ==  "Add A Song"){
+       	$UPC = $_POST["new_upc"];
+        $title = $_POST["new_title"];
+      
+        $stmt = $connection->prepare("INSERT INTO HasSong (upc, title) VALUES (?,?)");
+          
+        $stmt->bind_param("is", $UPC, $title);
+      
+      }
+    	elseif($_POST["submit"] ==  "Add A Return"){
+       	$retID = $_POST["new_retID"];
+        $returnDate = $_POST["new_returnDate"];
+        $receiptID = $_POST["new_receiptID"];
+      
+        $stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) VALUES (?,?,?)");
+          
+        $stmt->bind_param("isi", $retID, $returnDate, $receiptID);
+              
+      }
+      
+      	$stmt->execute();
+    	if($stmt->error) {       
+          printf("<b>Error: %s.</b>\n", $stmt->error);
+        } else {
+          echo "<b>Successfully added entry!</b>";
+        }
+      } //from elseif
+   }
+			
+			//End add
 
 	}
 

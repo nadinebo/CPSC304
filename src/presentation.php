@@ -33,7 +33,7 @@ class Presentation
 		echo"<br><br>";
 	}
 	
-	public function BuildAddForm($schema){
+	public function BuildAddForm($schema, $action){
 		echo "<form id=\"add\" name=\"add\" method=\"post\" action=\"";
 			echo htmlspecialchars($_SERVER["PHP_SELF"]);
 		echo"\">";
@@ -42,7 +42,15 @@ class Presentation
 		{
 			echo "<tr><td>".$schema[$i]."</td><td><input type=\"text\" size=30 name=\"new_".$schema[$i]."\"</td></tr>";
 		}
-        	echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"ADD\"></td></tr>";
+		if ($action == "Add Item"){
+        	echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add Item\"></td></tr>";
+    		}elseif ($action == "Add Lead Singers"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add Lead Singers\"></td></tr>";
+    		}elseif ($action == "Add A Song"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add A Song\"></td></tr>";
+    		}elseif ($action == "Add A Return"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add A Return\"></td></tr>";
+    		}
     		echo"</table>";
 		echo"</form>";
 	}
@@ -92,7 +100,8 @@ class Presentation
 		$schema = array('upc','title','type','category','company','year','price','stock');
 		
 		$this->buildTable("All Items",$result,$schema);
-		$this->buildAddForm($schema);
+		$action = "Add Item";
+		$this->buildAddForm($schema, $action);
 
 	}
 
@@ -111,8 +120,9 @@ class Presentation
 		$result = $Logic->getLeadSingers();
 		$schema = array('upc','name');	
 		$this->buildTable("All Lead Singers",$result,$schema);
-		$this->buildAddForm($schema);
-		$Logic->removeLeadSingers(22231,'Michal Geera');
+		$action = "Add Lead Singers";
+		$this->buildAddForm($schema, $action);
+		//$Logic->removeLeadSingers(22231,'Michal Geera');
 		
 	}
 
@@ -128,6 +138,8 @@ class Presentation
 		$result = $Logic->getAllSongTitles();
 		$schema = array('upc','title');
 		$this->buildTable("All Songs",$result,$schema);
+		$action = "Add A Song";
+		//$this->buildAddForm($schema, $action);
 			
 	}
 
@@ -190,7 +202,7 @@ class Presentation
 		$result = $Logic->getAllPurchaseItems();
 		$schema = array('receiptID','upc','quantity');
 		$this->buildTable("All Purchased Items",$result,$schema);
-		$this->buildAddForm($schema);
+//		$this->buildAddForm($schema);
 	
 	}
 	
@@ -206,7 +218,8 @@ class Presentation
 		$result = $Logic->getAllReturns();
 		$schema = array('retID','returnDate','receiptID');
 		$this->buildTable("All Returns",$result,$schema);
-		$this->buildAddForm($schema);
+		$action = "Add A Return";
+		$this->buildAddForm($schema, $action);
 	
 	}
 
