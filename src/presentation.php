@@ -33,7 +33,7 @@ class Presentation
 		echo"<br><br>";
 	}
 	
-	public function BuildAddForm($schema){
+	public function BuildAddForm($schema, $action){
 		echo "<form id=\"add\" name=\"add\" method=\"post\" action=\"";
 			echo htmlspecialchars($_SERVER["PHP_SELF"]);
 		echo"\">";
@@ -42,33 +42,76 @@ class Presentation
 		{
 			echo "<tr><td>".$schema[$i]."</td><td><input type=\"text\" size=30 name=\"new_".$schema[$i]."\"</td></tr>";
 		}
-        	echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"ADD\"></td></tr>";
+		if ($action == "Add Item"){
+        	echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add Item\"></td></tr>";
+    		}elseif ($action == "Add Lead Singers"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add Lead Singers\"></td></tr>";
+    		}elseif ($action == "Add A Song"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add A Song\"></td></tr>";
+    		}elseif ($action == "Add A Return"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add A Return\"></td></tr>";
+    		}
     		echo"</table>";
 		echo"</form>";
 	}
+	
+	
+		public function demo()
+	{
+		global $Logic;
+
+		$this->singersd();
+	
+		$this->Itemsd();
+
+//		$this->orders();
+
+		$this->songs();
+		
+		$this->customers();
+
+		$this->orders1();
+		
+		$this->purchaseitems();
+		
+		$this->returns();
+		
+		$this->returnitems();	
+		
+	}
+	
 	
 	public function Itemsd()
 	{
 		global $Logic;
 		
 		//Added this
+		$Logic->removeItem(38493);
+		$Logic->removeItem(22231);
+		$Logic->removeItem(11111);
+		$Logic->removeItem(22222);
 		
 		$Logic->newItem(38493,'St.Vincent','CD','POP','muhrecords',2014,20,1);
 		$Logic->newItem(11111,'test1','CD','POP','muhrecords',2014,20,10);
 		$Logic->newItem(22222,'test2','CD','POP','muhrecords',2014,20,1);
+		
 		//testing using the layers as classes
 		$result = $Logic->getItems();
 		$schema = array('upc','title','type','category','company','year','price','stock');
-		$this->buildTable("Items",$result,$schema);
-		$this->buildAddForm($schema);
-		//Create a table to display the singers
-		$Logic->removeItem(38493);
-		$Logic->removeItem(11111);
-		$Logic->removeItem(22222);
+		
+		$this->buildTable("All Items",$result,$schema);
+		$action = "Add Item";
+		$this->buildAddForm($schema, $action);
+
 	}
+
+	
 	public function singersd()
 	{
 		global $Logic;
+		
+		$Logic->removeLeadSingers(38493,'St.Vincent');
+		$Logic->removeLeadSingers(22231,'Michal Geera');
 		
 		$Logic->newLeadSinger(38493,'St.Vincent');
 		$Logic->newLeadSinger(22231,'Michal Geera');
@@ -76,15 +119,129 @@ class Presentation
 		//testing using the layers as classes
 		$result = $Logic->getLeadSingers();
 		$schema = array('upc','name');	
-		$this->buildTable("Lead Singer",$result,$schema);
-		$this->buildAddForm($schema);
-		$Logic->removeLeadSingers(22231,'Michal Geera');
-		$Logic->removeLeadSingers(38493,'St.Vincent');
+		$this->buildTable("All Lead Singers",$result,$schema);
+		$action = "Add Lead Singers";
+		$this->buildAddForm($schema, $action);
+		//$Logic->removeLeadSingers(22231,'Michal Geera');
+		
 	}
 
-	public function orders()
+
+	public function songs()
 	{
 		global $Logic;
+		
+		$Logic->removeSongTitle(38493,'I prefer your love');
+		
+		$Logic->newSongTitle(38493,'I prefer your love');
+		
+		$result = $Logic->getAllSongTitles();
+		$schema = array('upc','title');
+		$this->buildTable("All Songs",$result,$schema);
+		$action = "Add A Song";
+		//$this->buildAddForm($schema, $action);
+			
+	}
+
+	
+	public function customers(){
+	
+		global $Logic;
+		
+		$Logic->removeCustomer(1000);
+		$Logic->removeCustomer(2000);
+		
+		$Logic->newCustomer(1000,'ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
+		$Logic->newCustomer(2000,'ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
+
+		$result = $Logic->getCustomers();
+		
+		/*while($row = $result->fetch_assoc()){
+			echo"<td>".$row['cid']."</td>";
+			echo"<td>".$row['password']."</td>";
+			echo"<td>".$row['name']."</td>";
+			echo"<td>".$row['address']."</td>";
+			echo"<td>".$row['phone']."</td>";
+		}*/
+		
+		$result = $Logic->getCustomers();
+		$schema = array('cid','name', 'address','phone');	
+		$this->buildTable("All Customers",$result,$schema);
+		
+	}
+	
+	
+	public function orders1(){
+	
+		global $Logic;
+		
+		$Logic->removeOrder(12014);
+		$Logic->removeOrder(11014);
+		
+		$Logic->newOrder(12014,'2014-11-01 01:02:03',1000,45678,'2017-11-01 01:02:03','2014-12-01 01:02:03',null);
+		$Logic->newOrder(11014,'2014-11-01 01:02:03',2000,45123,'2015-11-01 01:02:03','2014-12-01 01:02:03',null);
+			
+		$result = $Logic->getAllOrders();
+		$schema = array('receiptID','date','cid','cardNum','expiryDate','expectedDate','deliveredDate');
+		$this->buildTable("All Orders",$result,$schema);
+		
+	}
+	
+	
+	public function purchaseitems(){
+	
+		global $Logic;
+		
+		$Logic->removePurchaseItem(12014,11111);
+		$Logic->removePurchaseItem(11014,22222);
+		
+		$Logic->newPurchaseItem(12014,11111,5);
+
+		$Logic->newPurchaseItem(11014,22222,5);
+		
+		$result = $Logic->getAllPurchaseItems();
+		$schema = array('receiptID','upc','quantity');
+		$this->buildTable("All Purchased Items",$result,$schema);
+//		$this->buildAddForm($schema);
+	
+	}
+	
+	
+	
+	public function returns(){
+	
+		global $Logic;
+		
+		$Logic->newReturn(12345,'2014-11-11 01:02:03',12014);
+		$Logic->newReturn(90876,'2014-11-10 03:02:01',11014);
+		
+		$result = $Logic->getAllReturns();
+		$schema = array('retID','returnDate','receiptID');
+		$this->buildTable("All Returns",$result,$schema);
+		$action = "Add A Return";
+		$this->buildAddForm($schema, $action);
+	
+	}
+
+
+	public function returnitems(){
+	
+		global $Logic;
+		
+		$Logic->newReturnItem(12345,11111,1);
+		$Logic->newReturnItem(90876,22222,1);
+
+		$result = $Logic->getAllReturnItems();
+		$schema = array('retID','upc','returnQuantity');
+		$this->buildTable("All Returned Items",$result,$schema);
+	}
+	
+	
+/* Nicole's stuff */	
+	
+		public function orders()
+	{
+		/*global $Logic;
 		
 		$date = date('Y-m-d');
 		
@@ -97,40 +254,22 @@ class Presentation
 		$receiptID = 1;
 		
 		$Logic->newOrder($receiptID,$date,2,1234,'0101',$nextWeek,$twoWeeks);
-		
-		$result = $Logic->getAllOrders();
+		*/
+		/*$result = $Logic->getAllOrders();
 		$schema = array('receiptID','date','cid','cardNum','expiryDate','expectedDate','deliveredDate');
 		$this->buildTable("All Orders",$result,$schema);
 		
 		$Logic->removeOrder($receiptID);
-		
+		*/
 	}
-
-	public function songs()
+	
+	
+		public function processReturns()
 	{
-		global $Logic;
-		
-		$UPC = '38493';
-		$title = 'I prefer your love';
-		$Logic->newItem('38493','St.Vincent','CD','POP','muhrecords',2014,20,1);
-		
-		$Logic->newSongTitle($UPC,$title);
-		
-		$result = $Logic->getAllSongTitles();
-		$schema = array('upc','title');
-		$this->buildTable("All Songs",$result,$schema);
-		
-		$Logic->removeSongTitle($UPC,$title);
-		$Logic->removeItem('38493');
-		
-	}
-
-	public function processReturns()
-	{
-		global $Logic;
+		/*global $Logic;
 		
 		// Setup variables for testing
-		$UPC = '38493';		
+		$UPC = 38493;		
 		$cid = 555;
 		$date = date('Y-m-d');		
 		$receiptID = 1;
@@ -146,31 +285,31 @@ class Presentation
 		$Logic->newCustomer($cid,'password','Nicole','Cornwall Street','604-837-9964');
 		$Logic->newItem($UPC,'St.Vincent','CD','POP','muhrecords',2014,20,1);
 		$Logic->newOrder($receiptID,$date,$cid,1234,'0101',$nextWeek,$twoWeeks);
-		$Logic->newPurchaseItem($receiptID,$UPC,'1');
+		$Logic->newPurchaseItem($receiptID,$UPC,1);
 		$Logic->newReturn($returnID,$date,$receiptID);
-		$Logic->newReturnItem($returnID,'1',$UPC);
-		
+		$Logic->newReturnItem($returnID,1,$UPC);
+		*/
 		// build a table to show the return	
-		$result = $Logic->getAllReturnItems();
+	/*	$result = $Logic->getAllReturnItems();
 		$schema = array('retID','returnQuantity','upc');
 		$this->buildTable("All Returns",$result,$schema);
-		
+	*/	
 		// remove test records
-		$Logic->removeReturnItem($returnID,$UPC);
+	/*	$Logic->removeReturnItem($returnID,$UPC);
 		$Logic->removeReturn($returnID);
 		$Logic->removePurchaseItem($receiptID,$UPC);
 		$Logic->removeOrder($receiptID);
 		$Logic->removeItem($UPC);
 		$Logic->removeCustomer($cid);
-		
+		*/
 	}
 
 	public function SalesReport()
 	{
-		global $Logic;
+		/*global $Logic;
 		
 		// Setup variables for testing
-		$UPC = '38493';		
+		$UPC = 38493;		
 		$cid = 555;
 		$date = date('Y-m-d');		
 		$receiptID1 = 1;	
@@ -185,10 +324,10 @@ class Presentation
 		// create records for testing
 		$Logic->newCustomer($cid,'password','Nicole','Cornwall Street','604-837-9964');
 		$Logic->newItem($UPC,'St.Vincent','CD','POP','muhrecords',2014,20,1);
-		$Logic->newOrder($receiptID1,$date,$cid,1234,'0101',$nextWeek,$twoWeeks);
-		$Logic->newOrder($receiptID2,$date,$cid,1234,'0101',$nextWeek,$twoWeeks);
-		$Logic->newPurchaseItem($receiptID1,$UPC,'1');
-		$Logic->newPurchaseItem($receiptID2,$UPC,'1');
+		$Logic->newOrder($receiptID1,$date,$cid,1234,'2017-11-01 01:02:03',$nextWeek,$twoWeeks);
+		$Logic->newOrder($receiptID2,$date,$cid,1234,'2017-11-01 01:02:03',$nextWeek,$twoWeeks);
+		$Logic->newPurchaseItem($receiptID1,$UPC,1);
+		$Logic->newPurchaseItem($receiptID2,$UPC,1);
 		
 		// build a table to show the return	
 		$result = $Logic->dailySales($date);
@@ -202,91 +341,8 @@ class Presentation
 		$Logic->removeOrder($receiptID2);
 		$Logic->removeItem($UPC);
 		$Logic->removeCustomer($cid);
-		
-	}
-
-	public function demo()
-	{
-		global $Logic;
-		echo"entering demo";
-		$this->singersd();
-		$this->itemsd();
-		$this->orders();
-		$this->songs();
-		echo "finished songs";
-		//$this->processReturns();
-		//$this->SalesReport();
-		$Logic->removeCustomer(1000);
-		$Logic->removeCustomer(2000);
-		
-		$Logic->newCustomer(1000,'ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
-		echo "insert a customer ";
-		//insert second return
-		$Logic->newCustomer(2000,'ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
-		echo "insert a customer ";
-		//$Logic->removeCustomer(1000);
-		//$Logic->removeCustomer(2000);
-		
-		$result = $Logic->getCustomers();
-		while($row = $result->fetch_assoc()){
-			echo"<td>".$row['cid']."</td>";
-			echo"<td>".$row['password']."</td>";
-			echo"<td>".$row['name']."</td>";
-			echo"<td>".$row['address']."</td>";
-			echo"<td>".$row['phone']."</td>";
-		}
-		
-		//insert first return
-		//retID 12345 returnDate receiptID
-		$Logic->newReturn('12345','2014-11-11 01:02:03','12014');
-		$Logic->removeOrder(12014);
-		$Logic->removeOrder(11014);
-		
-		//newOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate)
-		$Logic->newOrder(12014,'2014-11-01 01:02:03',1000,45678,'2017-11-01 01:02:03','2014-12-01 01:02:03');
-		$Logic->newOrder(11014,'2014-11-01 01:02:03',2000,45123,'2015-11-01 01:02:03','2014-12-01 01:02:03');
-		
-		$Logic->removePurchaseItem(12014,11111);
-		$Logic->removePurchaseItem(11014,11111);
-		
-		echo "insert a PurchaseItem";
-		$Logic->newPurchaseItem(12014,11111,5);
-		echo "insert a PurchaseItem";
-		$Logic->newPurchaseItem(11014,22222,5);
-		
-		$result = $Logic->getPurchaseItems();
-		/*while($row = $result->fetch_assoc()){
-			echo"<td>".$row['receiptID']."</td>";
-			echo"<td>".$row['upc']."</td>";
-			echo"<td>".$row['quantity']."</td>";
-		}
 		*/
-		
-		echo " done with purchase item ";
-
-		$Logic->newReturn(12345,'2014-11-11 01:02:03',12014);
-		
-		echo "insert a return";
-		$Logic->newReturn(90876,'2014-11-10 03:02:01',11014);
-		echo "insert a return";
-		
-		$result = $Logic->getAllReturns();
-		while($row = $result->fetch_assoc()){
-			echo"<td>".$row['retID']."</td>";
-			echo"<td>".$row['date']."</td>";
-			echo"<td>".$row['receiptID']."</td><td>";
-		}
-
-		$Logic->newReturnItem(12345,11111,1);
-		$Logic->newReturnItem(90876,22222,1);
-		echo "insert a return";
-		$result = $Logic->getAllReturnItems();
-		while($row = $result->fetch_assoc()){
-			echo"<td>".$row['retID']."</td>";
-			echo"<td>".$row['UPC']."</td>";
-			echo"<td>".$row['returnQuantity']."</td><td>";
-		}
-		
 	}
+	
 }
 ?>

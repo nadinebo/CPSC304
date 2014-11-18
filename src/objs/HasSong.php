@@ -44,7 +44,7 @@ class HasSong
 		if($stmt->error) {
 			echo "<br>Nothing to delete";
 		} else {
-			echo "<br>Successfully deleted song <i>".$title."</i><br>";
+			//echo "<br>Successfully deleted song <i>".$title."</i><br>";
 		}
 	}
 }

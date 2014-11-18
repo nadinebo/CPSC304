@@ -21,7 +21,7 @@ class LeadSinger
 		if($stmt->error) {
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);
 		} else {
-			echo "<b>Successfully added ".$Name."</b><br>";
+			//echo "<b>Successfully added ".$Name."</b><br>";
 		}
 	}
 
@@ -31,7 +31,7 @@ class LeadSinger
 		if(!$result = $connection->query("Select * From LeadSinger")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
-			echo "<b>Search succussfull</b><br>";
+			//echo "<b>Search succussfull</b><br>";
 		}
 		return $result;
 	}
@@ -45,7 +45,7 @@ class LeadSinger
 		if($stmt->error) {
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);
 		} else {
-			echo "<b>Successfully deleted ".$Name."</b><br>";
+			//echo "<b>Successfully deleted ".$Name."</b><br>";
 		}
 	}
 }

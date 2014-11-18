@@ -154,7 +154,7 @@ class Logic
 		return $Data->insertPurchaseItem($receiptID, $UPC, $quantity);	
 	}	
 	
-	public function getPurchaseItems()
+	public function getAllPurchaseItems()
 	{
 		global $Data;
 		return $Data->queryAllPurchaseItems();	

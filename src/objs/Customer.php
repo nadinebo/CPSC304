@@ -14,7 +14,7 @@ class Customer
 	// how are we adding cid into this equation?
 	public function insertCustomer($cid, $password, $name, $address, $phone)
 	{
-		echo "   inserting customer   ";
+		//echo "   inserting customer   ";
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO Customer (cid,password,name,address,phone) Values (?,?,?,?,?)");
 		$stmt->bind_param("issss", $cid, $password, $name, $address, $phone);
@@ -28,19 +28,19 @@ class Customer
 
 	public function queryAllCustomers()
 	{
-		echo "   query customer   ";
+		//echo "   query customer   ";
 		global $connection;
 		if(!$result = $connection->query("Select * FROM Customer")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
-			echo "<b>Search successful</b>";
+			//echo "<b>Search successful</b>";
 		}
 		return $result;
 	}
 
 	public function deleteCustomer($cid) 
 	{
-		echo "   deleting customer   ";
+		//echo "   deleting customer   ";
 		global $connection;
 		$stmt = $connection->prepare("DELETE FROM Customer WHERE cid=?");
 		$stmt->bind_param("i",$cid);

@@ -22,7 +22,7 @@ class Item_
 		if($stmt->error) {
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);
 		} else {
-			echo "<b>Successfully added ".$Name."</b><br>";
+			//echo "<b>Successfully added ".$UPC."</b><br>";
 		}
 	}
 
@@ -32,7 +32,7 @@ class Item_
 		if(!$result = $connection->query("Select * From Item_")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
-			echo "<b>Search succussfull</b><br>";
+			//echo "<b>Search succussfull</b><br>";
 		}
 		return $result;
 	}
@@ -46,7 +46,7 @@ class Item_
 		if($stmt->error) {
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);
 		} else {
-			echo "<b>Successfully deleted ".$Name."</b><br>";
+			//echo "<b>Successfully deleted ".$Name."</b><br>";
 		}
 	}
 }

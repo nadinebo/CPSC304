@@ -6,7 +6,7 @@ class Order_
 {
 	public function __construct($conn)
 	{
-		echo "con";
+		//echo "con";
 		global $connection;
 		$connection  = $conn;
 		error_reporting(E_STRICT);
@@ -43,7 +43,7 @@ class Order_
 		if($stmt->error) {
 			echo "<br>Nothing to delete";
 		} else {
-			echo "<br>Successfully deleted order ".$receiptID."<br>";
+			//echo "<br>Successfully deleted order ".$receiptID."<br>";
 		}
 	}
 }

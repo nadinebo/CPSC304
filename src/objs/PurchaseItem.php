@@ -13,40 +13,43 @@ class PurchaseItem
 
 	public function insertPurchaseItem($receiptID, $UPC, $quantity) 
 	{
-		echo "   adding a purchased item   ";
+		//echo "   adding a purchased item   ";
 		global $connection;
-		$stmt = $connection->prepare("INSERT INTO PurchaseItem (receiptID,upc,quantity) Values (?,?,?)");
-		$stmt->bind_param("isi", $receiptID, $UPC, $purchaseQuantity);
+		$stmt = $connection->prepare("INSERT INTO PurchaseItem (receiptID, upc, quantity) Values (?,?,?)");
+		$stmt->bind_param("iii", $receiptID, $UPC, $quantity);
+
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b\n", $stmt->error);
 		} else {
-			echo "<b>Successfully added purchase item #".$UPC."</b>";
+			//echo "<b>Successfully added purchase item #".$UPC."</b>";
 		}
 	}
 
 	public function queryAllPurchaseItems()
 	{
-		echo "   query a purchase   ";
+		//echo "   query a purchase   ";
 		global $connection;
-		if(!$result = $connection->query("SELECT receiptID,upc,Quantity FROM PurchaseItem")) {
+		if(!$result = $connection->query("SELECT receiptID,upc,quantity FROM PurchaseItem")) {
 			die('There was an error running the query on PurchaseItem[' .$db->error . ']');
 		} else {
-			echo "<b>Search is succesful for PurchaseItem</b>";
+			//echo "<b>Search is succesful for PurchaseItem</b>";
+			return $result;
 		}
 	}
 
 	public function deletePurchaseItem($receiptID, $UPC)
 	{
-		echo "   delete a purchased item   ";
+		//echo "   delete a purchased item   ";
 		global $connection;
-		$stmt = $connection->prepare("DELETE FROM PurchaseItem WHERE receiptID=? AND upc=?");
-		$stmt->bind_param("is",$receiptID,$UPC);
+		$stmt = $connection->prepare("DELETE FROM PurchaseItem WHERE receiptID=? AND UPC=?");
+		$stmt->bind_param("ii",$receiptID,$UPC);
+
 		$stmt->execute();
 		if ($stmt->error) {
 			printf("<b>Error: %s. <b>\n", $stmt->error);
 		} else {
-			echo "<b>Successfully deleted purchase item #".$UPC."</b>";
+			//echo "<b>Successfully deleted purchase item #".$UPC."</b>";
 		}
 	}
 	
