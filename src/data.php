@@ -109,7 +109,6 @@ class Data
         $name = $_POST["new_name"];
       
         $stmt = $connection->prepare("INSERT INTO LeadSinger (upc, name) VALUES (?,?)");
-          
         $stmt->bind_param("is", $UPC, $name);
         
       }
@@ -119,7 +118,6 @@ class Data
         $title = $_POST["new_title"];
       
         $stmt = $connection->prepare("INSERT INTO HasSong (upc, title) VALUES (?,?)");
-          
         $stmt->bind_param("is", $UPC, $title);
       
       }
@@ -133,7 +131,48 @@ class Data
         $stmt->bind_param("isi", $retID, $returnDate, $receiptID);
               
       }
+      	elseif($_POST["submit"] ==  "Add Order"){
+       	$date = $_POST["new_date"];
+       	$cid = $_POST["new_cid"];
+       	$cardNum = $_POST["new_cardNum"];
+        $expiryDate = $_POST["new_expiryDate"];
+        $receiptID = $_POST["new_receiptID"];
+        $expectedDate = $_POST["new_expectedDate"];
+        $deliveredDate = $_POST["new_deliveredDate"];
       
+        $stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate,deliveredDate) Values (?,?,?,?,?,?,?)");
+		$stmt->bind_param("isiisss", $receiptID, $date, $cid, $cardNum, $expiryDate, $expectedDate,$deliveredDate);
+            
+      }
+      	elseif($_POST["submit"] ==  "Add Customer"){
+       	$password = $_POST["new_password"];
+       	$cid = $_POST["new_cid"];
+       	$name = $_POST["new_name"];
+        $phone = $_POST["new_phone"];
+        $address = $_POST["new_address"];
+      
+        $stmt = $connection->prepare("INSERT INTO Customer (cid,password,name,address,phone) Values (?,?,?,?,?)");
+		$stmt->bind_param("issss", $cid, $password, $name, $address, $phone);
+		   
+      }
+      	elseif($_POST["submit"] ==  "Add Purchased Item"){
+       	$receiptID = $_POST["new_receiptID"];
+       	$upc = $_POST["new_upc"];
+       	$quantity = $_POST["new_quantity"];
+      
+        $stmt = $connection->prepare("INSERT INTO PurchaseItem (receiptID, upc, quantity) Values (?,?,?)");
+		$stmt->bind_param("iii", $receiptID, $upc, $quantity);   
+      }
+      
+      	elseif($_POST["submit"] ==  "Add Return Item"){
+       	$retID = $_POST["new_retID"];
+       	$upc = $_POST["new_upc"];
+       	$returnQuantity = $_POST["new_returnQuantity"];
+      
+        $stmt = $connection->prepare("INSERT INTO ReturnItem (retID,upc,returnQuantity) Values (?,?,?)");
+		$stmt->bind_param("iii", $retID, $upc, $returnQuantity);
+		  
+      }
         elseif($_POST["submit"] ==  "View Top Selling Items"){
         
        	printf("You are viewing the 'Top Selling' table stub!");

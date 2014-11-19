@@ -52,6 +52,14 @@ class Presentation
     		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add A Return\"></td></tr>";
     		}elseif ($action == "View Top Selling Items"){
         	echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"View Top Selling Items\"></td></tr>";
+    		}elseif ($action == "Add Order"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add Order\"></td></tr>";
+    		}elseif ($action == "Add Customer"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add Customer\"></td></tr>";
+    		}elseif ($action == "Add Purchased Item"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add Purchased Item\"></td></tr>";
+    		}elseif ($action == "Add Return Item"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add Return Item\"></td></tr>";
     		}
     		echo"</table>";
 		echo"</form>";
@@ -172,7 +180,7 @@ class Presentation
 		$schema = array('upc','title');
 		$this->buildTable("All Songs",$result,$schema);
 		$action = "Add A Song";
-		//$this->buildAddForm($schema, $action);
+		$this->buildAddForm($schema, $action);
 			
 	}
 
@@ -198,9 +206,10 @@ class Presentation
 		}*/
 		
 		$result = $Logic->getCustomers();
-		$schema = array('cid','name', 'address','phone');	
+		$schema = array('cid','name', 'password','address','phone');	
 		$this->buildTable("All Customers",$result,$schema);
-		
+		$action = "Add Customer";
+		$this->buildAddForm($schema, $action);
 	}
 	
 	
@@ -217,6 +226,8 @@ class Presentation
 		$result = $Logic->getAllOrders();
 		$schema = array('receiptID','date','cid','cardNum','expiryDate','expectedDate','deliveredDate');
 		$this->buildTable("All Orders",$result,$schema);
+		$action = "Add Order";
+		$this->buildAddForm($schema, $action);
 		
 	}
 	
@@ -235,7 +246,8 @@ class Presentation
 		$result = $Logic->getAllPurchaseItems();
 		$schema = array('receiptID','upc','quantity');
 		$this->buildTable("All Purchased Items",$result,$schema);
-//		$this->buildAddForm($schema);
+		$action = "Add Purchased Item";
+		$this->buildAddForm($schema, $action);
 	
 	}
 	
@@ -267,6 +279,8 @@ class Presentation
 		$result = $Logic->getAllReturnItems();
 		$schema = array('retID','upc','returnQuantity');
 		$this->buildTable("All Returned Items",$result,$schema);
+		$action = "Add Return Item";
+		$this->buildAddForm($schema, $action);
 	}
 	
 	
