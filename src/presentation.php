@@ -53,11 +53,11 @@ class Presentation
 		global $Logic;
 		$this->songs();
 
-//		$this->singersd();
+		$this->singersd();
 	
 		$this->Itemsd();
 
-//		$this->orders();
+		$this->orders();
 
 		
 		$this->customers();
@@ -143,7 +143,6 @@ class Presentation
 		
 		$Logic->removeCustomer(1000);
 		$Logic->removeCustomer(2000);
-		
 		$Logic->newCustomer(1000,'ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
 		$Logic->newCustomer(2000,'ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
 
@@ -158,9 +157,10 @@ class Presentation
 		}*/
 		
 		$result = $Logic->getCustomers();
-		$schema = array('cid','name', 'address','phone');	
+		$schema = array('cid','password','name', 'address','phone');	
 		$this->buildTable("All Customers",$result,$schema);
-		
+		$action = "Add Customer";
+		$this->buildAddForm($schema, $action); 
 	}
 	
 	
@@ -177,6 +177,7 @@ class Presentation
 		$result = $Logic->getAllOrders();
 		$schema = array('receiptID','date','cid','cardNum','expiryDate','expectedDate','deliveredDate');
 		$this->buildTable("All Orders",$result,$schema);
+		$this->buildAddForm($schema, "Add Order"); 
 		
 	}
 	
@@ -195,7 +196,7 @@ class Presentation
 		$result = $Logic->getAllPurchaseItems();
 		$schema = array('receiptID','upc','quantity');
 		$this->buildTable("All Purchased Items",$result,$schema);
-//		$this->buildAddForm($schema);
+		$this->buildAddForm($schema,"Add PurchaseItem");
 	
 	}
 	
@@ -227,6 +228,7 @@ class Presentation
 		$result = $Logic->getAllReturnItems();
 		$schema = array('retID','upc','returnQuantity');
 		$this->buildTable("All Returned Items",$result,$schema);
+		$this->buildAddForm($schema,"Add Return Item");
 	}
 	
 	

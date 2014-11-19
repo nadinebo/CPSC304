@@ -126,9 +126,40 @@ class Data
         $returnDate = $_POST["new_returnDate"];
         $receiptID = $_POST["new_receiptID"];
 	$this->insertReturn($retID,$returnDate,$receiptID);
-              
       }
+    	elseif($_POST["submit"] ==  "Add Customer"){
+       	$cid = $_POST["new_cid"];
+       	$password = $_POST["new_password"];
+       	$name = $_POST["new_name"];
+       	$address = $_POST["new_address"];
+       	$phone = $_POST["new_phone"];
+	$this->insertCustomer($cid,$password,$name,$address,$phone);
+	
+	}
+    	elseif($_POST["submit"] ==  "Add Order"){
+       	$receiptID = $_POST["new_receiptID"];
+       	$date = $_POST["new_date"];
+       	$cid = $_POST["new_cid"];
+       	$cardNum = $_POST["new_cardNum"];
+       	$expiryDate = $_POST["new_expiryDate"];
+       	$expectedDate = $_POST["new_expectedDate"];
+       	$deliveredDate = $_POST["new_deliveredDate"];
+	$this->insertOrder($receiptID,$date,$cid,$cardNum,$expiryDate,$expectedDate,$deliveredDate);
+	}
       
+    	elseif($_POST["submit"] ==  "Add PurchaseItem"){
+       	$receiptID = $_POST["new_receiptID"];
+       	$UPC = $_POST["new_upc"];
+       	$quantity = $_POST["new_quantity"];
+	$this->insertPurchaseItem($receiptID,$UPC,$quantity);
+	}
+
+	elseif($_POST["submit"] ==  "Add Return Item"){
+	$retID = $_POST["new_retID"];
+	$UPC = $_POST["new_upc"];
+	$returnQuantity = $_POST["new_returnQuantity"];
+	$this->insertReturnItem($retID,$UPC,$returnQuantity);
+	}
       } //from elseif
    }
 			
@@ -218,7 +249,6 @@ class Data
 	}
 	
 	public function insertReturnItem($retID,$UPC,$returnQuantity){
-		//echo"returnItemInsert Called DATA";
 		global $RI;
 		$RI->insertReturnItem($retID,$UPC,$returnQuantity);
 	}
