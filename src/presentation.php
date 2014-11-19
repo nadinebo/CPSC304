@@ -50,11 +50,37 @@ class Presentation
     		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add A Song\"></td></tr>";
     		}elseif ($action == "Add A Return"){
     		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add A Return\"></td></tr>";
+    		}elseif ($action == "View Top Selling Items"){
+        	echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"View Top Selling Items\"></td></tr>";
     		}
     		echo"</table>";
 		echo"</form>";
 	}
 	
+	
+		/*public function BuildAButton($action){
+		echo "<form id=\"add\" name=\"add\" method=\"post\" action=\"";
+			echo htmlspecialchars($_SERVER["PHP_SELF"]);
+		echo"\">";
+			echo"<table border=0 cellpadding=0 cellspacing=0>";
+		for($i=0;$i<count($schema);$i++)
+		{
+			echo "<tr><td>".$schema[$i]."</td><td><input type=\"text\" size=30 name=\"new_".$schema[$i]."\"</td></tr>";
+		}
+
+		if ($action == "View Top Selling Items"){
+        	echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"View Top Selling Items\"></td></tr>";
+    		}
+    		elseif ($action == "Add Lead Singers"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add Lead Singers\"></td></tr>";
+    		}elseif ($action == "Add A Song"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add A Song\"></td></tr>";
+    		}elseif ($action == "Add A Return"){
+    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add A Return\"></td></tr>";
+    		
+    		echo"</table>";
+		echo"</form>";
+	}*/
 	
 		public function demo()
 	{
@@ -77,6 +103,13 @@ class Presentation
 		$this->returns();
 		
 		$this->returnitems();	
+		
+		$schema = array('date','amount to display');
+		
+		//$this->buildTable("All Items",$result,$schema);
+		$action = "View Top Selling Items";
+		//$this->buildAButton($action);
+		$this->buildAddForm($schema, $action);
 		
 	}
 	

@@ -1,6 +1,4 @@
 <?php
-
-
 $connection = NULL;
 $LS = NULL; 	//the lead singer reference
 class Data
@@ -14,8 +12,8 @@ class Data
 			include 'objs/ReturnItem.php';
 			include 'objs/Customer.php';
 			include 'objs/PurchaseItem.php';
+			include 'objs/TopSellingItems.php';
 			include 'objs/Item_.php';
-
 			$server = '127.0.0.1';
 			$user = 'root';
 			$pass = '';
@@ -34,7 +32,6 @@ class Data
 			printf("Connect failed: %s\n", mysqli_connect_error());
 			exit();
 		    }	
-
 			//create references to the data objects
 			global $LS;
 			$LS = new LeadSinger($connection);
@@ -50,14 +47,12 @@ class Data
 			
 			global $RI;
 			$RI = new ReturnItem($connection);
-
 			global $I;
 			$I = new Item_($connection);
 			
 			//echo "data init";
 			global $PI;
 			$PI = new PurchaseItem($connection);
-
 			global $C;
 			$C = new Customer($connection);
 			
@@ -70,9 +65,7 @@ class Data
         printf("Connect failed: %s\n", mysqli_connect_error());
         exit();
     }
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
       if (isset($_POST["submitDelete"]) && $_POST["submitDelete"] == "DELETE") {
        /*
           Delete the selected item
@@ -97,7 +90,6 @@ class Data
            
        } elseif (isset($_POST["submit"])){
         if( $_POST["submit"] ==  "Add Item") {   
-
         	$UPC = $_POST["new_upc"];
         	$title = $_POST["new_title"];
         	$type = $_POST["new_type"];
@@ -106,12 +98,10 @@ class Data
         	$year = $_POST["new_year"];
         	$price = $_POST["new_price"];
         	$stock = $_POST["new_stock"];
-
        	 	$stmt = $connection->prepare("INSERT INTO Item_ (upc, title, type, category, company, year, price, stock) VALUES (?,?,?,?,?,?,?,?)");
           
         	$stmt->bind_param("issssiii", $UPC, $title, $type, $category, $company, $year, $price, $stock);
         }
-
       //}
       
       elseif($_POST["submit"] ==  "Add Lead Singers"){
@@ -144,6 +134,25 @@ class Data
               
       }
       
+        elseif($_POST["submit"] ==  "View Top Selling Items"){
+        
+       	printf("You are viewing the 'Top Selling' table stub!");
+       	
+       	$date = $_POST["new_date"];
+        $n = $_POST["new_n"];
+      
+        //$stmt = $connection->prepare("INSERT INTO LeadSinger (upc, name) VALUES (?,?)");
+          
+        //$stmt->bind_param("is", $UPC, $name);
+        
+        
+        
+        $TS = new TopSellingItems();
+        //$TS->queryAllTopSellingItems();
+       	
+        
+      }
+      
       	$stmt->execute();
     	if($stmt->error) {       
           printf("<b>Error: %s.</b>\n", $stmt->error);
@@ -154,9 +163,7 @@ class Data
    }
 			
 			//End add
-
 	}
-
 	public function insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock){
 		global $I;
 		$I->insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock);
@@ -166,12 +173,10 @@ class Data
 		global $I;
 		return $I->queryAllItems();
 	}
-
 	public function deleteItem($UPC){
 		global $I;
 		$I->deleteItem($UPC);
 	}
-
 	public function insertLeadSinger($UPC,$Name){
 		global $LS;
 		$LS->insertLeadSinger($UPC,$Name);
@@ -181,12 +186,10 @@ class Data
 		global $LS;
 		return $LS->queryAllLeadSingers();
 	}
-
 	public function deleteLeadSinger($UPC,$Name){
 		global $LS;
 		$LS->deleteLeadSinger($UPC,$Name);
 	}
-
 	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate){
 		global $O;
 		$O->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate);
@@ -196,22 +199,18 @@ class Data
 		global $O;
 		return $O->queryAllOrders();
 	}
-
 	public function deleteOrder($receiptID){
 		global $O;
 		$O->deleteOrder($receiptID);
 	}
-
 	public function insertHasSong($UPC,$title){
 		global $HS;
 		$HS->insertHasSong($UPC,$title);
 	}
-
 	public function queryAllSongTitles(){
 		global $HS;
 		return $HS->queryAllSongTitles();
 	}
-
 	public function deleteSongTitle($UPC,$title){
 		global $HS;
 		$HS->deleteSongTitle($UPC,$title);
@@ -232,7 +231,6 @@ class Data
 		global $R;
 		return $R->queryReturn();
 	}
-
 	public function deleteReturn($retID){
 		global $R;
 		$R->deleteReturn($retID);
@@ -253,12 +251,10 @@ class Data
 		global $RI;
 		return $RI->queryReturnItem($retID,$UPC);
 	}
-
 	public function deleteReturnItem($retID,$UPC){
 		global $RI;
 		$RI->deleteReturnItem($retID,$UPC);
 	}
-
 	public function insertCustomer($cid,$password,$name,$address,$phone)
 	{
 		//echo"customerInsertCalled DATA";
@@ -271,13 +267,11 @@ class Data
 		global $C;
 		return $C->queryAllCustomers();
 	}
-
 	public function deleteCustomer($cid)
 	{
 		global $C;
 		$C->deleteCustomer($cid);
 	}
-
 	public function insertPurchaseItem($receiptID,$UPC,$quantity)
 	{
 		//echo"purchaseItemInsertCalled DATA";
@@ -290,18 +284,15 @@ class Data
 		global $PI;
 		return $PI->queryAllPurchaseItems();
 	}
-
 	public function deletePurchaseItem($receiptID,$UPC)
 	{
 		global $PI;
 		$PI->deletePurchaseItem($receiptID,$UPC);
 	}
-
 	public function dailySales($reportDate)
 	{
 		global $PI;
 		$PI->dailySales($reportDate);
 	}
-
 }
 ?>
