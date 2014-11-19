@@ -42,15 +42,7 @@ class Presentation
 		{
 			echo "<tr><td>".$schema[$i]."</td><td><input type=\"text\" size=30 name=\"new_".$schema[$i]."\"</td></tr>";
 		}
-		if ($action == "Add Item"){
-        	echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add Item\"></td></tr>";
-    		}elseif ($action == "Add Lead Singers"){
-    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add Lead Singers\"></td></tr>";
-    		}elseif ($action == "Add A Song"){
-    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add A Song\"></td></tr>";
-    		}elseif ($action == "Add A Return"){
-    		echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"Add A Return\"></td></tr>";
-    		}
+        	echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"".$action."\"></td></tr>";
     		echo"</table>";
 		echo"</form>";
 	}
