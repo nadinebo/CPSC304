@@ -20,9 +20,7 @@ class Presentation
     echo "<input type=\"hidden\" name=\"upc\" value=\"-1\"/>";
    // We need a submit value to detect if delete was pressed 
     echo "<input type=\"hidden\" name=\"submitDelete\" value=\"DELETE ITEM\"/>";
-
 	//End add
-
 		
 		echo "<h2>".$tableName."</h2>";
 		echo "<table border=0 cellpadding =0 cellspacing=0>";
@@ -67,16 +65,12 @@ class Presentation
 	{
 		global $Logic;
 		$this->songs();
-
 		$this->singersd();
 	
 		$this->Itemsd();
-
 		$this->orders();
-
 		
 		$this->customers();
-
 		$this->orders1();
 		
 		$this->purchaseitems();
@@ -99,6 +93,7 @@ class Presentation
 		$Logic->removeItem(22222);
 		
 		$Logic->newItem(38493,'St.Vincent','CD','POP','muhrecords',2014,20,1);
+		$Logic->newItem(22231,'Michal Geera','CD','POP','muhrecords',2014,20,1);
 		$Logic->newItem(11111,'test1','CD','POP','muhrecords',2014,20,10);
 		$Logic->newItem(22222,'test2','CD','POP','muhrecords',2014,20,1);
 		
@@ -111,9 +106,7 @@ class Presentation
 		$this->buildTable("All Items",$result,$schema,$delete,$primary);
 		$action = "Add Item";
 		$this->buildAddForm($schema, $action);
-
 	}
-
 	
 	public function singersd()
 	{
@@ -131,15 +124,14 @@ class Presentation
 		$this->buildTable("All Lead Singers",$result,$schema);
 		$action = "Add Lead Singers";
 		$this->buildAddForm($schema, $action);
-
 	}
-
-
 	public function songs()
 	{
 		global $Logic;
 		
-		$Logic->newItem(38493,'St.Vincent','CD','POP','muhrecords',2014,20,1);
+		$Logic->removeSongTitle(38493,'I prefer your love');
+		
+		//$Logic->newItem(38493,'St.Vincent','CD','POP','muhrecords',2014,20,1);
 		$Logic->newSongTitle(38493,'I prefer your love');
 		
 		$result = $Logic->getAllSongTitles();
@@ -147,11 +139,10 @@ class Presentation
 		$this->buildTable("All Songs",$result,$schema);
 		$action = "Add A Song";
 		$this->buildAddForm($schema, $action);
-		$Logic->removeSongTitle(38493,'I prefer your love');
-		$Logic->removeItem(38493);
+		//$Logic->removeSongTitle(38493,'I prefer your love');
+		//$Logic->removeItem(38493);
 			
 	}
-
 	
 	public function customers(){
 	
@@ -161,7 +152,6 @@ class Presentation
 		$Logic->removeCustomer(2000);
 		$Logic->newCustomer(1000,'ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
 		$Logic->newCustomer(2000,'ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
-
 		$result = $Logic->getCustomers();
 		
 		/*while($row = $result->fetch_assoc()){
@@ -173,7 +163,7 @@ class Presentation
 		}*/
 		
 		$result = $Logic->getCustomers();
-		$schema = array('cid','password','name', 'address','phone');	
+		$schema = array('cid','name','password', 'address','phone');	
 		$this->buildTable("All Customers",$result,$schema);
 		$action = "Add Customer";
 		$this->buildAddForm($schema, $action); 
@@ -207,7 +197,6 @@ class Presentation
 		$Logic->removePurchaseItem(11014,22222);
 		
 		$Logic->newPurchaseItem(12014,11111,5);
-
 		$Logic->newPurchaseItem(11014,22222,5);
 		
 		$result = $Logic->getAllPurchaseItems();
@@ -233,15 +222,12 @@ class Presentation
 		$this->buildAddForm($schema, $action);
 	
 	}
-
-
 	public function returnitems(){
 	
 		global $Logic;
 		
 		$Logic->newReturnItem(12345,11111,1);
 		$Logic->newReturnItem(90876,22222,1);
-
 		$result = $Logic->getAllReturnItems();
 		$schema = array('retID','upc','returnQuantity');
 		$this->buildTable("All Returned Items",$result,$schema);
@@ -287,7 +273,6 @@ class Presentation
 		$date = date('Y-m-d');		
 		$receiptID = 1;
 		$returnID = 1;
-
 		$nextWeek = time() + (7 * 24 * 60 * 60);
 		$nextWeek = date('Y-m-d', $nextWeek);
 		
@@ -316,7 +301,6 @@ class Presentation
 		$Logic->removeCustomer($cid);
 		*/
 	}
-
 	public function SalesReport()
 	{
 		/*global $Logic;
@@ -327,7 +311,6 @@ class Presentation
 		$date = date('Y-m-d');		
 		$receiptID1 = 1;	
 		$receiptID2 = 2;
-
 		$nextWeek = time() + (7 * 24 * 60 * 60);
 		$nextWeek = date('Y-m-d', $nextWeek);
 		
