@@ -6,10 +6,23 @@ class Presentation
 	{
 		include 'logic.php';
 		global $Logic;
-		echo "logicinit";
+		//echo "logicinit";
 		$Logic = new Logic;
 	}
-	public function buildTable($tableName,$result,$schema){
+	public function buildTable($tableName,$result,$schema,$delete,$primary){
+		
+			//Added here
+	// Avoid Cross-site scripting (XSS) by encoding PHP_SELF (this page) using htmlspecialchars.
+    echo "<form id=\"delete\" name=\"delete\" action=\"";
+    echo htmlspecialchars($_SERVER["PHP_SELF"]);
+    echo "\" method=\"POST\">";
+    // Hidden value is used if the delete link is clicked
+    echo "<input type=\"hidden\" name=\"upc\" value=\"-1\"/>";
+   // We need a submit value to detect if delete was pressed 
+    echo "<input type=\"hidden\" name=\"submitDelete\" value=\"DELETE ITEM\"/>";
+
+	//End add
+
 		
 		echo "<h2>".$tableName."</h2>";
 		echo "<table border=0 cellpadding =0 cellspacing=0>";
@@ -26,11 +39,13 @@ class Presentation
 				echo"<td>".$row[$schema[$i]]."</td>";
 			}
 			echo "<td>";
-       			echo "<a href=\"javascript:formSubmit('".$row['title_id']."');\">DELETE</a>";
+       			echo "<a href=\"javascript:formSubmit('".$row['upc']."');\">".$delete."</a>";
 			echo"</td></tr>";
 		}
 		echo"</table>";
 		echo"<br><br>";
+		
+		echo "</form>";
 	}
 	
 	public function BuildAddForm($schema, $action){
@@ -91,7 +106,9 @@ class Presentation
 		$result = $Logic->getItems();
 		$schema = array('upc','title','type','category','company','year','price','stock');
 		
-		$this->buildTable("All Items",$result,$schema);
+		$delete = "DELETE ITEM";
+		$primary = 'upc';
+		$this->buildTable("All Items",$result,$schema,$delete,$primary);
 		$action = "Add Item";
 		$this->buildAddForm($schema, $action);
 
@@ -114,8 +131,7 @@ class Presentation
 		$this->buildTable("All Lead Singers",$result,$schema);
 		$action = "Add Lead Singers";
 		$this->buildAddForm($schema, $action);
-		//$Logic->removeLeadSingers(22231,'Michal Geera');
-		
+
 	}
 
 
@@ -161,6 +177,7 @@ class Presentation
 		$this->buildTable("All Customers",$result,$schema);
 		$action = "Add Customer";
 		$this->buildAddForm($schema, $action); 
+		
 	}
 	
 	
@@ -229,6 +246,7 @@ class Presentation
 		$schema = array('retID','upc','returnQuantity');
 		$this->buildTable("All Returned Items",$result,$schema);
 		$this->buildAddForm($schema,"Add Return Item");
+		
 	}
 	
 	
