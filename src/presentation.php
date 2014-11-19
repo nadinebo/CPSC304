@@ -51,14 +51,14 @@ class Presentation
 		public function demo()
 	{
 		global $Logic;
+		$this->songs();
 
-		$this->singersd();
+//		$this->singersd();
 	
 		$this->Itemsd();
 
 //		$this->orders();
 
-		$this->songs();
 		
 		$this->customers();
 
@@ -123,15 +123,16 @@ class Presentation
 	{
 		global $Logic;
 		
-		$Logic->removeSongTitle(38493,'I prefer your love');
-		
+		$Logic->newItem(38493,'St.Vincent','CD','POP','muhrecords',2014,20,1);
 		$Logic->newSongTitle(38493,'I prefer your love');
 		
 		$result = $Logic->getAllSongTitles();
 		$schema = array('upc','title');
 		$this->buildTable("All Songs",$result,$schema);
 		$action = "Add A Song";
-		//$this->buildAddForm($schema, $action);
+		$this->buildAddForm($schema, $action);
+		$Logic->removeSongTitle(38493,'I prefer your love');
+		$Logic->removeItem(38493);
 			
 	}
 

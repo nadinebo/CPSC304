@@ -15,7 +15,7 @@ class HasSong
 	public function insertHasSong($UPC,$title)
 	{	
 		global $connection;
-		$stmt = $connection->prepare("INSERT INTO HasSong (upc,title) Values (?,?)");
+		$stmt = $connection->prepare("INSERT INTO hasSong (upc,title) Values (?,?)");
 		echo "has song";
 		$stmt->bind_param("is", $UPC, $title);
 		$stmt->execute();
@@ -27,7 +27,7 @@ class HasSong
 	public function queryAllSongTitles()
 	{
 		global $connection;
-		if(!$result = $connection->query("Select upc,title From HasSong")) {
+		if(!$result = $connection->query("Select upc,title From hasSong")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
 			return $result;
@@ -38,7 +38,7 @@ class HasSong
 	public function deleteSongTitle($UPC,$title)
 	{
 		global $connection;
-		$stmt = $connection->prepare("DELETE FROM HasSong WHERE upc=? AND title=?");
+		$stmt = $connection->prepare("DELETE FROM hasSong WHERE upc=? AND title=?");
 		$stmt->bind_param("is",$UPC,$title);
 		$stmt->execute();
 		if($stmt->error) {
