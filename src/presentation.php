@@ -12,6 +12,7 @@ class Presentation
 	public function buildTable($tableName,$result,$schema,$delete,$primary){
 		
 			//Added here
+			if($delete == "DELETE ITEM"){
 	// Avoid Cross-site scripting (XSS) by encoding PHP_SELF (this page) using htmlspecialchars.
     echo "<form id=\"delete\" name=\"delete\" action=\"";
     echo htmlspecialchars($_SERVER["PHP_SELF"]);
@@ -20,6 +21,18 @@ class Presentation
     echo "<input type=\"hidden\" name=\"upc\" value=\"-1\"/>";
    // We need a submit value to detect if delete was pressed 
     echo "<input type=\"hidden\" name=\"submitDelete\" value=\"DELETE ITEM\"/>";
+    }elseif($delete == "DELETE CUSTOMER"){
+    
+    echo "<form id=\"delete\" name=\"delete\" action=\"";
+    echo htmlspecialchars($_SERVER["PHP_SELF"]);
+    echo "\" method=\"POST\">";
+    // Hidden value is used if the delete link is clicked
+    echo "<input type=\"hidden\" name=\"cid\" value=\"-1\"/>";
+   // We need a submit value to detect if delete was pressed 
+    echo "<input type=\"hidden\" name=\"submitDelete\" value=\"DELETE CUSTOMER\"/>";
+    
+    
+    }
 	//End add
 		
 		echo "<h2>".$tableName."</h2>";
@@ -37,7 +50,8 @@ class Presentation
 				echo"<td>".$row[$schema[$i]]."</td>";
 			}
 			echo "<td>";
-       			echo "<a href=\"javascript:formSubmit('".$row['upc']."');\">".$delete."</a>";
+       			//echo "<a href=\"javascript:formSubmit('".$row['upc']."');\">".$delete."</a>";
+       			echo "<a href=\"javascript:formSubmit('".$row[$primary]."');\">".$delete."</a>";
 			echo"</td></tr>";
 		}
 		echo"</table>";
@@ -164,7 +178,9 @@ class Presentation
 		
 		$result = $Logic->getCustomers();
 		$schema = array('cid','name','password', 'address','phone');	
-		$this->buildTable("All Customers",$result,$schema);
+		$delete = "DELETE CUSTOMER";
+		$primary = cid;
+		$this->buildTable("All Customers",$result,$schema,$delete,$primary);
 		$action = "Add Customer";
 		$this->buildAddForm($schema, $action); 
 		

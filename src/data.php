@@ -10,15 +10,18 @@
     <!--<link href="cals.css" rel="stylesheet" type="text/css">-->
 
 <!--
-    Javascript to submit a title_id as a POST form, used with the "delete" links
+    Javascript to submit a row as a POST form, used with the "delete" links
 -->
 <script>
-function formSubmit(upc) {
+function formSubmit(key) {
     'use strict';
-    if (confirm('Are you sure you want to delete this item?')) {
+    if (confirm('Are you sure you want to delete ' + key + '?')) {
       // Set the value of a hidden HTML element in this form
       var form = document.getElementById('delete');
-      form.upc.value = upc;
+      //form.parentNode.removeChild(upc);
+      //form.parentNode.value = upc;
+//      form.upc.value = key; //commented this
+		form.getElementById(key).value = key;
       // Post this form
       form.submit();
     }
@@ -103,7 +106,12 @@ class Data
        		$this->deleteItem($upc);
        		
        	} //DELETE ITEM close
-            
+          elseif ($_POST["submitDelete"] == "DELETE CUSTOMER") {
+      	//echo "inside delete";
+        	$cid = $_POST['cid'];
+       		$this->deleteCustomer($cid);
+       		
+       	}  
            
        } elseif (isset($_POST["submit"])){
         if( $_POST["submit"] ==  "Add Item") {   
