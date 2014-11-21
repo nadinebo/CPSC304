@@ -21,6 +21,12 @@
 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		if(isset($_POST["submit"]) && $_POST["submit"] == "Register"){
+		$cid= $_POST["new_cid"];
+		$password= $_POST["new_password"];
+		$name= $_POST["new_name"];
+		$address= $_POST["new_address"];
+		$phone= $_POST["new_phone"];
+		//$P->
 		echo "<h2>Congradulations On registering</h2>";
 		}
 	}
