@@ -47,12 +47,12 @@ drop table if exists Order_;
 create table Order_ (
 	/* receiptId int auto_increment not null, */
 	receiptId int not null,
-	date date not null,
+	date varchar(12) not null,
 	cid int not null,
 	cardNum int not null,
-	expiryDate date not null,
-	expectedDate date not null,
-	deliveredDate date,
+	expiryDate varchar(4) not null,
+	expectedDate varchar(12) not null,
+	deliveredDate varchar(12),
 	primary key (receiptID),
 	foreign key (cid) references Customer (cid) on delete cascade on update cascade);
 
@@ -71,7 +71,7 @@ drop table if exists Return_;
 create table Return_
 	/* (retID int auto_increment not null, */
 	(retID int not null,
-	returnDate date not null,
+	returnDate varchar(12) not null,
 	receiptID int not null unique,
 	primary key (retID),
 	foreign key (receiptID) references PurchaseItem (receiptID) on delete cascade on update cascade);
