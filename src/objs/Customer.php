@@ -19,9 +19,9 @@ class Customer
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
 		}
-		echo getType($stmt);
-		echo $stmt->field_count; 
-		$row = $stmt->fetch_assoc();
+	//	echo getType($stmt);
+	//	echo $stmt->field_count; 
+	//	$row = $stmt->fetch_assoc();
 		if($stmt == null){
 			echo "null";
 		}

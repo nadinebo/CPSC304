@@ -23,7 +23,7 @@
 <!--
     A simple stylesheet is provided so you can modify colours, fonts, etc.
 -->
-    <link href="../src/cals.css" rel="stylesheet" type="text/css">
+    <link href="../styles/main.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -34,7 +34,6 @@
 <?php
 	echo "<h2>Please enter your personal information</h2>";
 	$P->buildAddForm(array('cid','password','name','address','phone'),"Register");
-	}
 ?>
 </body>
 </html>
