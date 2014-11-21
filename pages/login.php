@@ -1,21 +1,21 @@
 <html>
 <head>
-<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-<meta content="utf-8" http-equiv="encoding">
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
 
-<title>Cals</title>
+	<title>Cals</title>
 <!--
     A simple stylesheet is provided so you can modify colours, fonts, etc.
 -->
-    <link href="../src/cals.css" rel="stylesheet" type="text/css">
+<link href="../src/cals.css" rel="stylesheet" type="text/css">
 
 </head>
 
 <body>
 
 
-<h2> Welcome to Cals </h2>
-<?php
+	<h2> Welcome to Cals </h2>
+	<?php
 	include '../src/presentation.php';
 	$P = new Presentation();
 
@@ -34,6 +34,6 @@
 	else{
 		$P->buildAddForm(array('cid','password'),"Login");
 	}
-?>
+	?>
 </body>
 </html>
