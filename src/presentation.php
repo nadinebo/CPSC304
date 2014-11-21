@@ -6,7 +6,6 @@ class Presentation
 	{
 		include 'logic.php';
 		global $Logic;
-		echo "logicinit";
 		$Logic = new Logic;
 	}
 	public function buildTable($tableName,$result,$schema){
@@ -33,7 +32,7 @@ class Presentation
 		echo"<br><br>";
 	}
 	
-	public function BuildAddForm($schema, $action){
+	public function buildAddForm($schema, $action){
 		echo "<form id=\"add\" name=\"add\" method=\"post\" action=\"";
 			echo htmlspecialchars($_SERVER["PHP_SELF"]);
 		echo"\">";
@@ -71,7 +70,20 @@ class Presentation
 		$this->returnitems();	
 		
 	}
-	
+	/*
+		returns -1 if the customer does not exit or invalid
+		returns 0  if the customer is good, also the logged in customer is set
+	*/	
+	public function login($cid,$password){
+		global $Logic;
+		$resp = $Logic->login($cid,$password);
+		if($resp == null){
+			return -1;
+		}
+		else{
+			return 0;
+		}
+	}
 	
 	public function Itemsd()
 	{

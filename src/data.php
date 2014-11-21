@@ -2,6 +2,7 @@
 
 
 $connection = NULL;
+$LoggedInUser = NULL;
 $LS = NULL; 	//the lead singer reference
 class Data
 {
@@ -26,7 +27,7 @@ class Data
 			//mysql_select_db($dbname);
 		    
 		    if (!mysqli_connect_errno()) {
-			echo "<b>Welcome!</b>";
+			//echo "<b>Welcome!</b>";
 		    }
 		
 		// Check that the connection was successful, otherwise exit
@@ -163,10 +164,16 @@ class Data
       } //from elseif
    }
 			
-			//End add
-
 	}
-
+	
+	public function login($cid,$password){
+		global $C;
+		global $LoggedInUser;
+		$LoggedInUser= $C->login($cid,$password);
+		return $LoggedInUser;
+	}	
+		
+	
 	public function insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock){
 		global $I;
 		$I->insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock);

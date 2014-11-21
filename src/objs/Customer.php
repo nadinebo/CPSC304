@@ -10,6 +10,25 @@ class Customer
 		$connection = $conn;
 		error_reporting(E_STRICT);
 	}
+	
+	public function login($cid,$password){
+		global $connection;
+		$stmt = $connection->prepare("SELECT * From Customer WHERE cid = ? && password = ?");
+		$stmt->bind_param("is",$cid,$password);
+		$stmt->execute();
+		if($stmt->error) {
+			printf("<b>Error: %s. </b>\n", $stmt->error);
+		} 
+		if($stmt == null){
+			echo "null";
+		}
+		if($stmt->num_rows != 1){
+			return null;
+		}
+		else{
+			return $stmt;
+		}
+	}
 
 	// how are we adding cid into this equation?
 	public function insertCustomer($cid, $password, $name, $address, $phone)

@@ -16,6 +16,11 @@ class Logic
 		$Data->insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock);
 	}
 	
+	public function login($cid,$password){
+		global $Data;
+		return $Data->login($cid,$password);
+	}
+
 	public function getItems(){
 		global $Data;
 		return $Data->queryAllItems();
