@@ -13,12 +13,15 @@ class Customer
 	
 	public function login($cid,$password){
 		global $connection;
-		$stmt = $connection->prepare("SELECT * From Customer WHERE cid = ? && password = ?");
-		$stmt->bind_param("is",$cid,$password);
+		$stmt = $connection->prepare("SELECT * From Customer WHERE cid = ? and password = ?");
+		//$stmt->bind_param("is",$cid,$password);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
-		} 
+		}
+		echo getType($stmt);
+		echo $stmt->field_count; 
+		$row = $stmt->fetch_assoc();
 		if($stmt == null){
 			echo "null";
 		}
