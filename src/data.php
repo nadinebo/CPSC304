@@ -182,7 +182,7 @@ class Data
 	}
 	
 	elseif($_POST["submit"] ==  "Get my daily sales"){
-	$date = $_POST["new_date"];
+	$date = $_POST["new_Date"];
 	$this->dailySales($date);
 	}	
       } //from elseif

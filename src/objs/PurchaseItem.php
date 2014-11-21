@@ -61,15 +61,53 @@ class PurchaseItem
 	public function dailySales($reportDate)
 	{
 		global $connection;
-		$stmt = $connection->prepare("CALL dailySales(?)");
-		$stmt->bind_param("s",$reportDate);
+				
+		$result = $connection->prepare("SELECT max(?) as Date,
+					p.upc as UPC, 
+					category as Category, 
+					sum(price) as ItemPrice, 
+		            sum(quantity) as Quantity, 
+		            sum(price * quantity) as Total
+		    from PurchaseItem p
+		    inner join Order_ o on p.receiptID = o.receiptID
+		    inner join Item_ i on p.upc = i.upc
+		    where datediff(?,o.date) < 1
+		    group by category, p.upc with rollup");
 		
-		if(!$result = $stmt->execute()){
-			die('There was an error running the query [' .$db->error . ']');
-			return $stmt->error;
-		} else {
-				return $result;
+		$result->bind_param("ss",$reportDate, $reportDate);
+		$result->execute();
+		
+	    $result->bind_result($Date, $UPC, $ItemPrice, $Quantity, $Total);
+		$i = 0;
+		$schema = array('Date','UPC','ItemPrice','Quantity','Total');
+		
+		// Build result table	
+		echo "<h2>Daily Sales Report</h2>";
+		echo "<table border=0 cellpadding =0 cellspacing=0>";
+
+		// Column titles
+		echo "<tr valine=center>";
+		for($j=0;$j<count($schema);$j++)
+		{
+			echo "<td class=rowheader>".$schema[$j]."</td>";
 		}
+		echo "</tr>";
+				
+		// details		
+		while ($row = $result->fetch()) {
+			echo "<tr valine=center>";
+			for($k=0;$k<count($schema);$k++)
+			{
+				//echo "<td>".$row[$schema[$k]]."</td>";
+				echo "<td>Test</td>";				
+			}
+			echo "</tr>";
+							
+			$i++;
+		}
+		
+		echo "</table><br>";
+
 	}
 	
 }
