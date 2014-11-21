@@ -21,7 +21,9 @@ class Order_
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
+			return $stmt->error;
 		}
+			return 0;
 	}
 
 	public function queryAllOrders()
@@ -42,8 +44,10 @@ class Order_
 		$stmt->execute();
 		if($stmt->error) {
 			echo "<br>Nothing to delete";
+			return $stmt->error;
 		} else {
 			//echo "<br>Successfully deleted order ".$receiptID."<br>";
+			return 0;
 		}
 	}
 }

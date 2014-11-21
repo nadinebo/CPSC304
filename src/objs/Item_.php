@@ -21,7 +21,9 @@ class Item_
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);
+			return $stmt->error;
 		} else {
+			return 0;
 			//echo "<b>Successfully added ".$UPC."</b><br>";
 		}
 	}
@@ -45,8 +47,10 @@ class Item_
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);
+			return $stmt->error;
 		} else {
 			//echo "<b>Successfully deleted ".$Name."</b><br>";
+			return 0;
 		}
 	}
 }

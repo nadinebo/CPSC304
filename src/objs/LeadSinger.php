@@ -20,8 +20,10 @@ class LeadSinger
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);
+			return $stmt->error;
 		} else {
 			//echo "<b>Successfully added ".$Name."</b><br>";
+			return 0;
 		}
 	}
 
@@ -44,8 +46,10 @@ class LeadSinger
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);
+			return $stmt->error;
 		} else {
 			//echo "<b>Successfully deleted ".$Name."</b><br>";
+			return 0;
 		}
 	}
 }

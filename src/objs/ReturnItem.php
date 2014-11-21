@@ -19,8 +19,10 @@ class ReturnItem
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
+			return $stmt->error;
 		} else {
 			//echo "<b>Successfully added return item #".$UPC."</b>";
+			return 0;
 		}
 	}
 	
@@ -47,6 +49,7 @@ class ReturnItem
 		$stmt->execute();
 		if($stmt->error) {
 			die('There was an error running the query [' .$db->error . ']');
+			return $stmt->error;
 		} else {
 			//echo "<b>Search is successful for ReturnItem</b>";
 		}
@@ -63,7 +66,9 @@ class ReturnItem
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
+			return $stmt->error;
 		} else {
+			return 0;
 			//echo "<b>Successfully deleted the return item #".$UPC."</b>";
 		}
 	}

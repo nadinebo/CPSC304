@@ -19,7 +19,9 @@ class Return_
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
+			return $stmt->error;
 		} else {
+			return 0;
 			//echo "<b>Successfully added return #".$retID."</b>";
 		}
 	}
@@ -63,7 +65,9 @@ class Return_
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
+			return $stmt->error;
 		} else {
+			return 0;
 			//echo "<b>Successfully deleted the return #".$retID."</b>";
 		}
 	}

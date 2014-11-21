@@ -21,7 +21,9 @@ class PurchaseItem
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b\n", $stmt->error);
+			return $stmt->error;
 		} else {
+			return 0;
 			//echo "<b>Successfully added purchase item #".$UPC."</b>";
 		}
 	}
@@ -48,8 +50,10 @@ class PurchaseItem
 		$stmt->execute();
 		if ($stmt->error) {
 			printf("<b>Error: %s. <b>\n", $stmt->error);
+			return $stmt->error;
 		} else {
 			//echo "<b>Successfully deleted purchase item #".$UPC."</b>";
+			return 0;
 		}
 	}
 	
@@ -60,6 +64,7 @@ class PurchaseItem
 		if(!$result = $connection->execute("CALL dailySales($reportDate)"))
 		{
 			die('There was an error running the query [' .$db->error . ']');
+			return $db->error;
 		} else {
 				return $result;
 		}

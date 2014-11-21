@@ -85,6 +85,11 @@ class Presentation
 		}
 	}
 	
+	public function register($cid,$password,$name,$address,$phone){
+		global $Logic;
+		$Logic->newCustomer($cid,$password,$name,$address,$phone);
+	}
+		
 	public function Itemsd()
 	{
 		global $Logic;

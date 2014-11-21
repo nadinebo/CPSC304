@@ -21,7 +21,9 @@ class HasSong
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
+			return $stmt->error;
 		} 
+		return 0;
 	}
 
 	public function queryAllSongTitles()
@@ -43,7 +45,9 @@ class HasSong
 		$stmt->execute();
 		if($stmt->error) {
 			echo "<br>Nothing to delete";
+			return $stmt->error;
 		} else {
+			return 0;
 			//echo "<br>Successfully deleted song <i>".$title."</i><br>";
 		}
 	}

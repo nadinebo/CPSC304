@@ -30,7 +30,7 @@ class Customer
 		}
 	}
 
-	// how are we adding cid into this equation?
+	/* upon a succussfull insertion the 0 is returned, otherwise its the error message*/
 	public function insertCustomer($cid, $password, $name, $address, $phone)
 	{
 		//echo "   inserting customer   ";
@@ -40,8 +40,10 @@ class Customer
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
+			return $stmt->error;
 		} else {
 			echo "<b>Successfully added ".$cid.", ".$name."</b>";
+			return 0;
 		}
 	}
 
@@ -57,6 +59,7 @@ class Customer
 		return $result;
 	}
 
+	/* upon a succussfull insertion the 0 is returned, otherwise its the error message*/
 	public function deleteCustomer($cid) 
 	{
 		//echo "   deleting customer   ";
@@ -66,8 +69,10 @@ class Customer
 		$stmt->execute();
 		if ($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
+			return $stmt->error;
 		} else {
 			echo "<b>Successfully deleted ".$cid.", ".$name."</b>";
+			return 0;
 		}
 	}
 }

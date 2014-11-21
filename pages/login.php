@@ -29,8 +29,6 @@
 				echo "<b>Invalid User name or Password<b><br>";
 				echo "<a href=\"register.php\">Would you like to register?</a>";
 			}
-			//echo $name;
-			//echo $password;
 		}
 	}
 	else{
