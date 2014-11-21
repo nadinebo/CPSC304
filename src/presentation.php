@@ -135,6 +135,9 @@ class Presentation
 	{
 		global $Logic;
 		
+		$Logic->removeSongTitle(38493,'I prefer your love');
+		$Logic->removeItem(38493);
+		
 		$Logic->newItem(38493,'St.Vincent','CD','POP','muhrecords',2014,20,1);
 		$Logic->newSongTitle(38493,'I prefer your love');
 		
@@ -143,7 +146,6 @@ class Presentation
 		$this->buildTable("All Songs",$result,$schema);
 		$action = "Add A Song";
 		$this->buildAddForm($schema, $action);
-		$Logic->removeSongTitle(38493,'I prefer your love');
 		$Logic->removeItem(38493);
 			
 	}
