@@ -180,6 +180,11 @@ class Data
 	$returnQuantity = $_POST["new_returnQuantity"];
 	$this->insertReturnItem($retID,$UPC,$returnQuantity);
 	}
+	
+	elseif($_POST["submit"] ==  "Get my daily sales"){
+	$date = $_POST["new_date"];
+	$this->dailySales($date);
+	}	
       } //from elseif
    }
 			

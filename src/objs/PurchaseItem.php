@@ -61,10 +61,12 @@ class PurchaseItem
 	public function dailySales($reportDate)
 	{
 		global $connection;
-		if(!$result = $connection->execute("CALL dailySales($reportDate)"))
-		{
+		$stmt = $connection->prepare("CALL dailySales(?)");
+		$stmt->bind_param("s",$reportDate);
+		
+		if(!$result = $stmt->execute()){
 			die('There was an error running the query [' .$db->error . ']');
-			return $db->error;
+			return $stmt->error;
 		} else {
 				return $result;
 		}

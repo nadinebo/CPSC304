@@ -80,7 +80,7 @@ class Presentation
 		$this->returns();
 		
 		$this->returnitems();	
-		
+				
 	}
 	/*
 		returns -1 if the customer does not exit or invalid
@@ -263,7 +263,6 @@ class Presentation
 		$this->buildAddForm($schema,"Add Return Item");
 		
 	}
-	
 	
 }
 ?>
