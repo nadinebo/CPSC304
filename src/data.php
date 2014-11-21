@@ -1,3 +1,34 @@
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+
+<title>CPSC 304 Project 2</title>
+<!--
+    A simple stylesheet is provided so you can modify colours, fonts, etc.
+-->
+    <!--<link href="cals.css" rel="stylesheet" type="text/css">-->
+
+<!--
+    Javascript to submit a title_id as a POST form, used with the "delete" links
+-->
+<script>
+function formSubmit(upc) {
+    'use strict';
+    if (confirm('Are you sure you want to delete this item?')) {
+      // Set the value of a hidden HTML element in this form
+      var form = document.getElementById('delete');
+      form.upc.value = upc;
+      // Post this form
+      form.submit();
+    }
+}
+</script>
+</head>
+
+<body>
+<h1 align=center>Cal's Music Store</h1>
+
 <?php
 
 
@@ -74,27 +105,15 @@ class Data
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-      if (isset($_POST["submitDelete"]) && $_POST["submitDelete"] == "DELETE") {
-       /*
-          Delete the selected item
-        */
-  /*     
-       // Create a delete query prepared statement with a ? for the title_id
-       $stmt = $connection->prepare("DELETE FROM titles WHERE title_id=?");
-       $deleteTitleID = $_POST['title_id'];
-       // Bind the title_id parameter, 's' indicates a string value
-       $stmt->bind_param("s", $deleteTitleID);
-       
-       // Execute the delete statement
-       $stmt->execute();
-          
-       if($stmt->error) {
-         printf("<b>Error: %s.</b>\n", $stmt->error);
-       } else {
-         echo "<b>Successfully deleted ".$deleteTitleID."</b>";
-       }*/
+      if (isset($_POST["submitDelete"])){
+      	if ($_POST["submitDelete"] == "DELETE ITEM") {
+      	//echo "inside delete";
+
+        	$upc = $_POST['upc'];
+       		$this->deleteItem($upc);
+       		
+       	} //DELETE ITEM close
             
-     // } elseif (isset($_POST["submit"]) && $_POST["submit"] ==  "ADD") { 
            
        } elseif (isset($_POST["submit"])){
         if( $_POST["submit"] ==  "Add Item") {   
@@ -321,3 +340,5 @@ class Data
 
 }
 ?>
+</body>
+</html>
