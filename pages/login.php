@@ -1,3 +1,20 @@
+<?php
+	include '../src/presentation.php';
+	$P = new Presentation();
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
+		if(isset($_POST["submit"]) && $_POST["submit"] == "Login"){
+			$cid = $_POST["new_cid"];
+			$password = $_POST["new_password"];
+			$response = $P->login($cid,$password);
+			if($response >= 0){
+				//valid login
+				header('Location: customerHome.php');
+			}
+		}
+	}
+
+?>
+
 <html>
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
@@ -16,8 +33,6 @@
 
 	<h2> Welcome to Cals </h2>
 	<?php
-	include '../src/presentation.php';
-	$P = new Presentation();
 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		if(isset($_POST["submit"]) && $_POST["submit"] == "Login"){
@@ -33,6 +48,7 @@
 	}
 	else{
 		$P->buildAddForm(array('cid','password'),"Login");
+		echo "<a href=\"register.php\">Would you like to register?</a>";
 	}
 	?>
 </body>

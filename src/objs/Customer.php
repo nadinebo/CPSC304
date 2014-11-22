@@ -14,22 +14,22 @@ class Customer
 	public function login($cid,$password){
 		global $connection;
 		$stmt = $connection->prepare("SELECT * From Customer WHERE cid = ? and password = ?");
-		//$stmt->bind_param("is",$cid,$password);
+		$stmt->bind_param("is",$cid,$password);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
 		}
-	//	echo getType($stmt);
-	//	echo $stmt->field_count; 
-	//	$row = $stmt->fetch_assoc();
+		$stmt->bind_result($ucid,$upassword,$name,$address,$phone);
+		$stmt->fetch();
+		$user = array($ucid,$upassword,$name,$address,$phone);
 		if($stmt == null){
 			echo "null";
 		}
-		if($stmt->num_rows != 1){
+		if($user[0] <= 0){
 			return null;
 		}
 		else{
-			return $stmt;
+			return $user;
 		}
 	}
 
