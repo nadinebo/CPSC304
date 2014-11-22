@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="../styles/main.css">
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -24,7 +24,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Cal's</a>
+					<a class="navbar-brand" href="#">Cal's Music Store</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
