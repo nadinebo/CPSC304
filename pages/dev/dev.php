@@ -25,7 +25,7 @@ function devtabs($funct){
 	echo"						<span class=\"icon-bar\"></span>";
 	echo"						<span class=\"icon-bar\"></span>";
 	echo"					</button>";
-	echo"					<a class=\"navbar-brand\" href=\"../customerHome.php\">Home</a>";
+	echo"					<a class=\"navbar-brand\" href=\"../customerHome.php\">Cal's</a>";
 	echo"					<a class=\"navbar-brand\" href=\"customer.php\">Customer</a>";
 	echo"					<a class=\"navbar-brand\" href=\"item.php\">Item</a>";
 	echo"					<a class=\"navbar-brand\" href=\"purchase.php\">Purchase</a>";

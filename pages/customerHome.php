@@ -24,7 +24,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="login.php">Cal's</a>
+					<a class="navbar-brand" href="customerHome.php">Cal's</a>
+					<a class="navbar-brand" href="#">Clerk</a>
+					<a class="navbar-brand" href="reports.php">Manager</a>
+					<a class="navbar-brand" href="dev/item.php">Dev</a>
+					<a class="navbar-brand" href="login.php">Logout</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -70,8 +74,8 @@
 		<?php
 		include '../src/presentation.php';
 		$P = new Presentation();
-		echo "<h1>Welcome outlander, to our glorious hovel";
-		echo "<h2>Take this rare shopping basket for hording<\h2>";
+		echo "<h1>Welcome outlander, to our glorious hovel</h1>";
+		echo "<h2>Take this rare shopping basket for hording</h2>";
 		?>
 	</div>
 	
