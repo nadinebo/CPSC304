@@ -23,9 +23,15 @@ class PurchaseItem
 			printf("<b>Error: %s. </b\n", $stmt->error);
 			return $stmt->error;
 		} else {
-			return 0;
-			//echo "<b>Successfully added purchase item #".$UPC."</b>";
-		}
+		
+		// update stock
+		$result = $connection->prepare("UPDATE Item_ set stock = stock - ? where upc = ?");
+		$result->bind_param("ii", $quantity, $UPC);
+
+		$result->execute();	
+		return 0;
+		//echo "<b>Successfully added purchase item #".$UPC."</b>";
+		}	
 	}
 
 	public function queryAllPurchaseItems()
@@ -41,9 +47,10 @@ class PurchaseItem
 	}
 
 	public function deletePurchaseItem($receiptID, $UPC)
-	{
+	{		
 		//echo "   delete a purchased item   ";
 		global $connection;
+
 		$stmt = $connection->prepare("DELETE FROM PurchaseItem WHERE receiptID=? AND UPC=?");
 		$stmt->bind_param("ii",$receiptID,$UPC);
 
@@ -52,9 +59,11 @@ class PurchaseItem
 			printf("<b>Error: %s. <b>\n", $stmt->error);
 			return $stmt->error;
 		} else {
-			//echo "<b>Successfully deleted purchase item #".$UPC."</b>";
-			return 0;
+			
+		//echo "<b>Successfully deleted purchase item #".$UPC."</b>";
+		return 0;
 		}
+		
 	}
 	
 	
