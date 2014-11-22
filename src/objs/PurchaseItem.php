@@ -80,14 +80,16 @@ class PurchaseItem
 	    $result->bind_result($Date, $UPC, $Category, $ItemPrice, $Quantity, $Total);
 		$schema = array('Date','UPC','Category','ItemPrice','Quantity','Total');
 		
+		if ($result->fetch()){
+		
 		// Build result table		
-		echo "<table border=0 cellpadding =0 cellspacing=0>";
+		echo "<table border = 1>";
 
 		// Column titles
-		echo "<tr valine=center>";
+		echo "<tr>";
 		for($j=1;$j<count($schema);$j++)
 		{
-			echo "<td class=rowheader>".$schema[$j]."</td>";
+			echo "<td>".$schema[$j]."</td>";
 		}
 		echo "</tr>";
 				
@@ -112,7 +114,12 @@ class PurchaseItem
 		
 		echo "</table><br>";
 
+	}	
+	else {
+			echo "No sales for this day";
+		}
 	}
+	
 	
 }
 ?>
