@@ -5,7 +5,11 @@
 	<header class="navbar-inverse">
 		<div class="container">
 			<nav role="navigation">
-			<a class="navbar-brand" href="customerhome.php">Home</a>
+					<a class="navbar-brand" href="customerHome.php">Cal's</a>
+					<a class="navbar-brand" href="#">Clerk</a>
+					<a class="navbar-brand" href="reports.php">Manager</a>
+					<a class="navbar-brand" href="dev/item.php">Dev</a>
+					<a class="navbar-brand" href="login.php">Logout</a>
 			</nav>
 		</div>
 	</header>
