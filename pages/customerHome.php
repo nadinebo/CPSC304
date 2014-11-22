@@ -32,7 +32,7 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Customer<span class="sr-only">(current)</span></a></li>
 						<li><a href="#">Clerk</a></li>
-						<li><a href="#">Manager</a></li>
+						<li><a href="reports.php">Manager</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Developer<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
