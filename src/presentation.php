@@ -80,8 +80,6 @@ class Presentation
 		$this->returns();
 		
 		$this->returnitems();	
-		
-		$this->dailySales();
 				
 	}
 	/*
@@ -265,14 +263,7 @@ class Presentation
 		$this->buildAddForm($schema,"Add Return Item");
 		
 	}
-	
-	public function dailySales(){
 		
-		global $Logic;
-		$input = array('Date');
-		$this->buildAddForm($input,"Get my daily sales");
-		
-	}	
 	
 }
 ?>

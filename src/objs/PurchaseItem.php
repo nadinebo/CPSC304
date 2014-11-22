@@ -63,8 +63,8 @@ class PurchaseItem
 		global $connection;
 				
 		$result = $connection->prepare("SELECT max(?) as Date,
-					p.upc as UPC, 
-					category as Category, 
+					IFNULL(p.upc,'') as UPC, 
+					IFNULL(category,'Total') as Category, 
 					sum(price) as ItemPrice, 
 		            sum(quantity) as Quantity, 
 		            sum(price * quantity) as Total
@@ -76,39 +76,50 @@ class PurchaseItem
 		
 		$result->bind_param("ss",$reportDate, $reportDate);
 		$result->execute();
+				
+	    $result->bind_result($Date, $UPC, $Category, $ItemPrice, $Quantity, $Total);
+		$schema = array('Date','UPC','Category','ItemPrice','Quantity','Total');
 		
-	    $result->bind_result($Date, $UPC, $ItemPrice, $Quantity, $Total);
-		$i = 0;
-		$schema = array('Date','UPC','ItemPrice','Quantity','Total');
+		if ($result->fetch()){
 		
-		// Build result table	
-		echo "<h2>Daily Sales Report</h2>";
-		echo "<table border=0 cellpadding =0 cellspacing=0>";
+		// Build result table		
+		echo "<table border = 1>";
 
 		// Column titles
-		echo "<tr valine=center>";
-		for($j=0;$j<count($schema);$j++)
+		echo "<tr>";
+		for($j=1;$j<count($schema);$j++)
 		{
-			echo "<td class=rowheader>".$schema[$j]."</td>";
+			echo "<td>".$schema[$j]."</td>";
 		}
 		echo "</tr>";
 				
+		$i = 0;		
+				
 		// details		
 		while ($row = $result->fetch()) {
-			echo "<tr valine=center>";
-			for($k=0;$k<count($schema);$k++)
-			{
-				//echo "<td>".$row[$schema[$k]]."</td>";
-				echo "<td>Test</td>";				
-			}
+			
+			// title row
+			if ($i == 0) {echo "<tr><h3> Daily Sales Report for ".$Date."</h3></tr>";}
+			
+			// data rows
+			echo "<tr>";	
+				echo "<td>". $UPC ."</td>";	
+				echo "<td>". $Category ."</td>";
+				echo "<td>". $ItemPrice ."</td>";
+				echo "<td>". $Quantity ."</td>";	
+				echo "<td>". $Total ."</td>";
 			echo "</tr>";
-							
 			$i++;
 		}
 		
 		echo "</table><br>";
 
+	}	
+	else {
+			echo "No sales for this day";
+		}
 	}
+	
 	
 }
 ?>
