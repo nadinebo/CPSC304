@@ -61,27 +61,28 @@ class Presentation
 		echo"</form>";
 	}
 	
-	
-		public function demo()
-	{
-		global $Logic;
-		$this->songs();
+	// THE OLD DEMO FUNCTION
+	// 	public function demo()
+	// {
+	// 	global $Logic;
+	// 	$this->songs();
 
-		$this->singersd();
+	// 	$this->singersd();
 	
-		$this->Itemsd();
+	// 	$this->Itemsd();
 		
-		$this->customers();
+	// 	$this->customers();
 
-		$this->orders1();
+	// 	$this->orders1();
 		
-		$this->purchaseitems();
+	// 	$this->purchaseitems();
 		
-		$this->returns();
+	// 	$this->returns();
 		
-		$this->returnitems();	
+	// 	$this->returnitems();	
 				
-	}
+	// }
+
 	/*
 		returns -1 if the customer does not exit or invalid
 		returns 0  if the customer is good, also the logged in customer is set
