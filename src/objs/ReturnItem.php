@@ -21,6 +21,12 @@ class ReturnItem
 			printf("<b>Error: %s. </b>\n", $stmt->error);
 			return $stmt->error;
 		} else {
+			
+			// update stock
+			$result = $connection->prepare("UPDATE Item_ set stock = stock + ? where upc = ?");
+			$result->bind_param("ii", $returnQuantity, $UPC);
+
+			$result->execute();
 			//echo "<b>Successfully added return item #".$UPC."</b>";
 			return 0;
 		}
