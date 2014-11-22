@@ -24,7 +24,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Cal's</a>
+					<a class="navbar-brand" href="login.php">Cal's</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -33,6 +33,7 @@
 						<li class="active"><a href="#">Customer<span class="sr-only">(current)</span></a></li>
 						<li><a href="#">Clerk</a></li>
 						<li><a href="#">Manager</a></li>
+						<li><a href="dev/item.php">Dev</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Developer<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
@@ -69,8 +70,8 @@
 		<?php
 		include '../src/presentation.php';
 		$P = new Presentation();
-		$P->demo();
-		echo " *** DONE! *** ";
+		echo "<h1>Welcome outlander, to our glorious hovel";
+		echo "<h2>Take this rare shopping basket for hording<\h2>";
 		?>
 	</div>
 	
