@@ -61,9 +61,6 @@ class Presentation
 		echo"</form>";
 	}
 	
-	
-	
-	
 		public function buildTopSellersForm($schema, $action){
 		echo "<form id=\"add\" name=\"add\" method=\"post\" action=\"";
 			echo htmlspecialchars($_SERVER["PHP_SELF"]);
@@ -78,34 +75,31 @@ class Presentation
 		echo"</form>";
 	}
 	
-	
-	
-	
-	
-		public function demo()
-	{
-		global $Logic;
-		$this->songs();
+	// THE OLD DEMO FUNCTION
+	// 	public function demo()
+	// {
+	// 	global $Logic;
+	// 	$this->songs();
 
-		$this->singersd();
+	// 	$this->singersd();
 	
-		$this->Itemsd();
+	// 	$this->Itemsd();
 		
-		$this->customers();
+	// 	$this->customers();
 
-		$this->orders1();
+	// 	$this->orders1();
 		
-		$this->purchaseitems();
+	// 	$this->purchaseitems();
 		
-		$this->returns();
+	// 	$this->returns();
 		
-		$this->returnitems();
+	//		$this->returnitems();
 		
-		$action = "Get Top Selling";
-		$schema = array('queryDate','quantity');
-		$this->buildAddForm($schema, $action);
+	//	$action = "Get Top Selling";
+	//	$schema = array('queryDate','quantity');
+	//	$this->buildAddForm($schema, $action);
 				
-	}
+	//}
 	
 	/*
 		returns -1 if the customer does not exit or invalid

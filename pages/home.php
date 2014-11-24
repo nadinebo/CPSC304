@@ -20,13 +20,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="home.php">Cal's Music Store</a>
+					<a class="navbar-brand" href="home.php" style="color: white">Cal's Music Store</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="customerHome.php">Customer<span class="sr-only">(current)</span></a></li>
+						<li><a href="customerHome.php">Customer</a></li>
 						<li><a href="clerkHome.php">Clerk</a></li>
 						<li><a href="managerHome.php">Manager</a></li>
 						<li><a href="developerHome.php">NewDev</a></li>
@@ -55,16 +55,16 @@
 	</header>
 	
 	<div class="container">
-		<h4><em>This page will include tabs for the different actions a Customer can do.</em></h3>
-		<h1>Welcome outlander, to our glorious hovel.</h1>
-		<h2>Take this rare shopping basket for hording.</h2>
+		<h1>This is the home page.</h1>
+		<p><em>Provides explanation and documentation of our database and UI.</em></p>
+		<p>For example: <strong>Select one of the following perspectives above to get started.</strong></p>
 		
 	</div>
 	
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-	</body>
-	</html>
+</body>
+</html>

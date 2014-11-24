@@ -33,7 +33,7 @@ function devtabs($funct){
 	echo"					<a class=\"navbar-brand\" href=\"songs.php\">Song</a>";
 	echo"					<a class=\"navbar-brand\" href=\"order.php\">Order</a>";
 	echo"					<a class=\"navbar-brand\" href=\"returnItem.php\">Return Item</a>";
-	echo"					<a class=\"navbar-brand\" href=\"singers.php\"></a>";
+	echo"					<a class=\"navbar-brand\" href=\"singers.php\">Singer</a>";
 	echo"				</div>";
 
 	echo"				<!-- Collect the nav links, forms, and other content for toggling -->";

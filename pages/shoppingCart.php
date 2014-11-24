@@ -26,7 +26,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="customerHome.php">Customer<span class="sr-only">(current)</span></a></li>
+						<li><a href="customerHome.php">Customer<span class="sr-only">(current)</span></a></li>
 						<li><a href="clerkHome.php">Clerk</a></li>
 						<li><a href="managerHome.php">Manager</a></li>
 						<li><a href="developerHome.php">NewDev</a></li>
@@ -46,7 +46,7 @@
 								<li><a href="#">One more separated link</a></li>
 							</ul>
 						</li>	
-						<li><a href="shoppingCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
+						<li class="active"><a href="shoppingCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
 						<li><a href="login.php">Logout</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
@@ -55,9 +55,7 @@
 	</header>
 	
 	<div class="container">
-		<h4><em>This page will include tabs for the different actions a Customer can do.</em></h3>
-		<h1>Welcome outlander, to our glorious hovel.</h1>
-		<h2>Take this rare shopping basket for hording.</h2>
+		<h4><em>This page will include the implementation of the shopping cart.</em></h3>
 		
 	</div>
 	

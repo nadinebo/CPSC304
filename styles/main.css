@@ -1,0 +1,7 @@
+.tab-content {
+	border: 1px solid;
+	border-color: #ddd;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding: 5px 15px;
+}

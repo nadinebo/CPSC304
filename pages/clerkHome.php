@@ -26,8 +26,8 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="customerHome.php">Customer<span class="sr-only">(current)</span></a></li>
-						<li><a href="clerkHome.php">Clerk</a></li>
+						<li><a href="customerHome.php">Customer<span class="sr-only">(current)</span></a></li>
+						<li class="active"><a href="clerkHome.php">Clerk</a></li>
 						<li><a href="managerHome.php">Manager</a></li>
 						<li><a href="developerHome.php">NewDev</a></li>
 						<li><a href="dev/item.php">OldDev</a></li>
@@ -55,12 +55,11 @@
 	</header>
 	
 	<div class="container">
-		<h4><em>This page will include tabs for the different actions a Customer can do.</em></h3>
-		<h1>Welcome outlander, to our glorious hovel.</h1>
-		<h2>Take this rare shopping basket for hording.</h2>
-		
+		<h4><em>This page will include tabs for the different actions a Clerk can do.</em></h3>
+
+
 	</div>
-	
+
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<!-- Latest compiled and minified JavaScript -->
