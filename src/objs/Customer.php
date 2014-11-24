@@ -45,7 +45,7 @@ class Customer
 			printf("<b>Error: %s. </b>\n", $stmt->error);
 			return $stmt->error;
 		} else {
-			echo "<b>Successfully added ".$cid.", ".$name."</b>";
+			//echo "<b>Successfully added ".$cid.", ".$name."</b>";
 			return 0;
 		}
 	}
@@ -74,7 +74,7 @@ class Customer
 			printf("<b>Error: %s. </b>\n", $stmt->error);
 			return $stmt->error;
 		} else {
-			echo "<b>Successfully deleted ".$cid.", ".$name."</b>";
+			//echo "<b>Successfully deleted ".$cid.", ".$name."</b>";
 			return 0;
 		}
 	}
