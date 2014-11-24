@@ -108,7 +108,7 @@ class PurchaseItem
 		while ($row = $result->fetch()) {
 			
 			// title row
-			if ($i == 0) {echo "<tr><h3> Daily Sales Report for ".$Date."</h3></tr>";}
+			if ($i == 0) {echo "<tr><h3> Daily Sales Report For ".$Date."</h3></tr>";}
 			
 			// data rows
 			echo "<tr>";	
@@ -127,6 +127,65 @@ class PurchaseItem
 	else {
 			echo "No sales for this day";
 		}
+	}
+	
+	
+	
+	public function topSelling($queryDate, $n)
+	{
+		
+		global $connection;
+		$stmt = $connection->prepare("select o.date, i.upc, 
+												i.title, i.company, 
+												i.stock, sum(pi.quantity) as quantity
+												from Order_ o,
+													Item_ i,
+    												PurchaseItem pi
+										where o.receiptID = pi.receiptID 
+												and i.upc = pi.upc and o.date=?
+										group by pi.upc
+										order by pi.quantity desc");
+		$stmt->bind_param("s",$queryDate);
+		$stmt->execute();
+		if($stmt->error) {
+			die('There was an error running the topSelling[' .$db->error . ']');
+		} else {
+			//echo "<b>Search successful</b>";
+		}
+		
+		$stmt->bind_result($date, $upc, $title, $company, $stock, $quantity);
+		$schema = array('date','upc','title','company','stock','quantity');
+		
+				
+		//echo "<table border = 1>";
+		echo "<table>";
+
+
+		for($j=1;$j<count($schema);$j++)
+		{
+			echo "<td class=rowheader>".$schema[$j]."</td>";
+		}
+		echo "</tr>";
+				
+		$i = 1;		
+		echo "<tr><h3> Top Selling Items Report For ".$queryDate."</h3></tr>";
+
+		while ($row = $stmt->fetch()&& $i <= $n) {
+		
+			echo "<tr>";
+				
+				echo "<td>".$upc."</td>";	
+				echo "<td>".$title."</td>";
+				echo "<td>".$company."</td>";
+				echo "<td>".$stock."</td>";	
+				echo "<td>".$quantity."</td>";
+				
+			echo "</tr>";
+			$i++;
+		}
+		
+		echo "</table><br>";
+
 	}
 	
 	

@@ -184,7 +184,16 @@ class Data
 	elseif($_POST["submit"] ==  "Get my daily sales"){
 	$date = $_POST["new_Date"];
 	$this->dailySales($date);
+	}
+	
+	elseif($_POST["submit"] ==  "Get Top Selling"){
+	$queryDate = $_POST["new_queryDate"];
+	$n = $_POST["new_quantity"];
+	//echo "queryDate: " .$queryDate. " ! ";
+	//echo "n: " .$n. " ! ";
+	$this->getTopSelling($queryDate,$n);
 	}	
+	
       } //from elseif
    }
 			
@@ -341,6 +350,12 @@ class Data
 	{
 		global $PI;
 		return $PI->dailySales($reportDate);
+	}
+	
+	public function getTopSelling($queryDate,$n)
+	{
+		global $PI;
+		return $PI->topSelling($queryDate,$n);
 	}
 
 }

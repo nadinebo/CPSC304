@@ -177,5 +177,11 @@ class Logic
 		return $Data->dailySales($reportDate);	
 	}
 	
+		public function topSelling($queryDate,$n)
+	{
+		global $Data;
+		return $Data->topSelling($queryDate,$n);	
+	}
+	
 }	
 ?>

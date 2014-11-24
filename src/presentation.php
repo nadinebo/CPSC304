@@ -62,6 +62,26 @@ class Presentation
 	}
 	
 	
+	
+	
+		public function buildTopSellersForm($schema, $action){
+		echo "<form id=\"add\" name=\"add\" method=\"post\" action=\"";
+			echo htmlspecialchars($_SERVER["PHP_SELF"]);
+		echo"\">";
+    		echo"<table border=0 cellpadding=0 cellspacing=0>";
+		for($i=0;$i<count($schema);$i++)
+		{
+			echo "<tr><td>".$schema[$i]."</td><td><input type=\"text\" size=30 name=\"new_".$schema[$i]."\"</td></tr>";
+		}
+        	echo"<tr><td></td><td><input type=\"submit\" name=\"submit\" border=0 value=\"".$action."\"></td></tr>";
+    		echo"</table>";
+		echo"</form>";
+	}
+	
+	
+	
+	
+	
 		public function demo()
 	{
 		global $Logic;
@@ -79,9 +99,14 @@ class Presentation
 		
 		$this->returns();
 		
-		$this->returnitems();	
+		$this->returnitems();
+		
+		$action = "Get Top Selling";
+		$schema = array('queryDate','quantity');
+		$this->buildAddForm($schema, $action);
 				
 	}
+	
 	/*
 		returns -1 if the customer does not exit or invalid
 		returns 0  if the customer is good, also the logged in customer is set
