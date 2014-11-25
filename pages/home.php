@@ -57,6 +57,12 @@
 		<p><em>Provides explanation and documentation of our database and UI.</em></p>
 		<p>For example: <strong>Select one of the following perspectives above to get started.</strong></p>
 		
+		<?php
+		// include '../src/presentation.php';
+		// $P = new Presentation();
+		// $P->initData();
+		?>
+		
 	</div>
 	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
