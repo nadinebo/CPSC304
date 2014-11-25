@@ -29,6 +29,13 @@ class PurchaseItem
 		$result->bind_param("ii", $quantity, $UPC);
 
 		$result->execute();	
+		
+		// reset negative stock values
+		$result = $connection->prepare("UPDATE Item_ set stock = case when stock < 0 then 0 else stock end where upc = ?");
+		$result->bind_param("i", $UPC);
+
+		$result->execute();		
+				
 		return 0;
 		//echo "<b>Successfully added purchase item #".$UPC."</b>";
 		}	
