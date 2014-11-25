@@ -74,32 +74,7 @@ class Presentation
     		echo"</table>";
 		echo"</form>";
 	}
-	
-	// THE OLD DEMO FUNCTION
-	// 	public function demo()
-	// {
-	// 	global $Logic;
-	// 	$this->songs();
 
-	// 	$this->singersd();
-	
-	// 	$this->Itemsd();
-		
-	// 	$this->customers();
-
-	// 	$this->orders1();
-		
-	// 	$this->purchaseitems();
-		
-	// 	$this->returns();
-		
-	//		$this->returnitems();
-		
-	//	$action = "Get Top Selling";
-	//	$schema = array('queryDate','quantity');
-	//	$this->buildAddForm($schema, $action);
-				
-	//}
 	
 	/*
 		returns -1 if the customer does not exit or invalid

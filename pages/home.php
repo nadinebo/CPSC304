@@ -29,8 +29,7 @@
 						<li><a href="customerHome.php">Customer</a></li>
 						<li><a href="clerkHome.php">Clerk</a></li>
 						<li><a href="managerHome.php">Manager</a></li>
-						<li><a href="developerHome.php">NewDev</a></li>
-						<li><a href="dev/item.php">OldDev</a></li>
+						<li><a href="developerHome.php">Dev</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -46,7 +45,6 @@
 								<li><a href="#">One more separated link</a></li>
 							</ul>
 						</li>	
-						<li><a href="shoppingCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
 						<li><a href="login.php">Logout</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->

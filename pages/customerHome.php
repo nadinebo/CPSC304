@@ -29,8 +29,7 @@
 						<li class="active"><a href="customerHome.php">Customer<span class="sr-only">(current)</span></a></li>
 						<li><a href="clerkHome.php">Clerk</a></li>
 						<li><a href="managerHome.php">Manager</a></li>
-						<li><a href="developerHome.php">NewDev</a></li>
-						<li><a href="dev/item.php">OldDev</a></li>
+						<li><a href="developerHome.php">Dev</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -46,7 +45,6 @@
 								<li><a href="#">One more separated link</a></li>
 							</ul>
 						</li>	
-						<li><a href="shoppingCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
 						<li><a href="login.php">Logout</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
@@ -58,6 +56,36 @@
 		<h4><em>This page will include tabs for the different actions a Customer can do.</em></h3>
 		<h1>Welcome outlander, to our glorious hovel.</h1>
 		<h2>Take this rare shopping basket for hording.</h2>
+
+		<div role="tabpanel">
+			<!--Nav tabs-->
+		 	<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation"><a href="#cart" aria-controls="cart" role="tab" data-toggle="tab">
+					<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+				</a></li>
+				<li role="presentation" class="active"><a href="#shop" aria-controls="shop" role="tab" data-toggle="tab">Browse Store</a></li>
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<?php
+				include '../src/presentation.php';
+				$P = new Presentation();
+				?>
+				<div role="tabpanel" class="tab-pane" id="cart">
+					<h3> The Shopping Cart </h3>
+					<?php
+
+					?>
+				</div>
+				<div role="tabpanel" class="tab-pane active" id="shop">
+					<h3> Browsing Store Items </h3>
+					<?php
+
+					?>
+				</div>
+			</div>
+		</div>
 		
 	</div>
 	

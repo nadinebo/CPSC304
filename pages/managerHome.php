@@ -33,8 +33,7 @@
 						<li><a href="customerHome.php">Customer<span class="sr-only">(current)</span></a></li>
 						<li><a href="clerkHome.php">Clerk</a></li>
 						<li class="active"><a href="managerHome.php">Manager</a></li>
-						<li><a href="developerHome.php">NewDev</a></li>
-						<li><a href="dev/item.php">OldDev</a></li>
+						<li><a href="developerHome.php">Dev</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -50,7 +49,6 @@
 								<li><a href="#">One more separated link</a></li>
 							</ul>
 						</li>	
-						<li><a href="shoppingCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
 						<li><a href="login.php">Logout</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
@@ -60,29 +58,51 @@
 
 	<div class="container">
 		<h4><em>This page will include tabs for the different actions a Manager can do.</em></h3>
-		<?php
-		include '../src/presentation.php';
 
-		$P = new Presentation();
+		<div role="tabpanel">
+			<!--Nav tabs-->
+		 	<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#addItem" aria-controls="addItem" role="tab" data-toggle="tab">Add Item</a></li>
+				<li role="presentation"><a href="#processDelivery" aria-controls="processDelivery" role="tab" data-toggle="tab">Process Delivery</a></li>
+				<li role="presentation"><a href="#dailySalesReport" aria-controls="dailySalesReport" role="tab" data-toggle="tab">Daily Sales Report</a></li>
+				<li role="presentation"><a href="#topSellingReport" aria-controls="topSellingReport" role="tab" data-toggle="tab">Top Selling Items Report</a></li>
+			</ul>
 
-		?>
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<?php
+				include '../src/presentation.php';
+				$P = new Presentation();
+				?>
+				<div role="tabpanel" class="tab-pane active" id="addItem">
+					<h3> Add Item to Store </h3>
+					<?php
+
+					?>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="processDelivery">
+					<h3> Process Delivery of an Order </h3>
+					<?php
+					
+					?>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="dailySalesReport">
+					<h3> Daily Sales Report </h3>
+					<?php
+					$input = array('Date');
+					$P->buildAddForm($input,"Get my daily sales");
+					?>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="topSellingReport">
+					<h3> Top Selling Report </h3>
+					<?php
+					$input = array('queryDate','quantity');
+					$P->buildAddForm($input,"Get Top Selling");
+					?>
+				</div>
+			</div>
+		</div>
 		
-		<table>
-			<tr><h2> Reporting Tools </h2></tr>
-			<tr>&nbsp;</tr>
-			<tr>&nbsp;</tr>
-
-			<!-- Daily Sales Report> -->	
-			<?php
-
-			echo "<tr><td><h3> Daily Sales Report </h3></td></tr><tr>";
-			$input = array('Date');
-			$P->buildAddForm($input,"Get my daily sales");
-			echo "</tr><tr>&nbsp;</tr>"
-
-			?>
-			
-		</table>
 	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

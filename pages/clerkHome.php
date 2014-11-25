@@ -29,8 +29,7 @@
 						<li><a href="customerHome.php">Customer<span class="sr-only">(current)</span></a></li>
 						<li class="active"><a href="clerkHome.php">Clerk</a></li>
 						<li><a href="managerHome.php">Manager</a></li>
-						<li><a href="developerHome.php">NewDev</a></li>
-						<li><a href="dev/item.php">OldDev</a></li>
+						<li><a href="developerHome.php">Dev</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -46,7 +45,6 @@
 								<li><a href="#">One more separated link</a></li>
 							</ul>
 						</li>	
-						<li><a href="shoppingCart.php"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
 						<li><a href="login.php">Logout</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
@@ -57,6 +55,34 @@
 	<div class="container">
 		<h4><em>This page will include tabs for the different actions a Clerk can do.</em></h3>
 
+		<div role="tabpanel">
+			<!--Nav tabs-->
+		 	<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#pReturn" aria-controls="pReturn" role="tab" data-toggle="tab">Process Return</a></li>
+				<li role="presentation"><a href="#eTab" aria-controls="eTab" role="tab" data-toggle="tab">Extra</a></li>
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<?php
+				include '../src/presentation.php';
+				$P = new Presentation();
+				?>
+
+				<div role="tabpanel" class="tab-pane active" id="pReturn">
+					<h3> Process a Return for a Refund </h3>
+					<?php
+
+					?>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="eTab">
+					<h3> Any other tasks for Clerk? </h3>
+					<?php
+
+					?>
+				</div>
+			</div>
+		</div>
 
 	</div>
 

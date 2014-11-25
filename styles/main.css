@@ -5,3 +5,7 @@
 	border-bottom-right-radius: 5px;
 	padding: 5px 15px;
 }
+
+.tab-pane {
+	padding: 0px 0px 15px 0px;
+}
