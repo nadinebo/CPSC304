@@ -7,8 +7,11 @@
 			$password = $_POST["new_password"];
 			$response = $P->login($cid,$password);
 			if($response >= 0){
-				//valid login
-				header('Location: customerHome.php');
+				//session_name('Private');
+				session_start();
+				$_SESSION['user']=$response;
+				$P->buildAddForm(array('cid','password'),"Login");
+				header('Location: home.php');
 			}
 		}
 	}
