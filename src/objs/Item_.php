@@ -20,8 +20,40 @@ class Item_
 		$stmt->bind_param("issssiii", $UPC, $title,$type,$category,$company,$year,$price,$stock);
 		$stmt->execute();
 		if($stmt->error) {
-			printf("<b>Error: %s. </b><br>\n", $stmt->error);
-			return $stmt->error;
+			//printf("<b>Error: %s. </b><br>\n", $stmt->error);
+			//return $stmt->error;
+			
+			//ADDED HERE
+			if($price != null && $stock != null){
+				$res = $connection->prepare("update Item_ set price = ?,stock = ?
+													where upc=?");
+				$res->bind_param("iii",$price,$stock,$UPC);
+			}elseif($price == null && $stock != null){
+				$res = $connection->prepare("update Item_ set stock = ?
+													where upc=?");
+				$res->bind_param("ii",$stock,$UPC);
+			}elseif($price != null && $stock == null){
+				$res = $connection->prepare("update Item_ set price = ?
+													where upc=?");
+				$res->bind_param("ii",$price,$UPC);
+			}else{
+			//Error control for now
+				$res = $connection->prepare("update Item_ set upc = ?
+													where upc=?");
+				$res->bind_param("i",$UPC);
+			}
+			$res->execute();
+			
+			if($res->error) {
+			printf("<b>Error: %s. </b><br>\n", $res->error);
+			return $res->error;
+			} else {
+			//echo "<b>Successfully deleted ".$Name."</b><br>";
+				return 0;
+			}
+			
+			//
+			
 		} else {
 			return 0;
 			//echo "<b>Successfully added ".$UPC."</b><br>";
