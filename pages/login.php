@@ -9,6 +9,7 @@
 			if($response >= 0){
 				//session_name('Private');
 				session_start();
+				echo $response['cid'];
 				$_SESSION['user']=$response;
 				$P->buildAddForm(array('cid','password'),"Login");
 				header('Location: home.php');

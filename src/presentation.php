@@ -83,11 +83,15 @@ class Presentation
 	public function login($cid,$password){
 		global $Logic;
 		$resp = $Logic->login($cid,$password);
+		$schema = array('cid','password','name', 'address','phone');	
 		if($resp == null){
 			return -1;
 		}
 		else{
-			return $resp;
+			for($i=0;$i<count($schema);$i++){
+				$ret[$schema[$i]] = $resp[$i];
+			}	
+			return $ret;
 		}
 	}
 	
@@ -105,21 +109,25 @@ class Presentation
 		$Logic->removeItem(22231);
 		$Logic->removeItem(11111);
 		$Logic->removeItem(22222);
-		
 		$Logic->newItem(38493,'St.Vincent','CD','POP','muhrecords',2014,20,1);
 		$Logic->newItem(11111,'test1','CD','POP','muhrecords',2014,20,10);
 		$Logic->newItem(22222,'test2','CD','POP','muhrecords',2014,20,1);
-		
 		//testing using the layers as classes
 		$result = $Logic->getItems();
 		$schema = array('upc','title','type','category','company','year','price','stock');
-		
 		$delete = "DELETE ITEM";
 		$primary = 'upc';
 		$this->buildTable("All Items",$result,$schema,$delete,$primary);
 		$action = "Add Item";
 		$this->buildAddForm($schema, $action);
 
+	}
+
+	public function getItems()
+	{
+		global $Logic;
+		$result = $Logic->getItems();
+		return $result;
 	}
 
 	
@@ -212,13 +220,10 @@ class Presentation
 	public function purchaseitems(){
 	
 		global $Logic;
-		
 		$Logic->removePurchaseItem(12014,11111);
 		$Logic->removePurchaseItem(11014,22222);
-
 		$Logic->newPurchaseItem(12014,11111,5);
 		$Logic->newPurchaseItem(11014,22222,5);
-		
 		$result = $Logic->getAllPurchaseItems();
 		$schema = array('receiptID','upc','quantity');
 		$this->buildTable("All Purchased Items",$result,$schema);

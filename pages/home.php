@@ -54,6 +54,11 @@
 	
 	<div class="container">
 		<h1>This is the home page.</h1>
+		<?php
+			session_start();
+			$user = $_SESSION['user'];
+				echo "<h1>Welcome back to Cal's ".$user['name']."</h1><br>";
+		?>	
 		<p><em>Provides explanation and documentation of our database and UI.</em></p>
 		<p>For example: <strong>Select one of the following perspectives above to get started.</strong></p>
 		
