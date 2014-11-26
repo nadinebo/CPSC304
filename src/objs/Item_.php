@@ -60,119 +60,141 @@ class Item_
 		}
 	}
 
-	public function searchItems($category,$title,$leadSinger)
+	public function searchItems($cat,$tit,$lead)
 	{
 		global $connection;
 
-		if($category != null && $title != null && $leadSinger != null){
+		if($cat != null && $tit != null && $lead != null){
 			// all
-			$res = $connection->prepare("SELECT 		I.UPC, title, type, category, company, year, price, stock
-											FROM		Item_ I, LeadSigner L
-											WHERE		I.UPC = L.UPC AND category LIKE '?%' AND title LIKE '?%' AND name LIKE '?%'
+			$stmt = $connection->prepare("select 		I.UPC, title, name, type, category, company, year, price, stock
+											FROM		Item_ I, LeadSinger L
+											WHERE		I.UPC = L.UPC AND category = ? AND title = ? AND name = ?
 											GROUP BY	I.upc
 											ORDER BY	type DESC, upc ASC");
-			$res->bind_param("sss",$category,$title,$leadSinger);
+			$stmt->bind_param("sss",$cat,$tit,$lead);
+			$stmt->bind_result($upc, $title, $name, $type, $category, $company, $year, $price, $stock);
+			$schema = array('upc','title', 'leadSinger', 'type', 'category', 'company', 'year', 'price', 'stock');
 		}
-		elseif($category != null && $title == null && $leadSinger == null) {
+		elseif($cat != null && $tit == null && $lead == null) {
 			// category only
-			$res = $connection->prepare("SELECT 		UPC, title, type, category, company, year, price, stock
+			$stmt = $connection->prepare("select 		upc, title, type, category, company, year, price, stock
 											FROM		Item_ I
-											WHERE		category LIKE '?%' 
+											WHERE		category = ? 
 											GROUP BY	upc
 											ORDER BY	type DESC, upc ASC");
-			$res->bind_param("s",$category);
+			$stmt->bind_param("s",$cat);
+			$stmt->bind_result($upc, $title, $type, $category, $company, $year, $price, $stock);
+			$schema = array('upc','title', 'type', 'category', 'company', 'year', 'price', 'stock');
 		}
-		elseif($category == null && $title != null && $leadSinger == null) {
+		elseif($cat == null && $tit != null && $lead == null) {
 			// title only
-			$res = $connection->prepare("SELECT 		UPC, title, type, category, company, year, price, stock
+			$stmt = $connection->prepare("select 		UPC, title, type, category, company, year, price, stock
 											FROM		Item_ I
-											WHERE		title LIKE '?%' 
+											WHERE		title = ?
 											GROUP BY	upc
 											ORDER BY	type DESC, upc ASC");
-			$res->bind_param("s",$title);
+			$stmt->bind_param("s",$tit);
+			$stmt->bind_result($upc, $title, $type, $category, $company, $year, $price, $stock);
+			$schema = array('upc','title', 'type', 'category', 'company', 'year', 'price', 'stock');
 		}
-		elseif($category == null && $title == null && $leadSinger != null) {
+		elseif($cat == null && $tit == null && $lead != null) {
 			// leadSinger only
-			$res = $connection->prepare("SELECT 		I.UPC, title, type, category, company, year, price, stock
-											FROM		Item_ I, LeadSigner L
-											WHERE		I.UPC = L.UPC AND name LIKE '?%'
+			$stmt = $connection->prepare("select 		I.UPC, title, name, type, category, company, year, price, stock
+											FROM		Item_ I, LeadSinger L
+											WHERE		I.UPC = L.UPC AND name = ?
 											GROUP BY	I.upc
 											ORDER BY	type DESC, upc ASC");
-			$res->bind_param("s",$leadSinger);
+			$stmt->bind_param("s",$lead);
+			$stmt->bind_result($upc, $title, $name, $type, $category, $company, $year, $price, $stock);
+			$schema = array('upc','title', 'leadSinger', 'type', 'category', 'company', 'year', 'price', 'stock');
 		}
-		// elseif($category != null && $title != null && $leadSinger == null) {
-		// 	// category & title
-		// 	$res = $connection->prepare("SELECT 		UPC, title, type, category, company, year, price, stock
-		// 									FROM		Item_ I
-		// 									WHERE		category LIKE '?%' AND title LIKE '?%''
-		// 									GROUP BY	upc
-		// 									ORDER BY	type DESC, upc ASC");
-		// 	$res->bind_param("ss",$category,$title);
-		// }
-		// elseif($category != null && $title == null && $leadSinger != null) {
-		// 	// category & leadSinger
-		// 	res = $connection->prepare("SELECT 			I.UPC, title, type, category, company, year, price, stock
-		// 									FROM		Item_ I, LeadSigner L
-		// 									WHERE		I.UPC = L.UPC AND category LIKE '?%' AND name LIKE '?%'
-		// 									GROUP BY	I.upc
-		// 									ORDER BY	type DESC, upc ASC");
-		// 	$res->bind_param("ss",$category,$leadSinger);
-		// }
-		// elseif($category == null && $title != null && $leadSinger != null) {
-		// 	// leadSinger & title
-		// 	res = $connection->prepare("SELECT 			I.UPC, title, type, category, company, year, price, stock
-		// 									FROM		Item_ I, LeadSigner L
-		// 									WHERE		I.UPC = L.UPC AND title LIKE '?%' AND name LIKE '?%'
-		// 									GROUP BY	I.upc
-		// 									ORDER BY	type DESC, upc ASC");
-		// 	$res->bind_param("ss",$title,$leadSinger);
-		// }
-
-		$res->execute();
-
-		if($res->error) {
-			printf("<b>Error: %s. </b><br>\n", $res->error);
-			return $res->error;
+		elseif($cat != null && $tit != null && $lead == null) {
+			// category & title
+			$stmt = $connection->prepare("select 		UPC, title, type, category, company, year, price, stock
+											FROM		Item_ I
+											WHERE		category = ? AND title = ?
+											GROUP BY	upc
+											ORDER BY	type DESC, upc ASC");
+			$stmt->bind_param("ss",$cat,$tit);
+			$stmt->bind_result($upc, $title, $type, $category, $company, $year, $price, $stock);
+			$schema = array('upc','title', 'type', 'category', 'company', 'year', 'price', 'stock');
+		}
+		elseif($cat != null && $tit == null && $lead != null) {
+			// category & leadSinger
+			$stmt = $connection->prepare("select 		I.UPC, title, name, type, category, company, year, price, stock
+											FROM		Item_ I, LeadSinger L
+											WHERE		I.UPC = L.UPC AND category = ? AND name = ?
+											GROUP BY	I.upc
+											ORDER BY	type DESC, upc ASC");
+			$stmt->bind_param("ss",$cat,$lead);
+			$stmt->bind_result($upc, $title, $name, $type, $category, $company, $year, $price, $stock);
+			$schema = array('upc','title', 'leadSinger', 'type', 'category', 'company', 'year', 'price', 'stock');
+		}
+		elseif($cat == null && $tit != null && $lead != null) {
+			// leadSinger & title
+			$stmt = $connection->prepare("select 		I.UPC, title, name, type, category, company, year, price, stock
+											FROM		Item_ I, LeadSinger L
+											WHERE		I.UPC = L.UPC AND title = ? AND name = ?
+											GROUP BY	I.upc
+											ORDER BY	type DESC, upc ASC");
+			$stmt->bind_param("ss",$tit,$lead);
+			$stmt->bind_result($upc, $title, $name, $type, $category, $company, $year, $price, $stock);
+			$schema = array('upc','title', 'leadSinger', 'type', 'category', 'company', 'year', 'price', 'stock');
+		}
+		$stmt->execute();
+		if($stmt->error) {
+			printf("<b>Error: %s. </b><br>\n", $stmt->error);
+			return $stmt->error;
 		} else {
-			//echo "<b>Successfully deleted ".$Name."</b><br>";
-			return 0;
+			//echo "<b>Search successful ".$cat."</b><br>";
+			
 		}
-
-		$res->bind_result($upc, $title, $leadSinger, $type, $category, $company, $year, $price $stock);
-		$schema = array('upc','title', 'leadSinger', 'type', 'category', 'company', 'year', 'price', 'stock');
-		
 				
 		//echo "<table border = 1>";
-		echo "<table>";
-
+		echo "<table class='table'>";
 
 		for($j=0;$j<count($schema);$j++)
 		{
 			echo "<td class=rowheader>".$schema[$j]."</td>";
 		}
-		echo "</tr>";
-				
-		$i = count($schema);		
+
 		echo "<tr><h3> Search Results </h3></tr>";
 
-		while ($row = $res->fetch() && $i > 0) {
-		
-			echo "<tr>";
-				
+		if (count($schema) === 9) {
+			// LeadSinger would have been used to search
+			while ($row = $stmt->fetch()) {
+
+				echo "<tr>";
 				echo "<td>".$upc."</td>";	
 				echo "<td>".$title."</td>";
-				echo "<td>".$leadSinger."</td>";
+				echo "<td>".$name."</td>";
 				echo "<td>".$type."</td>";
 				echo "<td>".$category."</td>";
-				echo "<td>".$company."</td>"
+				echo "<td>".$company."</td>";
 				echo "<td>".$year."</td>";
 				echo "<td>".$price."</td>";
 				echo "<td>".$stock."</td>";	
 				
-			echo "</tr>";
-			$i--;
+				echo "</tr>";
+			}
+		} else {
+			// LeadSinger would not have been used
+			while ($row = $stmt->fetch()) {
+
+				echo "<tr>";
+				echo "<td>".$upc."</td>";	
+				echo "<td>".$title."</td>";
+				echo "<td>".$type."</td>";
+				echo "<td>".$category."</td>";
+				echo "<td>".$company."</td>";
+				echo "<td>".$year."</td>";
+				echo "<td>".$price."</td>";
+				echo "<td>".$stock."</td>";	
+				
+				echo "</tr>";
+			}
 		}
-		
+
 		echo "</table><br>";
 	}
 
