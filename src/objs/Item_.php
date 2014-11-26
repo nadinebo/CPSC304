@@ -15,14 +15,16 @@ class Item_
 	//Basic manipulation functions
 	public function insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock)
 	{
-		global $connection;
-		$stmt = $connection->prepare("INSERT INTO Item_ (upc,title,type,category,company,year,price,stock) Values (?,?,?,?,?,?,?,?)");
-		//$stmt->bind_param("issssiii", $UPC, $title,$type,$category,$company,$year,$price,$stock);
+		global $connection;			
+		$stmt = $connection->prepare("INSERT INTO Item_ (upc,title,type,category,company,year,price,stock) Values (?,?,?,?,?,?,?,?)"); 		
+
+		//$stmt->bind_param("issssiiii", $UPC, $title,$type,$category,$company,$year,$price,$stock,$UPC);
 		$stmt->bind_param("issssidi", $UPC, $title,$type,$category,$company,$year,$price,$stock);
 		
 		$stmt->execute();
+
 		if($stmt->error) {
-			//printf("<b>Error: %s. </b><br>\n", $stmt->error);
+			//printf("Item already exists");
 			//return $stmt->error;
 			
 			//ADDED HERE
@@ -52,16 +54,14 @@ class Item_
 			if($res->error) {
 			printf("<b>Error: %s. </b><br>\n", $res->error);
 			return $res->error;
+			
 			} else {
-			//echo "<b>Successfully deleted ".$Name."</b><br>";
 				return 0;
 			}
-			
-			//
-			
-		} else {
+				
+		} 
+		else {
 			return 0;
-			//echo "<b>Successfully added ".$UPC."</b><br>";
 		}
 	}
 
