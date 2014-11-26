@@ -10,7 +10,7 @@ class Return_
 	}
 	
 	
-	public function insertReturn($retID,$returnDate,$receiptID)
+	/*public function insertReturn($retID,$returnDate,$receiptID)
 	{
 		//echo "   adding a return   ";
 		global $connection;
@@ -33,7 +33,53 @@ class Return_
 			return 0;
 			//echo "<b>Successfully added return #".$retID."</b>";
 		}
+	}*/
+	
+	public function insertReturn($retID,$returnDate,$receiptID)
+	{
+		//echo "   adding a return   ";
+		global $connection;
+		//ADDED HERE
+		$res = $connection->prepare("select date from Order_ o where o.receiptID=?");
+		$res->bind_param("i",$receiptID);
+		$res->execute();
+		if($res->error) {
+			printf("<b>Error: %s. </b>\n", $res->error);
+			return $res->error;
+		} else {
+			return $res;
+			
+			$diff = date_diff($returnDate,$res);
+			
+			if($diff <= 15){
+				echo "$res = " .$res."!";
+				$stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) Values (?,?,?)");
+				$stmt->bind_param("isi", $retID, $returnDate, $receiptID);
+				$stmt->execute();
+				
+				if($stmt->error) {
+					printf("<b>Error: %s. </b>\n", $stmt->error);
+					return $stmt->error;
+				} else {
+					return 0;
+			//echo "<b>Successfully added return #".$retID."</b>";
+				}
+			}else{
+		
+				echo "The return period has passed. Items can only be returned within 15 days from purchase.";
+		
+			}//
+		echo "I shouldn't see this line at all";
+		}
+		
+		//
+		
+	
 	}
+	
+	
+	
+
 	
 	
 	public function queryAllReturns()
