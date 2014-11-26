@@ -23,7 +23,19 @@ Nadine (Return, ReturnItem)
 
 
 Kevin's NOTES
-All database items are being added/initialized on each call or refresh of the Dev page.
-- implement initData() function at home page to input initial data into database
-- may need to clear all tuples and initialize again if home page refreshes (or just run init_table.sql again)
-- delete calls to new items from the dev page
+- follow TopSellingItem Implementation
+- create if statements for possible data entries
+- create SQL queries for those statements
+- simple table. Not complicated.
+
+
+Final Revamp:
+- strip down functionality to only implement things a customer/clerk/manager can do
+	CUSTOMER:
+	- purchasing items creates order
+	CLERK:
+	- only process return
+	MANAGER:
+	- display reports
+	- add item and change the price/quantity
+	- process the DELIVERY DATE of an order (not create a new order)

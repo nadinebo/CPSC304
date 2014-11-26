@@ -76,19 +76,19 @@
 				<div role="tabpanel" class="tab-pane" id="cart">
 					<h3> The Shopping Cart </h3>
 					<?php
-
+					// Cart Implementation
 					?>
 				</div>
 				<div role="tabpanel" class="tab-pane active" id="shop">
-					<h3> Browsing Store Items </h3>
+					<h3> Search for Items</h3>
 					<?php
-
+					$input = array('Category','Title', 'LeadSinger');
+					$P->buildAddForm($input,"Search For Item");
 					?>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="allItems">
-					<h3> All Items </h3>
 					<?php
-
+					$P->allItems();
 					?>
 				</div>
 			</div>

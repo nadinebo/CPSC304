@@ -81,6 +81,19 @@ class Presentation
 		global $Logic;
 		$Logic->newCustomer($cid,$password,$name,$address,$phone);
 	}
+
+	public function allItems() {
+		global $Logic;
+				
+		//testing using the layers as classes
+		$result = $Logic->getItems();
+		$schema = array('upc','title','type','category','company','year','price','stock');
+		
+		//implement ADD ITEM instead of DELETE
+		$delete = "DELETE ITEM";
+		$primary = 'upc';
+		$this->buildTable("All Items",$result,$schema,$delete,$primary);
+	}
 		
 	public function Itemsd()
 	{
@@ -90,6 +103,7 @@ class Presentation
 		$result = $Logic->getItems();
 		$schema = array('upc','title','type','category','company','year','price','stock');
 		
+		//should be ADD instead of DELETE
 		$delete = "DELETE ITEM";
 		$primary = 'upc';
 		$this->buildTable("All Items",$result,$schema,$delete,$primary);

@@ -124,70 +124,77 @@ class Data
        		$this->insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock);
        	}
 
-      elseif($_POST["submit"] ==  "Add Lead Singers"){
-       	$UPC = $_POST["new_upc"];
-        $name = $_POST["new_name"];
-	$this->insertLeadSinger($UPC,$name);
-      }
-      
-    	elseif($_POST["submit"] ==  "Add A Song"){
-       	$UPC = $_POST["new_upc"];
-        $title = $_POST["new_title"];
-	$this->insertHasSong($UPC,$title);
-      }
-    	elseif($_POST["submit"] ==  "Add A Return"){
-       	$retID = $_POST["new_retID"];
-        $returnDate = $_POST["new_returnDate"];
-        $receiptID = $_POST["new_receiptID"];
-	$this->insertReturn($retID,$returnDate,$receiptID);
-      }
-    	elseif($_POST["submit"] ==  "Add Customer"){
-       	$cid = $_POST["new_cid"];
-       	$password = $_POST["new_password"];
-       	$name = $_POST["new_name"];
-       	$address = $_POST["new_address"];
-       	$phone = $_POST["new_phone"];
-	$this->insertCustomer($cid,$password,$name,$address,$phone);
-	
-	}
-    	elseif($_POST["submit"] ==  "Add Order"){
-       	$receiptID = $_POST["new_receiptID"];
-       	$date = $_POST["new_date"];
-       	$cid = $_POST["new_cid"];
-       	$cardNum = $_POST["new_cardNum"];
-       	$expiryDate = $_POST["new_expiryDate"];
-       	$expectedDate = $_POST["new_expectedDate"];
-       	$deliveredDate = $_POST["new_deliveredDate"];
-	$this->insertOrder($receiptID,$date,$cid,$cardNum,$expiryDate,$expectedDate,$deliveredDate);
-	}
-      
-    	elseif($_POST["submit"] ==  "Add PurchaseItem"){
-       	$receiptID = $_POST["new_receiptID"];
-       	$UPC = $_POST["new_upc"];
-       	$quantity = $_POST["new_quantity"];
-	$this->insertPurchaseItem($receiptID,$UPC,$quantity);
-	}
+       	elseif($_POST["submit"] ==  "Add Lead Singers"){
+       		$UPC = $_POST["new_upc"];
+       		$name = $_POST["new_name"];
+       		$this->insertLeadSinger($UPC,$name);
+       	}
 
-	elseif($_POST["submit"] ==  "Add Return Item"){
-	$retID = $_POST["new_retID"];
-	$UPC = $_POST["new_upc"];
-	$returnQuantity = $_POST["new_returnQuantity"];
-	$this->insertReturnItem($retID,$UPC,$returnQuantity);
-	}
-	
-	elseif($_POST["submit"] ==  "Get my daily sales"){
-	$date = $_POST["new_Date"];
-	$this->dailySales($date);
-	}
-	
-	elseif($_POST["submit"] ==  "Get Top Selling"){
-	$queryDate = $_POST["new_queryDate"];
-	$n = $_POST["new_quantity"];
+       	elseif($_POST["submit"] ==  "Add A Song"){
+       		$UPC = $_POST["new_upc"];
+       		$title = $_POST["new_title"];
+       		$this->insertHasSong($UPC,$title);
+       	}
+       	elseif($_POST["submit"] ==  "Add A Return"){
+       		$retID = $_POST["new_retID"];
+       		$returnDate = $_POST["new_returnDate"];
+       		$receiptID = $_POST["new_receiptID"];
+       		$this->insertReturn($retID,$returnDate,$receiptID);
+       	}
+       	elseif($_POST["submit"] ==  "Add Customer"){
+       		$cid = $_POST["new_cid"];
+       		$password = $_POST["new_password"];
+       		$name = $_POST["new_name"];
+       		$address = $_POST["new_address"];
+       		$phone = $_POST["new_phone"];
+       		$this->insertCustomer($cid,$password,$name,$address,$phone);
+
+       	}
+       	elseif($_POST["submit"] ==  "Add Order"){
+       		$receiptID = $_POST["new_receiptID"];
+       		$date = $_POST["new_date"];
+       		$cid = $_POST["new_cid"];
+       		$cardNum = $_POST["new_cardNum"];
+       		$expiryDate = $_POST["new_expiryDate"];
+       		$expectedDate = $_POST["new_expectedDate"];
+       		$deliveredDate = $_POST["new_deliveredDate"];
+       		$this->insertOrder($receiptID,$date,$cid,$cardNum,$expiryDate,$expectedDate,$deliveredDate);
+       	}
+
+       	elseif($_POST["submit"] ==  "Add PurchaseItem"){
+       		$receiptID = $_POST["new_receiptID"];
+       		$UPC = $_POST["new_upc"];
+       		$quantity = $_POST["new_quantity"];
+       		$this->insertPurchaseItem($receiptID,$UPC,$quantity);
+       	}
+
+       	elseif($_POST["submit"] ==  "Add Return Item"){
+       		$retID = $_POST["new_retID"];
+       		$UPC = $_POST["new_upc"];
+       		$returnQuantity = $_POST["new_returnQuantity"];
+       		$this->insertReturnItem($retID,$UPC,$returnQuantity);
+       	}
+
+       	elseif($_POST["submit"] ==  "Get my daily sales"){
+       		$date = $_POST["new_Date"];
+       		$this->dailySales($date);
+       	}
+
+       	elseif($_POST["submit"] ==  "Get Top Selling"){
+       		$queryDate = $_POST["new_queryDate"];
+       		$n = $_POST["new_quantity"];
 	//echo "queryDate: " .$queryDate. " ! ";
 	//echo "n: " .$n. " ! ";
-	$this->getTopSelling($queryDate,$n);
-	}	
-	
+       		$this->getTopSelling($queryDate,$n);
+       	}	
+
+       	elseif($_POST["submit"] ==  "Search For Item"){
+       		$category = $_POST["new_Category"];
+       		$title = $_POST["new_Title"];
+       		$leadSinger = $_POST["new_LeadSinger"];
+       		$this->searchItems($category,$title,$leadSinger);
+       	}
+
       } //from elseif
   }
 
@@ -349,6 +356,12 @@ public function dailySales($reportDate)
 {
 	global $PI;
 	return $PI->dailySales($reportDate);
+}
+
+public function searchItems($category,$title,$leadSinger)
+{
+	global $I;
+	return $I->searchItems($category,$title,$leadSinger);
 }
 
 }
