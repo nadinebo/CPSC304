@@ -26,6 +26,19 @@ class Order_
 			return 0;
 	}
 
+	public function updateDelivery($receiptID,$deliveredDate)
+	{
+		global $connection;
+		$stmt = $connection->prepare("update Order_ set deliveredDate=? where receiptID=?");
+		$stmt->bind_param("si", $deliveredDate,$receiptID);
+		$stmt->execute();
+		if($stmt->error) {
+			printf("<b>Error: %s. </b>\n", $stmt->error);
+			return $stmt->error;
+		}
+			return 0;
+	}
+
 	public function queryAllOrders()
 	{
 		global $connection;

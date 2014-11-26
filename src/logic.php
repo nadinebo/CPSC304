@@ -53,6 +53,12 @@ class Logic
 	{
 		global $Data;
 		return $Data->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate);	
+	}
+	
+		public function updateDelivery($receiptID,$deliveredDate)
+	{
+		global $Data;
+		return $Data->updateDelivery($receiptID,$deliveredDate);	
 	}	
 
 	public function getAllOrders()
