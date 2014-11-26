@@ -10,7 +10,7 @@ class Logic
 		global $Data;
 		$Data = new Data();
 	}
-	
+
 	public function newItem($UPC,$title,$type,$category,$company,$year,$price,$stock){
 		global $Data;
 		$Data->insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock);
@@ -53,6 +53,12 @@ class Logic
 	{
 		global $Data;
 		return $Data->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate);	
+	}
+	
+		public function updateDelivery($receiptID,$deliveredDate)
+	{
+		global $Data;
+		return $Data->updateDelivery($receiptID,$deliveredDate);	
 	}	
 
 	public function getAllOrders()

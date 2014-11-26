@@ -70,9 +70,9 @@
 				?>
 
 				<div role="tabpanel" class="tab-pane active" id="pReturn">
-					<h3> Process a Return for a Refund </h3>
 					<?php
-
+					$P->returns();
+					$P->returnitems();
 					?>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="eTab">

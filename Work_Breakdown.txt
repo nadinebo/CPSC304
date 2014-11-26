@@ -20,3 +20,10 @@ Nadine (Return, ReturnItem)
 	6. Adding Items (Nadine)
 	7. Daily Sales Report (Nicole)
 	8. Top Selling Items (Stew)
+
+
+Kevin's NOTES
+All database items are being added/initialized on each call or refresh of the Dev page.
+- implement initData() function at home page to input initial data into database
+- may need to clear all tuples and initialize again if home page refreshes (or just run init_table.sql again)
+- delete calls to new items from the dev page

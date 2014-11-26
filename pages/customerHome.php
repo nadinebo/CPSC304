@@ -64,6 +64,7 @@
 					<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
 				</a></li>
 				<li role="presentation" class="active"><a href="#shop" aria-controls="shop" role="tab" data-toggle="tab">Browse Store</a></li>
+				<li role="presentation"><a href="#allItems" aria-controls="allItems" role="tab" data-toggle="tab">All Items</a></li>
 			</ul>
 
 			<!-- Tab panes -->
@@ -259,6 +260,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 //Uncomment for ultra basket mode
 //echoBasket($addBasket);
 ?>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="allItems">
+					<h3> All Items </h3>
+					<?php
+
+					?>
 				</div>
 			</div>
 		</div>

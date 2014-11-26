@@ -10,12 +10,21 @@ class Return_
 	}
 	
 	
-	public function insertReturn($retID,$returnDate,$receiptID)
+	/*public function insertReturn($retID,$returnDate,$receiptID)
 	{
 		//echo "   adding a return   ";
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) Values (?,?,?)");
 		$stmt->bind_param("isi", $retID, $returnDate, $receiptID);
+
+		//$stmt = $connection->prepare("INSERT into Return_
+		//SELECT ?,?,? from Return_ r
+		//WHERE ? in (
+		//SELECT r.receiptID from Return_ r
+		//inner join Order_ o on r.receiptID = o.receiptID
+		//where datediff(o.date,r.returnDate) < 14)");		
+		
+		//$stmt->bind_param("isii", $retID, $returnDate, $receiptID, $receiptID);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
@@ -24,7 +33,63 @@ class Return_
 			return 0;
 			//echo "<b>Successfully added return #".$retID."</b>";
 		}
+	}*/
+	
+	public function insertReturn($retID,$returnDate,$receiptID)
+	{
+		//echo "   adding a return   ";
+		global $connection;
+		//ADDED HERE
+		$res = $connection->prepare("select date from Order_ o where o.receiptID=?");
+		$res->bind_param("i",$receiptID);
+		$res->execute();
+		if($res->error) {
+			printf("<b>Error: %s. </b>\n", $res->error);
+			return $res->error;
+		} else {
+			
+			$res->bind_result($mydate);
+			
+			while($res->fetch()){
+			
+				$date1=date_create($returnDate);
+				$date2=date_create($mydate);
+				
+				$diff = date_diff($date1,$date2);
+				
+				if($diff->format("%a") <= "15"){
+					
+					$res->close();
+					
+					$stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) Values (?,?,?)");
+					$stmt->bind_param("isi", $retID, $returnDate, $receiptID);
+					$stmt->execute();
+					
+					if($stmt->error) {
+						printf("<b>Error: %s. </b>\n", $stmt->error);
+						return $stmt->error;
+					} else {
+						return 0;
+					}
+				}else{
+		
+					echo "The return period has passed. Items can only be returned within 15 days from purchase. ";
+					echo "\r\n";
+					echo "It has been ";
+					echo $diff->format("%a days since the purchase was made.");
+					
+					
+				}
+			}
+	
+		}
+
+			
 	}
+	
+	
+	
+
 	
 	
 	public function queryAllReturns()

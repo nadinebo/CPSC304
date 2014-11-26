@@ -62,12 +62,22 @@
 		<p><em>Provides explanation and documentation of our database and UI.</em></p>
 		<p>For example: <strong>Select one of the following perspectives above to get started.</strong></p>
 		
+		<button type="button" id="initButton" data-complete-text="Initialized" class="btn btn-success">Initialize Database</button>
+		
+		
 	</div>
-	
+
+	<?php
+	include '../src/presentation.php';
+	$P = new Presentation();
+	$P->initData();
+	?>
+
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>
