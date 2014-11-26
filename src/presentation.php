@@ -24,7 +24,7 @@ class Presentation
 
 		
 		echo "<h2>".$tableName."</h2>";
-		echo "<table>";
+		echo "<table class='table'>";
 		echo "<tr valine=center>";
 		for($i=0;$i<count($schema);$i++)
 		{
@@ -51,7 +51,7 @@ class Presentation
 		echo "<form id=\"add\" name=\"add\" method=\"post\" action=\"";
 			echo htmlspecialchars($_SERVER["PHP_SELF"]);
 		echo"\">";
-    		echo"<table border=0 cellpadding=0 cellspacing=0>";
+    		echo"<table>";
 		for($i=0;$i<count($schema);$i++)
 		{
 			echo "<tr><td>".$schema[$i]."</td><td><input type=\"text\" size=30 name=\"new_".$schema[$i]."\"</td></tr>";
@@ -85,17 +85,7 @@ class Presentation
 	public function Itemsd()
 	{
 		global $Logic;
-		
-		//Added this
-		$Logic->removeItem(38493);
-		$Logic->removeItem(22231);
-		$Logic->removeItem(11111);
-		$Logic->removeItem(22222);
-		
-		$Logic->newItem(38493,'St.Vincent','CD','POP','muhrecords',2014,20,1);
-		$Logic->newItem(11111,'test1','CD','POP','muhrecords',2014,20,10);
-		$Logic->newItem(22222,'test2','CD','POP','muhrecords',2014,20,1);
-		
+				
 		//testing using the layers as classes
 		$result = $Logic->getItems();
 		$schema = array('upc','title','type','category','company','year','price','stock');
@@ -112,13 +102,7 @@ class Presentation
 	public function singersd()
 	{
 		global $Logic;
-		
-		$Logic->removeLeadSingers(38493,'St.Vincent');
-		$Logic->removeLeadSingers(22231,'Michal Geera');
-		
-		$Logic->newLeadSinger(38493,'St.Vincent');
-		$Logic->newLeadSinger(22231,'Michal Geera');
-		
+
 		//testing using the layers as classes
 		$result = $Logic->getLeadSingers();
 		$schema = array('upc','name');	
@@ -132,12 +116,6 @@ class Presentation
 	public function songs()
 	{
 		global $Logic;
-		
-		$Logic->removeSongTitle(38493,'I prefer your love');
-		$Logic->removeItem(38493);
-		
-		$Logic->newItem(38493,'St.Vincent','CD','POP','muhrecords',2014,20,1);
-		$Logic->newSongTitle(38493,'I prefer your love');
 		
 		$result = $Logic->getAllSongTitles();
 		$schema = array('upc','title');
@@ -153,21 +131,6 @@ class Presentation
 	
 		global $Logic;
 		
-		$Logic->removeCustomer(1000);
-		$Logic->removeCustomer(2000);
-		$Logic->newCustomer(1000,'ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
-		$Logic->newCustomer(2000,'ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
-
-		$result = $Logic->getCustomers();
-		
-		/*while($row = $result->fetch_assoc()){
-			echo"<td>".$row['cid']."</td>";
-			echo"<td>".$row['password']."</td>";
-			echo"<td>".$row['name']."</td>";
-			echo"<td>".$row['address']."</td>";
-			echo"<td>".$row['phone']."</td>";
-		}*/
-		
 		$result = $Logic->getCustomers();
 		$schema = array('cid','password','name', 'address','phone');	
 		$this->buildTable("All Customers",$result,$schema);
@@ -181,12 +144,6 @@ class Presentation
 	
 		global $Logic;
 		
-		$Logic->removeOrder(12014);
-		$Logic->removeOrder(11014);
-		
-		$Logic->newOrder(12014,'2014-11-01',1000,45678,'2017','2014-12-01',null);
-		$Logic->newOrder(11014,'2014-11-01',2000,45123,'2015','2014-12-01',null);
-			
 		$result = $Logic->getAllOrders();
 		$schema = array('receiptID','date','cid','cardNum','expiryDate','expectedDate','deliveredDate');
 		$this->buildTable("All Orders",$result,$schema);
@@ -198,12 +155,6 @@ class Presentation
 	public function purchaseitems(){
 	
 		global $Logic;
-		
-		$Logic->removePurchaseItem(12014,11111);
-		$Logic->removePurchaseItem(11014,22222);
-
-		$Logic->newPurchaseItem(12014,11111,5);
-		$Logic->newPurchaseItem(11014,22222,5);
 		
 		$result = $Logic->getAllPurchaseItems();
 		$schema = array('receiptID','upc','quantity');
@@ -218,9 +169,6 @@ class Presentation
 	
 		global $Logic;
 		
-		$Logic->newReturn(12345,'2014-11-11',12014);
-		$Logic->newReturn(90876,'2014-11-10',11014);
-		
 		$result = $Logic->getAllReturns();
 		$schema = array('retID','returnDate','receiptID');
 		$this->buildTable("All Returns",$result,$schema);
@@ -234,9 +182,6 @@ class Presentation
 	
 		global $Logic;
 		
-		$Logic->newReturnItem(12345,11111,1);
-		$Logic->newReturnItem(90876,22222,1);
-
 		$result = $Logic->getAllReturnItems();
 		$schema = array('retID','upc','returnQuantity');
 		$this->buildTable("All Returned Items",$result,$schema);
@@ -246,6 +191,8 @@ class Presentation
 		
 	public function initData(){
 		global $Logic;
+
+
 		// CD Albums
 		$Logic->newItem(00001,'1989','CD','Pop','Big Machine Records',2014,14.99,10);
 		$Logic->newItem(00002,'Bitches Brew','CD','Jazz','Original',1970,9.99,10);
@@ -355,7 +302,6 @@ class Presentation
 		// From returns()
 		$Logic->newReturn(12345,'2014-11-11',12014);
 		$Logic->newReturn(90876,'2014-11-10',11014);
-
 
 	}
 	
