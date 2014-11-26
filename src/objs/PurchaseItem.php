@@ -151,7 +151,7 @@ class PurchaseItem
 										where o.receiptID = pi.receiptID 
 												and i.upc = pi.upc and o.date=?
 										group by pi.upc
-										order by pi.quantity desc");
+										order by sum(pi.quantity) desc");
 		$stmt->bind_param("s",$queryDate);
 		$stmt->execute();
 		if($stmt->error) {
