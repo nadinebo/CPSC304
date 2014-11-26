@@ -92,10 +92,12 @@ class Logic
 	}
 	
 	
-	public function newReturn($retID,$returnDate,$receiptID)
+	//public function newReturn($retID,$returnDate,$receiptID)
+	public function newReturn($returnDate,$receiptID)
 	{
 		global $Data;
-		return $Data->insertReturn($retID,$returnDate,$receiptID);	
+		//return $Data->insertReturn($retID,$returnDate,$receiptID);	
+		return $Data->insertReturn($returnDate,$receiptID);	
 	}	
 	
 	public function getReturn($retID)

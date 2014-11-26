@@ -136,10 +136,11 @@ class Data
 	$this->insertHasSong($UPC,$title);
       }
     	elseif($_POST["submit"] ==  "Add A Return"){
-       	$retID = $_POST["new_retID"];
+       	//$retID = $_POST["new_retID"];
         $returnDate = $_POST["new_returnDate"];
         $receiptID = $_POST["new_receiptID"];
-	$this->insertReturn($retID,$returnDate,$receiptID);
+	//$this->insertReturn($retID,$returnDate,$receiptID);
+	$this->insertReturn($returnDate,$receiptID);
       }
     	elseif($_POST["submit"] ==  "Add Customer"){
        	$cid = $_POST["new_cid"];
@@ -178,6 +179,7 @@ class Data
 	$UPC = $_POST["new_upc"];
 	$returnQuantity = $_POST["new_returnQuantity"];
 	$this->insertReturnItem($retID,$UPC,$returnQuantity);
+	//$this->insertReturnItem($UPC,$returnQuantity);
 	}
 	
 	elseif($_POST["submit"] ==  "Get my daily sales"){
@@ -270,10 +272,12 @@ public function deleteSongTitle($UPC,$title){
 	return $HS->deleteSongTitle($UPC,$title);
 }
 
-public function insertReturn($retID,$returnDate,$receiptID){
+//public function insertReturn($retID,$returnDate,$receiptID){
+public function insertReturn($returnDate,$receiptID){
 		//echo"returnInsert Called DATA";
 	global $R;
-	return $R->insertReturn($retID,$returnDate,$receiptID);
+	//return $R->insertReturn($retID,$returnDate,$receiptID);
+	return $R->insertReturn($returnDate,$receiptID);
 }
 
 public function queryAllReturns(){

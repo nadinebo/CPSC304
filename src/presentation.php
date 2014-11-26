@@ -205,7 +205,8 @@ class Presentation
 		$schema = array('retID','returnDate','receiptID');
 		$this->buildTable("Process Return for Refund",$result,$schema);
 		$action = "Add A Return";
-		$this->buildAddForm($schema, $action);
+		$schema1 = array('returnDate','receiptID');
+		$this->buildAddForm($schema1, $action);
 	
 	}
 
@@ -337,12 +338,12 @@ class Presentation
 		$Logic->newPurchaseItem(11014,20004,3);
 
 		// From returns()
-		$Logic->newReturn(12345,'2014-11-11',12014);
-		$Logic->newReturn(90876,'2014-11-10',11014);
+		$Logic->newReturn('2014-11-11',12014);
+		//$Logic->newReturn('2014-11-10',11014);
 
-		$Logic->newReturnItem(12345,10007,2);
-		$Logic->newReturnItem(12345,20002,1);
-		$Logic->newReturnItem(90876,20004,3);
+		//$Logic->newReturnItem(1,10007,2);
+		//$Logic->newReturnItem(2,20002,1);
+		//$Logic->newReturnItem(90876,20004,3);
 	}
 	
 }

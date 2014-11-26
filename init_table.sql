@@ -70,8 +70,8 @@ create table PurchaseItem
 
 drop table if exists Return_;
 create table Return_
-	/* (retID int auto_increment not null, */
-	(retID int not null,
+	(retID int auto_increment not null,
+	/*(retID int not null, */
 	returnDate varchar(12) not null,
 	receiptID int not null unique,
 	primary key (retID),
@@ -84,7 +84,7 @@ create table ReturnItem
 	returnQuantity int not null,
 	upc int not null,
 	primary key (retID, upc),
-	foreign key (retID) references Return_ (retID) on delete cascade on update cascade,
+	foreign key (retID) references Return_ (retID),-- on delete cascade on update cascade,
 	foreign key (upc) references Item_ (upc) on delete cascade on update cascade);
 
 

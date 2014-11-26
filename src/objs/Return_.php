@@ -34,8 +34,9 @@ class Return_
 			//echo "<b>Successfully added return #".$retID."</b>";
 		}
 	}*/
-	
-	public function insertReturn($retID,$returnDate,$receiptID)
+
+	//public function insertReturn($retID,$returnDate,$receiptID)	
+	public function insertReturn($returnDate,$receiptID)
 	{
 		//echo "   adding a return   ";
 		global $connection;
@@ -60,9 +61,11 @@ class Return_
 				if($diff->format("%a") <= "15"){
 					
 					$res->close();
+
 					
-					$stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) Values (?,?,?)");
-					$stmt->bind_param("isi", $retID, $returnDate, $receiptID);
+					//$stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) Values (?,?,?)");
+					$stmt = $connection->prepare("INSERT INTO Return_ (returnDate, receiptID) Values (?,?)");
+					$stmt->bind_param("si", $returnDate, $receiptID);
 					$stmt->execute();
 					
 					if($stmt->error) {
