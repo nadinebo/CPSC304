@@ -14,31 +14,62 @@ class PurchaseItem
 	public function insertPurchaseItem($receiptID, $UPC, $quantity) 
 	{
 		//echo "   adding a purchased item   ";
-		global $connection;
-		$stmt = $connection->prepare("INSERT INTO PurchaseItem (receiptID, upc, quantity) Values (?,?,?)");
-		$stmt->bind_param("iii", $receiptID, $UPC, $quantity);
-
-		$stmt->execute();
-		if($stmt->error) {
-			printf("<b>Error: %s. </b\n", $stmt->error);
-			return $stmt->error;
-		} else {
 		
-		// update stock
-		$result = $connection->prepare("UPDATE Item_ set stock = stock - ? where upc = ?");
-		$result->bind_param("ii", $quantity, $UPC);
+		global $connection; 
+		
+		$result = $connection->prepare("select stock from Item_ i where i.upc=?");
+		$result->bind_param("i", $UPC);
 
 		$result->execute();	
 		
-		// reset negative stock values
-		$result = $connection->prepare("UPDATE Item_ set stock = case when stock < 0 then 0 else stock end where upc = ?");
-		$result->bind_param("i", $UPC);
+		if($result->error) {
+			printf("<b>Error looking up item stock: %s. </b\n", $result->error);
+			//return $result->error;
+		} else {
+		
+		$result->bind_result($itemstock);
+		
+		$result->fetch();
+		
+		
+		if($quantity > $itemstock){
+			
+			echo "We only have " .$itemstock. " units of item " .$UPC. " in stock, please select a different quantity.";
+		
+		}else{
+			
+			$result->close();
+			$newstock = $itemstock - $quantity;
+			
+			$stmt = $connection->prepare("UPDATE Item_ set stock =? where upc =?");
+			$stmt->bind_param("ii", $newstock, $UPC);
 
-		$result->execute();		
-				
-		return 0;
-		//echo "<b>Successfully added purchase item #".$UPC."</b>";
-		}	
+			$stmt->execute();
+			if($stmt->error) {
+				printf("<b>Error updating stock: %s. </b\n", $stmt->error);
+				//return $stmt->error;
+			} else {
+		
+			
+			$stmt->close();
+			
+			$res = $connection->prepare("INSERT INTO PurchaseItem (receiptID, upc, quantity) Values (?,?,?)");
+			$res->bind_param("iii", $receiptID, $UPC, $quantity);
+
+			$res->execute();
+			if($res->error) {
+				printf("<b>Error inserting: %s. </b\n", $res->error);
+				return $res->error;
+			} else {
+				//echo "Successfully purchased " .$UPC. "! ";
+			}
+		
+		}
+		
+		}//else close
+		
+		}//close first error catch
+		
 	}
 
 	public function queryAllPurchaseItems()
