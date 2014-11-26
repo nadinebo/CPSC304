@@ -16,6 +16,15 @@ class Return_
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) Values (?,?,?)");
 		$stmt->bind_param("isi", $retID, $returnDate, $receiptID);
+
+		//$stmt = $connection->prepare("INSERT into Return_
+		//SELECT ?,?,? from Return_ r
+		//WHERE ? in (
+		//SELECT r.receiptID from Return_ r
+		//inner join Order_ o on r.receiptID = o.receiptID
+		//where datediff(o.date,r.returnDate) < 14)");		
+		
+		//$stmt->bind_param("isii", $retID, $returnDate, $receiptID, $receiptID);
 		$stmt->execute();
 		if($stmt->error) {
 			printf("<b>Error: %s. </b>\n", $stmt->error);
