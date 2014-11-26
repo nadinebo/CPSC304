@@ -58,14 +58,12 @@ class Return_
 				$diff = date_diff($date1,$date2);
 				
 				if($diff->format("%a") <= "15"){
-					echo "in diff if, mydate = " .$mydate."!";
 					
 					$res->close();
 					
 					$stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) Values (?,?,?)");
 					$stmt->bind_param("isi", $retID, $returnDate, $receiptID);
 					$stmt->execute();
-					echo "stmt executed!";
 					
 					if($stmt->error) {
 						printf("<b>Error: %s. </b>\n", $stmt->error);
