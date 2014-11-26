@@ -63,9 +63,9 @@
 	</div>
 
 	<?php
-	// include '../src/presentation.php';
-	// $P = new Presentation();
-	// $P->initData();
+	include '../src/presentation.php';
+	$P = new Presentation();
+	$P->initData();
 	?>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -73,14 +73,6 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-	<script>
-	$('#initButton').on('click', function () {
-			$(this).button('complete');
-			$(this).prop('disabled', true);
-
-			
-		})
-	</script>
 
 </body>
 </html>

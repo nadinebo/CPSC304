@@ -192,15 +192,16 @@ class Presentation
 	public function initData(){
 		global $Logic;
 
+		// Re-initialize Database
 
 		// CD Albums
-		$Logic->newItem(00001,'1989','CD','Pop','Big Machine Records',2014,14.99,10);
-		$Logic->newItem(00002,'Bitches Brew','CD','Jazz','Original',1970,9.99,10);
-		$Logic->newItem(00003,'Led Zeppelin','CD','Rock','Atlantic Recording Corp.',1969,9.99,10);
-		$Logic->newItem(00004,'Songs About Jane','CD','Pop','Interscope Records',2002,9.99,10);
-		$Logic->newItem(00005,'Crash My Party','CD','Country','Capitol Records Nashville',2013,14.99,10);
-		$Logic->newItem(00006,'Tailgates & Tanlines','CD','Country','Capitol Records Nashville',2011,14.99,10);
-		$Logic->newItem(00007,'Dream Your Life Away','CD','Alternative','Atlantic Recording Corp.',2014,14.99,10);
+		$Logic->newItem(20001,'1989','CD','Pop','Big Machine Records',2014,14.99,10);
+		$Logic->newItem(20002,'Bitches Brew','CD','Jazz','Original',1970,9.99,10);
+		$Logic->newItem(20003,'Led Zeppelin','CD','Rock','Atlantic Recording Corp.',1969,9.99,10);
+		$Logic->newItem(20004,'Songs About Jane','CD','Pop','Interscope Records',2002,9.99,10);
+		$Logic->newItem(20005,'Crash My Party','CD','Country','Capitol Records Nashville',2013,14.99,10);
+		$Logic->newItem(20006,'Tailgates & Tanlines','CD','Country','Capitol Records Nashville',2011,14.99,10);
+		$Logic->newItem(20007,'Dream Your Life Away','CD','Alternative','Atlantic Recording Corp.',2014,14.99,10);
 
 		// DVDs
 		$Logic->newItem(10001,'Now You See Me','DVD','Thriller','Summit Entertainment',2013,19.99,10);
@@ -217,77 +218,77 @@ class Presentation
 		$Logic->newItem(10012,'The Lego Movie','DVD','Animation','Warner Bros.',2014,19.99,10);
 
 		// Artists of Albums
-		$Logic->newLeadSinger(00001,'Taylor Swift');
-		$Logic->newLeadSinger(00002,'Miles Davis');
-		$Logic->newLeadSinger(00003,'Led Zeppelin');
-		$Logic->newLeadSinger(00004,'Maroon 5');
-		$Logic->newLeadSinger(00005,'Luke Bryan');
-		$Logic->newLeadSinger(00006,'Luke Bryan');
-		$Logic->newLeadSinger(00007,'Vance Joy');
+		$Logic->newLeadSinger(20001,'Taylor Swift');
+		$Logic->newLeadSinger(20002,'Miles Davis');
+		$Logic->newLeadSinger(20003,'Led Zeppelin');
+		$Logic->newLeadSinger(20004,'Maroon 5');
+		$Logic->newLeadSinger(20005,'Luke Bryan');
+		$Logic->newLeadSinger(20006,'Luke Bryan');
+		$Logic->newLeadSinger(20007,'Vance Joy');
 
 		// Taylor Swift, 1989
-		$Logic->newSongTitle(00001,'Shake it off');
-		$Logic->newSongTitle(00001,'Blank space');
-		$Logic->newSongTitle(00001,'Welcome to New York');
+		$Logic->newSongTitle(20001,'Shake it off');
+		$Logic->newSongTitle(20001,'Blank space');
+		$Logic->newSongTitle(20001,'Welcome to New York');
 
 		// Miles Davis, Bitches Brew
-		$Logic->newSongTitle(00002,"Pharaoh's Dance");
-		$Logic->newSongTitle(00002,'Bitches Brew');
-		$Logic->newSongTitle(00002,'Miles Runs the Voodoo Down');
-		$Logic->newSongTitle(00002,'Spanish Key');
-		$Logic->newSongTitle(00002,'Feio');
+		$Logic->newSongTitle(20002,"Pharaoh's Dance");
+		$Logic->newSongTitle(20002,'Bitches Brew');
+		$Logic->newSongTitle(20002,'Miles Runs the Voodoo Down');
+		$Logic->newSongTitle(20002,'Spanish Key');
+		$Logic->newSongTitle(20002,'Feio');
 
 		// Led Zeppelin, Led Zeppelin II
-		$Logic->newSongTitle(00003,"Whole Lotta Love");
-		$Logic->newSongTitle(00003,'What Is and What Should Never Be');
-		$Logic->newSongTitle(00003,'The Lemon Song');
-		$Logic->newSongTitle(00003,'Thank You');
-		$Logic->newSongTitle(00003,'Heartbreaker');
-		$Logic->newSongTitle(00003,"Living Loving Maid (She's Just a Woman)");
-		$Logic->newSongTitle(00003,'Ramble On');
-		$Logic->newSongTitle(00003,'Moby Dick');
-		$Logic->newSongTitle(00003,'Bring It On Home');
+		$Logic->newSongTitle(20003,"Whole Lotta Love");
+		$Logic->newSongTitle(20003,'What Is and What Should Never Be');
+		$Logic->newSongTitle(20003,'The Lemon Song');
+		$Logic->newSongTitle(20003,'Thank You');
+		$Logic->newSongTitle(20003,'Heartbreaker');
+		$Logic->newSongTitle(20003,"Living Loving Maid (She's Just a Woman)");
+		$Logic->newSongTitle(20003,'Ramble On');
+		$Logic->newSongTitle(20003,'Moby Dick');
+		$Logic->newSongTitle(20003,'Bring It On Home');
 
 		// Maroon 5, Songs About Jane
-		$Logic->newSongTitle(00004,"Harder to Breathe");
-		$Logic->newSongTitle(00004,'This Love');
-		$Logic->newSongTitle(00004,'Shiver');
-		$Logic->newSongTitle(00004,'She Will Be Loved');
-		$Logic->newSongTitle(00004,'Tangled');
-		$Logic->newSongTitle(00004,"The Sun");
-		$Logic->newSongTitle(00004,'Must Get Out');
-		$Logic->newSongTitle(00004,'Sunday Morning');
-		$Logic->newSongTitle(00004,'Secret');
-		$Logic->newSongTitle(00004,'Through With You');
-		$Logic->newSongTitle(00004,'Not Coming Home');
-		$Logic->newSongTitle(00004,'Sweetest Goodbye');
+		$Logic->newSongTitle(20004,"Harder to Breathe");
+		$Logic->newSongTitle(20004,'This Love');
+		$Logic->newSongTitle(20004,'Shiver');
+		$Logic->newSongTitle(20004,'She Will Be Loved');
+		$Logic->newSongTitle(20004,'Tangled');
+		$Logic->newSongTitle(20004,"The Sun");
+		$Logic->newSongTitle(20004,'Must Get Out');
+		$Logic->newSongTitle(20004,'Sunday Morning');
+		$Logic->newSongTitle(20004,'Secret');
+		$Logic->newSongTitle(20004,'Through With You');
+		$Logic->newSongTitle(20004,'Not Coming Home');
+		$Logic->newSongTitle(20004,'Sweetest Goodbye');
 
 		// Luke Bryan, Crash My Party
-		$Logic->newSongTitle(00005,"That's My Kind of Night");
-		$Logic->newSongTitle(00005,'Crash My Party');
-		$Logic->newSongTitle(00005,'Roller Coaster');
-		$Logic->newSongTitle(00005,'Drink a Beer');
-		$Logic->newSongTitle(00005,'Play It Again');
-		$Logic->newSongTitle(00005,"Dirt Road Diary");
-		$Logic->newSongTitle(00005,'I See You');
+		$Logic->newSongTitle(20005,"That's My Kind of Night");
+		$Logic->newSongTitle(20005,'Crash My Party');
+		$Logic->newSongTitle(20005,'Roller Coaster');
+		$Logic->newSongTitle(20005,'Drink a Beer');
+		$Logic->newSongTitle(20005,'Play It Again');
+		$Logic->newSongTitle(20005,"Dirt Road Diary");
+		$Logic->newSongTitle(20005,'I See You');
 
 		// Luke Bryan, Tailgates & Tanlines
-		$Logic->newSongTitle(00006,"Country Girl (Shake It for Me)");
-		$Logic->newSongTitle(00006,'Kiss Tomorrow Goodbye');
-		$Logic->newSongTitle(00006,'Drunk On You');
-		$Logic->newSongTitle(00006,"I Don't Want This Night To End");
+		$Logic->newSongTitle(20006,"Country Girl (Shake It for Me)");
+		$Logic->newSongTitle(20006,'Kiss Tomorrow Goodbye');
+		$Logic->newSongTitle(20006,'Drunk On You');
+		$Logic->newSongTitle(20006,"I Don't Want This Night To End");
 
 		// Vance Joy, Dream Your Life Away
-		$Logic->newSongTitle(00007,'Mess Is Mine');
-		$Logic->newSongTitle(00007,'Wasted Time');
-		$Logic->newSongTitle(00007,'Riptide');
-		$Logic->newSongTitle(00007,'Who Am I');
-		$Logic->newSongTitle(00007,'Red Eye');
-		$Logic->newSongTitle(00007,'Georgia');
+		$Logic->newSongTitle(20007,'Mess Is Mine');
+		$Logic->newSongTitle(20007,'Wasted Time');
+		$Logic->newSongTitle(20007,'Riptide');
+		$Logic->newSongTitle(20007,'Who Am I');
+		$Logic->newSongTitle(20007,'Red Eye');
+		$Logic->newSongTitle(20007,'Georgia');
 
 
 		// From customers()
-		$Logic->newCustomer(0304,'0304','DevTest','1234 Main Mall','778-123-4567');
+		$Logic->newCustomer(304,'cs304','DevTest','1234 Main Mall','778-123-4567');
 		$Logic->newCustomer(1000,'ilikejane','JohnDoe','1234 W10th ave','604-123-4567');
 		$Logic->newCustomer(2000,'ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
 
@@ -296,8 +297,12 @@ class Presentation
 		$Logic->newOrder(11014,'2014-11-01',2000,45123,'2015','2014-12-01',null);
 
 		// From purchaseitems()
-		$Logic->newPurchaseItem(12014,11111,5);
-		$Logic->newPurchaseItem(11014,22222,5);
+		$Logic->newPurchaseItem(12014,10007,5);
+		$Logic->newPurchaseItem(12014,20005,2);
+		$Logic->newPurchaseItem(12014,20002,7);
+		$Logic->newPurchaseItem(11014,20001,2);
+		$Logic->newPurchaseItem(11014,10003,1);
+		$Logic->newPurchaseItem(11014,20004,3);
 
 		// From returns()
 		$Logic->newReturn(12345,'2014-11-11',12014);

@@ -10,7 +10,7 @@ class Logic
 		global $Data;
 		$Data = new Data();
 	}
-	
+
 	public function newItem($UPC,$title,$type,$category,$company,$year,$price,$stock){
 		global $Data;
 		$Data->insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock);

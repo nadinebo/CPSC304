@@ -16,7 +16,6 @@ class HasSong
 	{	
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO hasSong (upc,title) Values (?,?)");
-		echo "has song";
 		$stmt->bind_param("is", $UPC, $title);
 		$stmt->execute();
 		if($stmt->error) {

@@ -91,7 +91,6 @@ class Data
 		$C = new Customer($connection);
 
 
-
 			//Added this
 
 			    // Check that the connection was successful, otherwise exit
@@ -200,7 +199,6 @@ public function login($cid,$password){
 	$LoggedInUser= $C->login($cid,$password);
 	return $LoggedInUser;
 }	
-
 
 public function insertItem($UPC,$title,$type,$category,$company,$year,$price,$stock){
 	global $I;
