@@ -100,6 +100,9 @@ class PurchaseItem
 		
 		// Build result table		
 		echo "<table border = 1>";
+		
+		// title row
+		echo "<tr><h3> Daily Sales Report For ".$Date."</h3></tr>";
 
 		// Column titles
 		echo "<tr>";
@@ -109,14 +112,20 @@ class PurchaseItem
 		}
 		echo "</tr>";
 				
-		$i = 0;		
+		//$i = 0;		
+
+		// first row
+		echo "<tr>";	
+			echo "<td>". $UPC ."</td>";	
+			echo "<td>". $Category ."</td>";
+			echo "<td>". $ItemPrice ."</td>";
+			echo "<td>". $Quantity ."</td>";	
+			echo "<td>". $Total ."</td>";
+		echo "</tr>";
 				
-		// details		
+		// remaining rows		
 		while ($row = $result->fetch()) {
-			
-			// title row
-			if ($i == 0) {echo "<tr><h3> Daily Sales Report For ".$Date."</h3></tr>";}
-			
+						
 			// data rows
 			echo "<tr>";	
 				echo "<td>". $UPC ."</td>";	
@@ -125,7 +134,7 @@ class PurchaseItem
 				echo "<td>". $Quantity ."</td>";	
 				echo "<td>". $Total ."</td>";
 			echo "</tr>";
-			$i++;
+			//$i++;
 		}
 		
 		echo "</table><br>";
