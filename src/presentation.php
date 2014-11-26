@@ -149,6 +149,14 @@ class Presentation
 		$this->buildTable("All Orders",$result,$schema);
 		$this->buildAddForm($schema, "Add Order"); 
 		
+		//ADDED HERE
+		$schema1 = array('receiptID','deliveredDate');
+		//$this->buildTable("All Orders",$result,$schema);
+		echo "<h3>Update Order</h3>";
+		$this->buildAddForm($schema1, "Update Delivery Date"); 
+		
+		//
+		
 	}
 	
 	

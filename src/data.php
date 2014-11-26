@@ -160,6 +160,11 @@ class Data
        	$deliveredDate = $_POST["new_deliveredDate"];
 	$this->insertOrder($receiptID,$date,$cid,$cardNum,$expiryDate,$expectedDate,$deliveredDate);
 	}
+	elseif($_POST["submit"] ==  "Update Delivery Date"){
+       	$receiptID = $_POST["new_receiptID"];
+       	$deliveredDate = $_POST["new_deliveredDate"];
+	$this->updateDelivery($receiptID,$deliveredDate);
+	}
       
     	elseif($_POST["submit"] ==  "Add PurchaseItem"){
        	$receiptID = $_POST["new_receiptID"];
@@ -238,6 +243,11 @@ public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expected
 public function queryAllOrders(){
 	global $O;
 	return $O->queryAllOrders();
+}
+
+public function updateDelivery($receiptID,$deliveredDate){
+	global $O;
+	return $O->updateDelivery($receiptID,$deliveredDate);
 }
 
 public function deleteOrder($receiptID){
