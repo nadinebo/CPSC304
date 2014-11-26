@@ -47,34 +47,46 @@ class Return_
 			printf("<b>Error: %s. </b>\n", $res->error);
 			return $res->error;
 		} else {
-			return $res;
 			
-			$diff = date_diff($returnDate,$res);
+			$res->bind_result($mydate);
 			
-			if($diff <= 15){
-				echo "$res = " .$res."!";
-				$stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) Values (?,?,?)");
-				$stmt->bind_param("isi", $retID, $returnDate, $receiptID);
-				$stmt->execute();
+			while($res->fetch()){
+			
+				$date1=date_create($returnDate);
+				$date2=date_create($mydate);
 				
-				if($stmt->error) {
-					printf("<b>Error: %s. </b>\n", $stmt->error);
-					return $stmt->error;
-				} else {
-					return 0;
-			//echo "<b>Successfully added return #".$retID."</b>";
+				$diff = date_diff($date1,$date2);
+				
+				if($diff->format("%a") <= "15"){
+					echo "in diff if, mydate = " .$mydate."!";
+					
+					$res->close();
+					
+					$stmt = $connection->prepare("INSERT INTO Return_ (retID, returnDate, receiptID) Values (?,?,?)");
+					$stmt->bind_param("isi", $retID, $returnDate, $receiptID);
+					$stmt->execute();
+					echo "stmt executed!";
+					
+					if($stmt->error) {
+						printf("<b>Error: %s. </b>\n", $stmt->error);
+						return $stmt->error;
+					} else {
+						return 0;
+					}
+				}else{
+		
+					echo "The return period has passed. Items can only be returned within 15 days from purchase. ";
+					echo "\r\n";
+					echo "It has been ";
+					echo $diff->format("%a days since the purchase was made.");
+					
+					
 				}
-			}else{
-		
-				echo "The return period has passed. Items can only be returned within 15 days from purchase.";
-		
-			}//
-		echo "I shouldn't see this line at all";
-		}
-		
-		//
-		
+			}
 	
+		}
+
+			
 	}
 	
 	
