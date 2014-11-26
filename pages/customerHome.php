@@ -100,14 +100,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$_SESSION['shoppingBasket'] = $basket;;
 }
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-	//echo "<h1>POST</h1>";
-	if(isset($_POST["submitAdd"]) && $_POST["submitAdd"] == "ADD"){
-		echoBasket($basket);
+echoBasket($basket);
+
+function echoEncodedVar($basket){
+	$schema = array('upc','title','type','category','company','year','quantity','price');
+	for($i=0;$i<sizeof($basket);$i++){
+			$row = $basket[$i];
+			for($j=0;$j<count($schema);$j++){
+				echo "<input type=\"hidden\" name=\"sbfv".$row[$schema[0]].$schema[$j]."\" value=\"-1\"/>";
+			}
 	}
-}
-else{
-	echoBasket($basket);
 }
 
 function echoBasket($basket){
@@ -118,6 +120,7 @@ function echoBasket($basket){
 	echo "<input type=\"hidden\" name=\"upc\" value=\"-1\"/>";
 	// We need a submit value to detect if delete was pressed 
 	echo "<input type=\"hidden\" name=\"submitDelete\" value=\"DELETE\"/>";
+	echoEncodedVar($basket);
 	echo "<h2>Shopping Basket</h2>";
 	echo "<table class='table' border=0 cellpadding =0 cellspacing=0>";
 	echo "<tr valine=center>";
@@ -145,6 +148,8 @@ function echoBasket($basket){
 	echo"</table>";
 	echo"<br><br>";
 	echo "</form>";
+
+	echo"<input type=\"button\" value=\"checkout\" onclick=\"javascript:checkout()\"/>";
 }
 
 	?>				
@@ -320,6 +325,10 @@ function addFormSubmit(upc) {
 	}
 }
 </script>
-
+<script>
+function checkout() {
+	document.write("clicked");
+}
+</script>
 	</body>
 	</html>
