@@ -17,7 +17,9 @@ class Item_
 	{
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO Item_ (upc,title,type,category,company,year,price,stock) Values (?,?,?,?,?,?,?,?)");
-		$stmt->bind_param("issssiii", $UPC, $title,$type,$category,$company,$year,$price,$stock);
+		//$stmt->bind_param("issssiii", $UPC, $title,$type,$category,$company,$year,$price,$stock);
+		$stmt->bind_param("issssidi", $UPC, $title,$type,$category,$company,$year,$price,$stock);
+		
 		$stmt->execute();
 		if($stmt->error) {
 			//printf("<b>Error: %s. </b><br>\n", $stmt->error);
@@ -27,7 +29,9 @@ class Item_
 			if($price != null && $stock != null){
 				$res = $connection->prepare("update Item_ set price = ?,stock = ?
 													where upc=?");
-				$res->bind_param("iii",$price,$stock,$UPC);
+				//$res->bind_param("iii",$price,$stock,$UPC);
+				$res->bind_param("dii",$price,$stock,$UPC);
+				
 			}elseif($price == null && $stock != null){
 				$res = $connection->prepare("update Item_ set stock = ?
 													where upc=?");
@@ -35,7 +39,8 @@ class Item_
 			}elseif($price != null && $stock == null){
 				$res = $connection->prepare("update Item_ set price = ?
 													where upc=?");
-				$res->bind_param("ii",$price,$UPC);
+				//$res->bind_param("ii",$price,$UPC);
+				$res->bind_param("di",$price,$UPC);
 			}else{
 			//Error control for now
 				$res = $connection->prepare("update Item_ set upc = ?

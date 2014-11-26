@@ -23,7 +23,8 @@ create table Item_
 	category char(100),
 	company char(100),
 	year int,
-	price int,
+	/*price int,*/
+    price double(10,2),
 	stock int not null,
 	primary key (upc));
 
