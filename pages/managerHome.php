@@ -77,13 +77,13 @@
 				<div role="tabpanel" class="tab-pane active" id="addItem">
 					<h3> Add Item to Store </h3>
 					<?php
-
+					$P->Itemsd();
 					?>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="processDelivery">
 					<h3> Process Delivery of an Order </h3>
 					<?php
-					
+					$P->orders1();
 					?>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="dailySalesReport">
