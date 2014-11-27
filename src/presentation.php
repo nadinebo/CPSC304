@@ -216,13 +216,11 @@ class Presentation
 		$schema = array('receiptID','date','cid','cardNum','expiryDate','expectedDate','deliveredDate');
 		$this->buildTable("All Orders",$result,$schema);
 		
-		//$newSchema = array('receiptID','date','cid','cardNum','expiryDate');
 		$newSchema = array('date','cid','cardNum','expiryDate');
 		$this->buildAddForm($newSchema, "Add Order"); 
 		
 		//ADDED HERE
 		$schema1 = array('receiptID','deliveredDate');
-		//$this->buildTable("All Orders",$result,$schema);
 		echo "<h3>Set/Update Delivery Date</h3>";
 		$this->buildAddForm($schema1, "Update Delivery Date"); 
 		
