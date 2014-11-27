@@ -130,13 +130,13 @@ class PurchaseItem
 		if ($result->fetch()){
 		
 		// Build result table		
-		echo "<table border = 1>";
+		echo "<table class='table'>";
 		
 		// title row
 		echo "<tr><h3> Daily Sales Report For ".$Date."</h3></tr>";
 
 		// Column titles
-		echo "<tr>";
+		echo "<tr class='rowheader'>";
 		for($j=1;$j<count($schema);$j++)
 		{
 			echo "<td>".$schema[$j]."</td>";
@@ -217,7 +217,7 @@ class PurchaseItem
 		$i = 1;		
 		echo "<tr><h3> Top Selling Items Report For ".$queryDate."</h3></tr>";
 
-		while ($row = $stmt->fetch()&& $i <= $n) {
+		while ($row = $stmt->fetch() && $i <= $n) {
 		
 			echo "<tr>";
 				
