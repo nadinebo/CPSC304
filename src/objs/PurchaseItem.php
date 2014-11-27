@@ -205,7 +205,8 @@ class PurchaseItem
 		
 				
 		//echo "<table border = 1>";
-		echo "<table>";
+		//echo "<table>";
+		echo "<table class='table'>";
 
 
 		for($j=1;$j<count($schema);$j++)
