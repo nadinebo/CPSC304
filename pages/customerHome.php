@@ -70,7 +70,6 @@
 
 			<!-- Tab panes -->
 			<div class="tab-content">
-<<<<<<< HEAD
 <?php
 include '../src/presentation.php';
 $P = new Presentation();
@@ -200,6 +199,7 @@ function echoBasket($basket){
 
 	?>				
 
+	</div> <!--closed cart div-->
 
 
 
@@ -213,93 +213,6 @@ function echoBasket($basket){
 <!--						SHOPPING CART TAB							     -->	
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
-=======
-				<?php
-				include '../src/presentation.php';
-				$P = new Presentation();
-				?>
-				<div role="tabpanel" class="tab-pane" id="cart">
-					<h3> The Shopping Cart </h3>
-					<?php
-					session_start();
-					if(!isset($_SESSION['shoppingBasket'])){
-						//$_SESSION['shoppingBasket'] = null;
-						//echo "new basket";
-					}
-					$basket = $_SESSION['shoppingBasket'];
-
-					if($_SERVER["REQUEST_METHOD"] == "POST") {
-						echo "<h1>POST</h1>";
-						if(isset($_POST["submitDelete"]) && $_POST["submitDelete"] == "DELETE"){
-							echo "<h1>ITEM DELETED</h1>";
-							$deleteUPC = $_POST['upc'];
-							echo $deleteUPC;
-							for($i=0;$i<count($basket);$i++){
-								$item = $basket[$i];
-								if($item['upc'] == $deleteUPC){
-									$basket[$i]=null;
-									break;
-								}
-							}
-						}
-						$_SESSION['shoppingBasket'] = $basket;;
-					}
-
-					echoBasket($basket);
-
-					function echoEncodedVar($basket){
-						$schema = array('upc','title','type','category','company','year','quantity','price');
-						for($i=0;$i<sizeof($basket);$i++){
-							$row = $basket[$i];
-							for($j=0;$j<count($schema);$j++){
-								echo "<input type=\"hidden\" name=\"sbfv".$row[$schema[0]].$schema[$j]."\" value=\"-1\"/>";
-							}
-						}
-					}
-
-					function echoBasket($basket){
-						echo "<form id=\"removeItem\" name=\"delete\" action=\"";
-						echo htmlspecialchars($_SERVER["PHP_SELF"]);
-						echo "\" method=\"POST\">";
-						// Hidden value is used if the delete link is clicked
-						echo "<input type=\"hidden\" name=\"upc\" value=\"-1\"/>";
-						// We need a submit value to detect if delete was pressed 
-						echo "<input type=\"hidden\" name=\"submitDelete\" value=\"DELETE\"/>";
-						echoEncodedVar($basket);
-						echo "<h2>Shopping Basket</h2>";
-						echo "<table class='table' border=0 cellpadding =0 cellspacing=0>";
-						echo "<tr valine=center>";
-						$schema = array('upc','title','type','category','company','year','quantity','price');
-						for($i=0;$i<count($schema);$i++){
-							echo "<td class=rowheader>".$schema[$i]."</td>";
-						}
-						echo "</tr>";
-
-						for($i=0;$i<sizeof($basket);$i++){
-							echo $i;
-							$row = $basket[$i];
-							if($row == null){
-								echo"NULL";
-								continue;
-							}else{
-								for($j=0;$j<count($schema);$j++){
-									echo"<td>".$row[$schema[$j]]."</td>";
-								}
-							}
-							echo "<td>";
-							echo "<a href=\"javascript:formSubmit('".$row['upc']."');\">remove</a>";
-							echo"</td></tr>";
-						}
-						echo"</table>";
-						echo"<br><br>";
-						echo "</form>";
-
-						echo"<input type=\"button\" value=\"checkout\" onclick=\"javascript:checkout()\"/>";
-					}
-
-					?>				
-				</div> <!--closed cart div-->
->>>>>>> 6986d5b7e91d153e75ebc45181b2a45e5de2a5e6
 
 				<div role="tabpanel" class="tab-pane active" id="shop">
 					<h3> Browsing Store Items </h3>
