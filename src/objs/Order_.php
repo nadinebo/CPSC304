@@ -6,7 +6,6 @@ class Order_
 {
 	public function __construct($conn)
 	{
-		//echo "con";
 		global $connection;
 		$connection  = $conn;
 		error_reporting(E_STRICT);
@@ -27,8 +26,7 @@ class Order_
 
 
 	//Basic manipulation functions
-	//public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate) //,$expectedDate,$deliveredDate)
-	public function insertOrder($date,$CID,$cardNum,$expiryDate) //,$expectedDate,$deliveredDate)
+	public function insertOrder($date,$CID,$cardNum,$expiryDate) 
 	{
 		global $connection;
 		$maxOrders = 3;
@@ -43,9 +41,7 @@ class Order_
 			$i++;
 		};
 		
-		//$stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?,?)");
 		$stmt = $connection->prepare("INSERT INTO Order_ (date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?)");
-		//$stmt->bind_param("isiiss", $receiptID, $date, $CID, $cardNum, $expiryDate,$expectedDate);
 		$stmt->bind_param("siiss", $date, $CID, $cardNum, $expiryDate,$expectedDate);
 
 		$stmt->execute();
@@ -89,7 +85,6 @@ class Order_
 			echo "<br>Nothing to delete";
 			return $stmt->error;
 		} else {
-			//echo "<br>Successfully deleted order ".$receiptID."<br>";
 			return 0;
 		}
 	}

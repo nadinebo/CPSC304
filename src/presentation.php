@@ -210,10 +210,6 @@ class Presentation
 		$Logic->removePurchaseItem(2,22222);
 		$Logic->newPurchaseItem(1,11111,5);
 		$Logic->newPurchaseItem(2,22222,5);
-		//$Logic->removePurchaseItem(12014,11111);
-		//$Logic->removePurchaseItem(11014,22222);
-		//$Logic->newPurchaseItem(12014,11111,5);
-		//$Logic->newPurchaseItem(11014,22222,5);
 		
 		
 		$result = $Logic->getAllPurchaseItems();
@@ -233,7 +229,7 @@ class Presentation
 		$schema = array('retID','returnDate','receiptID');
 		$this->buildTable("Process Return for Refund",$result,$schema);
 		$action = "Add A Return";
-		$schema1 = array('returnDate','receiptID');
+		$schema1 = array('ReturnDate','ReceiptID');
 		$this->buildAddForm($schema1, $action);
 	
 	}
@@ -244,7 +240,7 @@ class Presentation
 		global $Logic;
 		
 		$result = $Logic->getAllReturnItems();
-		$schema = array('retID','upc','returnQuantity');
+		$schema = array('ReturnID','upc','ReturnQuantity');
 		$this->buildTable("Specify Returned Items",$result,$schema);
 		$this->buildAddForm($schema,"Add Return Item");
 		
@@ -354,10 +350,8 @@ class Presentation
 		$Logic->newCustomer(2000,'ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
 
 		// From orders1()
-		//$Logic->newOrder(12014,'2014-11-01',1000,45678,'2017'); //,'2014-12-01',null);
-		//$Logic->newOrder(11014,'2014-11-01',2000,45123,'2015'); //,'2014-12-01',null);
-		$Logic->newOrder('2014-11-01',1000,45678,'2017'); //,'2014-12-01',null);
-		$Logic->newOrder('2014-11-01',2000,45123,'2015'); //,'2014-12-01',null);
+		$Logic->newOrder('2014-11-01',1000,45678,'2017'); 
+		$Logic->newOrder('2014-11-01',2000,45123,'2015'); 
 
 
 		// From purchaseitems()
@@ -367,22 +361,13 @@ class Presentation
 		$Logic->newPurchaseItem(2,20001,2);
 		$Logic->newPurchaseItem(2,10003,1);
 		$Logic->newPurchaseItem(2,20004,3);
-		//$Logic->newPurchaseItem(12014,10007,5);
-		//$Logic->newPurchaseItem(12014,20005,2);
-		//$Logic->newPurchaseItem(12014,20002,7);
-		//$Logic->newPurchaseItem(11014,20001,2);
-		//$Logic->newPurchaseItem(11014,10003,1);
-		//$Logic->newPurchaseItem(11014,20004,3);
 
 		// From returns()		
 		$Logic->newReturn('2014-11-11',1);
 		$Logic->newReturn('2014-11-10',2);
-		//$Logic->newReturn('2014-11-11',12014);
-		//$Logic->newReturn('2014-11-10',11014);
 
 		$Logic->newReturnItem(1,10007,2);
 		$Logic->newReturnItem(2,20002,1);
-		//$Logic->newReturnItem(90876,20004,3);
 	}
 	
 }

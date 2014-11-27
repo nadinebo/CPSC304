@@ -13,7 +13,6 @@ class PurchaseItem
 
 	public function insertPurchaseItem($receiptID, $UPC, $quantity) 
 	{
-		//echo "   adding a purchased item   ";
 		
 		global $connection; 
 		
@@ -24,7 +23,6 @@ class PurchaseItem
 		
 		if($result->error) {
 			printf("<b>Error looking up item stock: %s. </b\n", $result->error);
-			//return $result->error;
 		} else {
 		
 		$result->bind_result($itemstock);
@@ -47,7 +45,6 @@ class PurchaseItem
 			$stmt->execute();
 			if($stmt->error) {
 				printf("<b>Error updating stock: %s. </b\n", $stmt->error);
-				//return $stmt->error;
 			} else {
 		
 			
@@ -61,7 +58,6 @@ class PurchaseItem
 				printf("<b>Error inserting: %s. </b\n", $res->error);
 				return $res->error;
 			} else {
-				//echo "Successfully purchased " .$UPC. "! ";
 			}
 		
 		}
@@ -74,19 +70,16 @@ class PurchaseItem
 
 	public function queryAllPurchaseItems()
 	{
-		//echo "   query a purchase   ";
 		global $connection;
 		if(!$result = $connection->query("SELECT receiptID,upc,quantity FROM PurchaseItem")) {
 			die('There was an error running the query on PurchaseItem[' .$db->error . ']');
 		} else {
-			//echo "<b>Search is succesful for PurchaseItem</b>";
 			return $result;
 		}
 	}
 
 	public function deletePurchaseItem($receiptID, $UPC)
 	{		
-		//echo "   delete a purchased item   ";
 		global $connection;
 
 		$stmt = $connection->prepare("DELETE FROM PurchaseItem WHERE receiptID=? AND UPC=?");
@@ -98,7 +91,6 @@ class PurchaseItem
 			return $stmt->error;
 		} else {
 			
-		//echo "<b>Successfully deleted purchase item #".$UPC."</b>";
 		return 0;
 		}
 		
@@ -143,7 +135,6 @@ class PurchaseItem
 		}
 		echo "</tr>";
 				
-		//$i = 0;		
 
 		// first row
 		echo "<tr>";	
@@ -165,7 +156,6 @@ class PurchaseItem
 				echo "<td>". $Quantity ."</td>";	
 				echo "<td>". $Total ."</td>";
 			echo "</tr>";
-			//$i++;
 		}
 		
 		echo "</table><br>";
@@ -175,7 +165,6 @@ class PurchaseItem
 			echo "No sales for this day";
 		}
 	}
-	
 	
 	
 	public function topSelling($queryDate, $n)
@@ -197,15 +186,11 @@ class PurchaseItem
 		if($stmt->error) {
 			die('There was an error running the topSelling[' .$db->error . ']');
 		} else {
-			//echo "<b>Search successful</b>";
 		}
 		
 		$stmt->bind_result($date, $upc, $title, $company, $stock, $quantity);
 		$schema = array('date','upc','title','company','stock','quantity');
 		
-				
-		//echo "<table border = 1>";
-		//echo "<table>";
 		echo "<table class='table'>";
 
 

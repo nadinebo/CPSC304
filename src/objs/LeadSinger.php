@@ -19,10 +19,8 @@ class LeadSinger
 		$stmt->bind_param("is", $UPC, $Name);
 		$stmt->execute();
 		if($stmt->error) {
-			//printf("<b>Error: %s. </b><br>\n", $stmt->error);
 			return $stmt->error;
 		} else {
-			//echo "<b>Successfully added ".$Name."</b><br>";
 			return 0;
 		}
 	}
@@ -33,7 +31,6 @@ class LeadSinger
 		if(!$result = $connection->query("Select * From LeadSinger")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
-			//echo "<b>Search succussfull</b><br>";
 		}
 		return $result;
 	}
@@ -45,10 +42,8 @@ class LeadSinger
 		$stmt->bind_param("is",$UPC,$Name);
 		$stmt->execute();
 		if($stmt->error) {
-			//printf("<b>Error: %s. </b><br>\n", $stmt->error);
 			return $stmt->error;
 		} else {
-			//echo "<b>Successfully deleted ".$Name."</b><br>";
 			return 0;
 		}
 	}

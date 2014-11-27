@@ -36,7 +36,6 @@ class Customer
 	/* upon a succussfull insertion the 0 is returned, otherwise its the error message*/
 	public function insertCustomer($cid, $password, $name, $address, $phone)
 	{
-		//echo "   inserting customer   ";
 		global $connection;
 		$stmt = $connection->prepare("INSERT INTO Customer (cid,password,name,address,phone) Values (?,?,?,?,?)");
 		$stmt->bind_param("issss", $cid, $password, $name, $address, $phone);
@@ -45,19 +44,16 @@ class Customer
 			printf("<b>Error: %s. </b>\n", $stmt->error);
 			return $stmt->error;
 		} else {
-			//echo "<b>Successfully added ".$cid.", ".$name."</b>";
 			return 0;
 		}
 	}
 
 	public function queryAllCustomers()
 	{
-		//echo "   query customer   ";
 		global $connection;
 		if(!$result = $connection->query("Select * FROM Customer")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
-			//echo "<b>Search successful</b>";
 		}
 		return $result;
 	}
@@ -65,7 +61,6 @@ class Customer
 	/* upon a succussfull insertion the 0 is returned, otherwise its the error message*/
 	public function deleteCustomer($cid) 
 	{
-		//echo "   deleting customer   ";
 		global $connection;
 		$stmt = $connection->prepare("DELETE FROM Customer WHERE cid=?");
 		$stmt->bind_param("i",$cid);
@@ -74,7 +69,6 @@ class Customer
 			printf("<b>Error: %s. </b>\n", $stmt->error);
 			return $stmt->error;
 		} else {
-			//echo "<b>Successfully deleted ".$cid.", ".$name."</b>";
 			return 0;
 		}
 	}

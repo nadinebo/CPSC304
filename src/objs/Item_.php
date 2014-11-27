@@ -17,21 +17,16 @@ class Item_
 	{
 		global $connection;			
 		$stmt = $connection->prepare("INSERT INTO Item_ (upc,title,type,category,company,year,price,stock) Values (?,?,?,?,?,?,?,?)"); 		
-
-		//$stmt->bind_param("issssiiii", $UPC, $title,$type,$category,$company,$year,$price,$stock,$UPC);
 		$stmt->bind_param("issssidi", $UPC, $title,$type,$category,$company,$year,$price,$stock);
 		
 		$stmt->execute();
 
 		if($stmt->error) {
-			//printf("Item already exists");
-			//return $stmt->error;
 			
 			//ADDED HERE
 			if($price != null && $stock != null){
 				$res = $connection->prepare("update Item_ set price = ?,stock = ?
 													where upc=?");
-				//$res->bind_param("iii",$price,$stock,$UPC);
 				$res->bind_param("dii",$price,$stock,$UPC);
 				
 			}elseif($price == null && $stock != null){
@@ -41,7 +36,6 @@ class Item_
 			}elseif($price != null && $stock == null){
 				$res = $connection->prepare("update Item_ set price = ?
 													where upc=?");
-				//$res->bind_param("ii",$price,$UPC);
 				$res->bind_param("di",$price,$UPC);
 			}else{
 			//Error control for now
@@ -151,11 +145,9 @@ class Item_
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);
 			return $stmt->error;
 		} else {
-			//echo "<b>Search successful ".$cat."</b><br>";
 			
 		}
 				
-		//echo "<table border = 1>";
 		echo "<table class='table'>";
 
 		for($j=0;$j<count($schema);$j++)
@@ -210,7 +202,6 @@ class Item_
 		if(!$result = $connection->query("Select * From Item_")) {
 			die('There was an error running the query [' .$db->error . ']');
 		} else {
-			//echo "<b>Search succussfull</b><br>";
 		}
 		return $result;
 	}
@@ -225,7 +216,6 @@ class Item_
 			printf("<b>Error: %s. </b><br>\n", $stmt->error);
 			return $stmt->error;
 		} else {
-			//echo "<b>Successfully deleted ".$Name."</b><br>";
 			return 0;
 		}
 	}
