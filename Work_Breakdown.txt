@@ -22,12 +22,6 @@ Nadine (Return, ReturnItem)
 	8. Top Selling Items (Stew)
 
 
-Kevin's NOTES
-- follow TopSellingItem Implementation
-- create if statements for possible data entries
-- create SQL queries for those statements
-- simple table. Not complicated.
-
 
 Final Revamp:
 - strip down functionality to only implement things a customer/clerk/manager can do

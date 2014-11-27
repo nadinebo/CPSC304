@@ -82,6 +82,13 @@ class Presentation
 		$Logic->newCustomer($cid,$password,$name,$address,$phone);
 	}
 
+	public function searchItems() {
+		global $Logic;
+
+		$input = array('Category','Title', 'LeadSinger');
+		$this->buildAddForm($input,"Search For Item");
+	}
+
 	public function allItems() {
 		global $Logic;
 				

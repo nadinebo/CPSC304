@@ -82,8 +82,7 @@
 				<div role="tabpanel" class="tab-pane active" id="shop">
 					<h3> Search for Items</h3>
 					<?php
-					$input = array('Category','Title', 'LeadSinger');
-					$P->buildAddForm($input,"Search For Item");
+					$P->searchItems();
 					?>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="allItems">
