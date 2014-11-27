@@ -102,16 +102,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$P->submitOrder($today,$user['cid'],$cardnumber,$expirydate);
 		//Retrieve the latest order
 		$order = $P->newestOrder();
+		$tax = 0.12;
+		$total;
+		$totalAfterTax;
 		//echo" recipt ID = ".$order['receiptID'];
+		echo "<h4>Thank you ".$user['name']." for your patronage<br> Your reciept is as follows:<br></h4>";
+		echo "----------------------------------------<br>";
+		echo "<h5>QTY        ITEM          PRICE	TAX<br><br>";
 		for($i=0;$i<sizeof($basket);$i++){
 			$row = $basket[$i];
 			if($row == null){
 				continue;
 			}
+			$formatedTax = sprintf("%.2f",$row['price']*$tax);
+			echo $row['quantity']."    ".$row['title']."    $".$row['price']."      ".$formatedTax."<br>";
 			purchase($order['receiptID'],$row['upc'],$row['quantity']);
+			$total += $row['price'];
+			$totalAfterTax += $formatedTax + $row['price'];
 			//create purchase Item
 			$basket[$i]=null;
 		}
+		$formatedTax = sprintf("%.2f",$total * $tax);
+
+		echo "<br>Tax:   $".$formatedTax."<br>";
+		echo "Total:   $".$total."<br>";
+		echo "Total after tax:   $".$totalAfterTax."<br>";
+
+		echo "<br><br>This transaction was chared to ".$cardnumber."<br>";
+		echo "Deliver to :".$user['address']."<br>";
+		echo "The expected time of delivery is ".$order['expectedDate']."<br>Thank you for shopping at Cals<br>";
+		echo "----------------------------------------<br>";
 	}
 	$_SESSION['shoppingBasket'] = $basket;;
 }
