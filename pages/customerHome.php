@@ -341,7 +341,10 @@ function echoBasket($basket){
 		var quant = document.getElementById('quantity'+upc).value;
 		var title = document.getElementById(upc+'title').textContent;
 		var stock = document.getElementById(upc+'stock').textContent;
-		if(stock < quant){
+
+		var numstock = parseInt(stock,10);
+		var numquant = parseInt(quant,10);
+		if(numstock < numquant){
 			if (confirm('You want '+quant+' but we only got '+stock+' so is '+stock+' ok?')) {
 			// Set the value of a hidden HTML element in this form
 			var form = document.getElementById('addItem');
