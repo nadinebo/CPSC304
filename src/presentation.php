@@ -165,7 +165,9 @@ class Presentation
 		$result = $Logic->getAllOrders();
 		$schema = array('receiptID','date','cid','cardNum','expiryDate','expectedDate','deliveredDate');
 		$this->buildTable("All Orders",$result,$schema);
-		$this->buildAddForm($schema, "Add Order"); 
+		
+		$newSchema = array('receiptID','date','cid','cardNum','expiryDate');
+		$this->buildAddForm($newSchema, "Add Order"); 
 		
 		//ADDED HERE
 		$schema1 = array('receiptID','deliveredDate');
@@ -203,7 +205,8 @@ class Presentation
 		$schema = array('retID','returnDate','receiptID');
 		$this->buildTable("Process Return for Refund",$result,$schema);
 		$action = "Add A Return";
-		$this->buildAddForm($schema, $action);
+		$schema1 = array('returnDate','receiptID');
+		$this->buildAddForm($schema1, $action);
 	
 	}
 
@@ -323,8 +326,8 @@ class Presentation
 		$Logic->newCustomer(2000,'ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
 
 		// From orders1()
-		$Logic->newOrder(12014,'2014-11-01',1000,45678,'2017','2014-12-01',null);
-		$Logic->newOrder(11014,'2014-11-01',2000,45123,'2015','2014-12-01',null);
+		$Logic->newOrder(12014,'2014-11-01',1000,45678,'2017'); //,'2014-12-01',null);
+		$Logic->newOrder(11014,'2014-11-01',2000,45123,'2015'); //,'2014-12-01',null);
 
 		// From purchaseitems()
 		$Logic->newPurchaseItem(12014,10007,5);
@@ -335,12 +338,12 @@ class Presentation
 		$Logic->newPurchaseItem(11014,20004,3);
 
 		// From returns()
-		$Logic->newReturn(12345,'2014-11-11',12014);
-		$Logic->newReturn(90876,'2014-11-10',11014);
+		$Logic->newReturn('2014-11-11',12014);
+		//$Logic->newReturn('2014-11-10',11014);
 
-		$Logic->newReturnItem(12345,10007,2);
-		$Logic->newReturnItem(12345,20002,1);
-		$Logic->newReturnItem(90876,20004,3);
+		//$Logic->newReturnItem(1,10007,2);
+		//$Logic->newReturnItem(2,20002,1);
+		//$Logic->newReturnItem(90876,20004,3);
 	}
 	
 }

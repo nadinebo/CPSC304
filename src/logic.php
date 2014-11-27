@@ -49,10 +49,10 @@ class Logic
 		return $Data->deleteLeadSinger($UPC,$Name);	
 	}
 	
-	public function newOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate)
+	public function newOrder($receiptID,$date,$CID,$cardNum,$expiryDate) 
 	{
 		global $Data;
-		return $Data->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate,$expectedDate,$deliveredDate);	
+		return $Data->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate);
 	}
 	
 		public function updateDelivery($receiptID,$deliveredDate)
@@ -92,10 +92,12 @@ class Logic
 	}
 	
 	
-	public function newReturn($retID,$returnDate,$receiptID)
+	//public function newReturn($retID,$returnDate,$receiptID)
+	public function newReturn($returnDate,$receiptID)
 	{
 		global $Data;
-		return $Data->insertReturn($retID,$returnDate,$receiptID);	
+		//return $Data->insertReturn($retID,$returnDate,$receiptID);	
+		return $Data->insertReturn($returnDate,$receiptID);	
 	}	
 	
 	public function getReturn($retID)
