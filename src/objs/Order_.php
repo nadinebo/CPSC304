@@ -27,7 +27,8 @@ class Order_
 
 
 	//Basic manipulation functions
-	public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate) //,$expectedDate,$deliveredDate)
+	//public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate) //,$expectedDate,$deliveredDate)
+	public function insertOrder($date,$CID,$cardNum,$expiryDate) //,$expectedDate,$deliveredDate)
 	{
 		global $connection;
 		$maxOrders = 3;
@@ -42,8 +43,10 @@ class Order_
 			$i++;
 		};
 		
-		$stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?,?)");
-		$stmt->bind_param("isiiss", $receiptID, $date, $CID, $cardNum, $expiryDate,$expectedDate);
+		//$stmt = $connection->prepare("INSERT INTO Order_ (receiptID,date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?,?)");
+		$stmt = $connection->prepare("INSERT INTO Order_ (date,cid,cardNum,expiryDate,expectedDate) Values (?,?,?,?,?)");
+		//$stmt->bind_param("isiiss", $receiptID, $date, $CID, $cardNum, $expiryDate,$expectedDate);
+		$stmt->bind_param("siiss", $date, $CID, $cardNum, $expiryDate,$expectedDate);
 
 		$stmt->execute();
 		if($stmt->error) {

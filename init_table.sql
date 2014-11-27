@@ -46,8 +46,8 @@ create table hasSong (
 
 drop table if exists Order_;
 create table Order_ (
-	/* receiptId int auto_increment not null, */
-	receiptId int not null,
+	receiptId int auto_increment not null,
+	/* receiptId int not null, */
 	date varchar(12) not null,
 	cid int not null,
 	cardNum int not null,
@@ -84,7 +84,7 @@ create table ReturnItem
 	returnQuantity int not null,
 	upc int not null,
 	primary key (retID, upc),
-	foreign key (retID) references Return_ (retID),-- on delete cascade on update cascade,
+	foreign key (retID) references Return_ (retID) on delete cascade on update cascade,
 	foreign key (upc) references Item_ (upc) on delete cascade on update cascade);
 
 
