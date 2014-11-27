@@ -378,7 +378,7 @@ function echoBasket($basket){
 <script>
 function checkout() {
 	var form = document.getElementById('checkout');
-	form.expirydate.value = '2017';
+	//form.expirydate.value = '2017';
 	form.cardnumber.value = prompt("Credit CardNumber", "#");
 	form.expirydate.value = prompt("Expire Date", "YYYY");
 	form.submit();
