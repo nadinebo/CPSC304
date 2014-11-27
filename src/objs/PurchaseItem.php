@@ -217,7 +217,7 @@ class PurchaseItem
 		$i = 1;		
 		echo "<tr><h3> Top Selling Items Report For ".$queryDate."</h3></tr>";
 
-		while ($row = $stmt->fetch()&& $i <= $n) {
+		while ($row = $stmt->fetch() && $i <= $n) {
 		
 			echo "<tr>";
 				
