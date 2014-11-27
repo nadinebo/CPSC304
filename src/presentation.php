@@ -255,7 +255,7 @@ class Presentation
 		$schema = array('retID','returnDate','receiptID');
 		$this->buildTable("Process Return for Refund",$result,$schema);
 		$action = "Add A Return";
-		$schema1 = array('ReturnDate','ReceiptID');
+		$schema1 = array('returnDate','receiptID');
 		$this->buildAddForm($schema1, $action);
 	
 	}
