@@ -23,8 +23,13 @@ Nadine (Return, ReturnItem)
 
 
 
-Final Revamp:
-- strip down functionality to only implement things a customer/clerk/manager can do
+TODO:
+- Remove commented out code
+- Checkout (Stew)
+- Remove tabs we're not using (Kevin?)
+- User manual (Nicole)
+
+MANDATORY FUNCTIONALITY FOR TABS:
 	CUSTOMER:
 	- purchasing items creates order
 	CLERK:

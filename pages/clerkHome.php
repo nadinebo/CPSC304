@@ -59,7 +59,6 @@
 			<!--Nav tabs-->
 		 	<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active"><a href="#pReturn" aria-controls="pReturn" role="tab" data-toggle="tab">Process Return</a></li>
-				<li role="presentation"><a href="#eTab" aria-controls="eTab" role="tab" data-toggle="tab">Extra</a></li>
 			</ul>
 
 			<!-- Tab panes -->
@@ -73,12 +72,6 @@
 					<?php
 					$P->returns();
 					$P->returnitems();
-					?>
-				</div>
-				<div role="tabpanel" class="tab-pane" id="eTab">
-					<h3> Any other tasks for Clerk? </h3>
-					<?php
-
 					?>
 				</div>
 			</div>
