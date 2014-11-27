@@ -90,6 +90,12 @@ class Presentation
 		global $Logic;
 		$Logic->newOrder($date,$cid,$cardNum,$expire);
 	}
+	
+	public function submitPurchaseItem($reciptID,$upc,$quantity){
+		global $Logic;
+		echo "going down";
+		$Logic->newPurchaseItem($reciptID,$upc,$quantity);
+	}
 		
 	public function newestOrder(){
 		echo"got all orders";

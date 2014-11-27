@@ -118,8 +118,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo" recipt ID = ".$order['receiptID'];
 		for($i=0;$i<sizeof($basket);$i++){
 			$row = $basket[$i];
+			if($row == null){
+				continue;
+			}
+			purchase($order['receiptID'],$row['upc'],$row['quantity']);
 			//create purchase Item
-			checkout($row,$user, $cardnumber, $expirydate);
 			$basket[$i]=null;
 		}
 	}
@@ -130,15 +133,10 @@ echoBasket($basket);
 checkoutForm($basket);
 
 
-function checkout($row, $user, $cardnumber, $expirydate){
+function purchase($reciptID, $upc, $quantity){
+	echo "ID : ".$reciptID."upc :".$upc."quantity".$quantity."<br>";
 	global $P;
-	if($row == null){
-		return null;
-	}
-
-	echo "Checking Out :".$user['cid']."<br>With the card :".$cardnumber."<br> and the expiry date : ".$expirydate."<br>";
-	//errors here
-	echo "making it here";
+	$P->submitPurchaseItem($reciptID,$upc,$quantity);
 }
 
 function checkoutForm($basket){
