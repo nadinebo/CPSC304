@@ -73,6 +73,10 @@
 include '../src/presentation.php';
 $P = new Presentation();
 ?>
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<!--						SHOPPING CART TAB							     -->	
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				<div role="tabpanel" class="tab-pane" id="cart">
 					<h3> The Shopping Cart </h3>
 <?php
@@ -83,6 +87,7 @@ if(!isset($_SESSION['shoppingBasket'])){
 }
 $basket = $_SESSION['shoppingBasket'];
 
+		/* If checkout was pressed */
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo "<h1>POST</h1>";
 	if(isset($_POST["submitDelete"]) && $_POST["submitDelete"] == "DELETE"){
@@ -100,16 +105,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$_SESSION['shoppingBasket'] = $basket;;
 }
 
+		/* If checkout was pressed */
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+	if(isset($_POST["submitCheckout"]) && $_POST["submitCheckout"]=="CHECKOUT"){
+		echo "<h2>checkout</h2>";
+		for($i=0;$i<sizeof($basket);$i++){
+			$row = $basket[$i];
+			checkout($row);
+			$basket[$i]=null;
+		}
+	}
+}
+
 echoBasket($basket);
+echoEncodedVar($basket);
+
 
 function echoEncodedVar($basket){
+	echo "<form id=\"checkout\" name=\"delete\" action=\"";
+	echo htmlspecialchars($_SERVER["PHP_SELF"]);
+	echo "\" method=\"POST\">";
 	$schema = array('upc','title','type','category','company','year','quantity','price');
 	for($i=0;$i<sizeof($basket);$i++){
 			$row = $basket[$i];
 			for($j=0;$j<count($schema);$j++){
-				echo "<input type=\"hidden\" name=\"sbfv".$row[$schema[0]].$schema[$j]."\" value=\"-1\"/>";
+				echo "<input type=\"hidden\" name=\"sbfv".$i.$schema[$j]."\" value=\"-1\"/>";
 			}
+	echo "<input type=\"hidden\" name=\"submitCheckout\" value=\"CHECKOUT\"/>";
 	}
+	echo "</form>";
 }
 
 function echoBasket($basket){
@@ -120,7 +144,6 @@ function echoBasket($basket){
 	echo "<input type=\"hidden\" name=\"upc\" value=\"-1\"/>";
 	// We need a submit value to detect if delete was pressed 
 	echo "<input type=\"hidden\" name=\"submitDelete\" value=\"DELETE\"/>";
-	echoEncodedVar($basket);
 	echo "<h2>Shopping Basket</h2>";
 	echo "<table class='table' border=0 cellpadding =0 cellspacing=0>";
 	echo "<tr valine=center>";
@@ -163,6 +186,9 @@ function echoBasket($basket){
 
 
 
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<!--						SHOPPING CART TAB							     -->	
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
 
 				</div>
@@ -318,6 +344,7 @@ function addFormSubmit(upc) {
 	else if (confirm('So you want to buy '+quant+' of '+title)) {
 		// Set the value of a hidden HTML element in this form
 		var form = document.getElementById('addItem');
+		var upcc = 'upc';
 		form.upc.value = upc;
 		form.quantity.value = quant;
 		// Post this form
@@ -327,7 +354,9 @@ function addFormSubmit(upc) {
 </script>
 <script>
 function checkout() {
-	document.write("clicked");
+	var form = document.getElementById('checkout');
+	form.submit();
+	
 }
 </script>
 	</body>
