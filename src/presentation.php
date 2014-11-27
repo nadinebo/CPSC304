@@ -166,7 +166,8 @@ class Presentation
 		$schema = array('receiptID','date','cid','cardNum','expiryDate','expectedDate','deliveredDate');
 		$this->buildTable("All Orders",$result,$schema);
 		
-		$newSchema = array('receiptID','date','cid','cardNum','expiryDate');
+		//$newSchema = array('receiptID','date','cid','cardNum','expiryDate');
+		$newSchema = array('date','cid','cardNum','expiryDate');
 		$this->buildAddForm($newSchema, "Add Order"); 
 		
 		//ADDED HERE
@@ -183,10 +184,15 @@ class Presentation
 	public function purchaseitems(){
 	
 		global $Logic;
-		$Logic->removePurchaseItem(12014,11111);
-		$Logic->removePurchaseItem(11014,22222);
-		$Logic->newPurchaseItem(12014,11111,5);
-		$Logic->newPurchaseItem(11014,22222,5);
+		$Logic->removePurchaseItem(1,11111);
+		$Logic->removePurchaseItem(2,22222);
+		$Logic->newPurchaseItem(1,11111,5);
+		$Logic->newPurchaseItem(2,22222,5);
+		//$Logic->removePurchaseItem(12014,11111);
+		//$Logic->removePurchaseItem(11014,22222);
+		//$Logic->newPurchaseItem(12014,11111,5);
+		//$Logic->newPurchaseItem(11014,22222,5);
+		
 		
 		$result = $Logic->getAllPurchaseItems();
 		$schema = array('receiptID','upc','quantity');
@@ -326,19 +332,30 @@ class Presentation
 		$Logic->newCustomer(2000,'ilikejohn','JaneDoe','1234 W10th ave','604-123-4567');
 
 		// From orders1()
-		$Logic->newOrder(12014,'2014-11-01',1000,45678,'2017'); //,'2014-12-01',null);
-		$Logic->newOrder(11014,'2014-11-01',2000,45123,'2015'); //,'2014-12-01',null);
+		//$Logic->newOrder(12014,'2014-11-01',1000,45678,'2017'); //,'2014-12-01',null);
+		//$Logic->newOrder(11014,'2014-11-01',2000,45123,'2015'); //,'2014-12-01',null);
+		$Logic->newOrder('2014-11-01',1000,45678,'2017'); //,'2014-12-01',null);
+		$Logic->newOrder('2014-11-01',2000,45123,'2015'); //,'2014-12-01',null);
+
 
 		// From purchaseitems()
-		$Logic->newPurchaseItem(12014,10007,5);
-		$Logic->newPurchaseItem(12014,20005,2);
-		$Logic->newPurchaseItem(12014,20002,7);
-		$Logic->newPurchaseItem(11014,20001,2);
-		$Logic->newPurchaseItem(11014,10003,1);
-		$Logic->newPurchaseItem(11014,20004,3);
+		$Logic->newPurchaseItem(1,10007,5);
+		$Logic->newPurchaseItem(1,20005,2);
+		$Logic->newPurchaseItem(1,20002,7);
+		$Logic->newPurchaseItem(2,20001,2);
+		$Logic->newPurchaseItem(2,10003,1);
+		$Logic->newPurchaseItem(2,20004,3);
+		//$Logic->newPurchaseItem(12014,10007,5);
+		//$Logic->newPurchaseItem(12014,20005,2);
+		//$Logic->newPurchaseItem(12014,20002,7);
+		//$Logic->newPurchaseItem(11014,20001,2);
+		//$Logic->newPurchaseItem(11014,10003,1);
+		//$Logic->newPurchaseItem(11014,20004,3);
 
-		// From returns()
-		$Logic->newReturn('2014-11-11',12014);
+		// From returns()		
+		$Logic->newReturn('2014-11-11',1);
+		$Logic->newReturn('2014-11-10',2);
+		//$Logic->newReturn('2014-11-11',12014);
 		//$Logic->newReturn('2014-11-10',11014);
 
 		//$Logic->newReturnItem(1,10007,2);

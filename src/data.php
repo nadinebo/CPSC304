@@ -152,14 +152,15 @@ class Data
 	
 	}
     	elseif($_POST["submit"] ==  "Add Order"){
-       	$receiptID = $_POST["new_receiptID"];
+       	//$receiptID = $_POST["new_receiptID"];
        	$date = $_POST["new_date"];
        	$cid = $_POST["new_cid"];
        	$cardNum = $_POST["new_cardNum"];
        	$expiryDate = $_POST["new_expiryDate"];
        	//$expectedDate = $_POST["new_expectedDate"];
        	//$deliveredDate = $_POST["new_deliveredDate"];
-	$this->insertOrder($receiptID,$date,$cid,$cardNum,$expiryDate); //,$expectedDate,$deliveredDate);
+	//$this->insertOrder($receiptID,$date,$cid,$cardNum,$expiryDate); //,$expectedDate,$deliveredDate);
+	$this->insertOrder($date,$cid,$cardNum,$expiryDate); //,$expectedDate,$deliveredDate);
 	}
 	elseif($_POST["submit"] ==  "Update Delivery Date"){
        	$receiptID = $_POST["new_receiptID"];
@@ -237,9 +238,11 @@ public function deleteLeadSinger($UPC,$Name){
 	return $LS->deleteLeadSinger($UPC,$Name);
 }
 
-public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate){ 
+//public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate){ 
+public function insertOrder($date,$CID,$cardNum,$expiryDate){ 
 	global $O;
-	return $O->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate); 
+	//return $O->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate); 
+	return $O->insertOrder($date,$CID,$cardNum,$expiryDate); 
 }
 
 public function queryAllOrders(){
