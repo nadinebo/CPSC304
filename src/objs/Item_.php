@@ -183,6 +183,8 @@ class Item_
 				$searchResult[$i] = $searchItem;
 				$i++;
 			}
+			//$checker = $searchResult[0];
+			//echo $checker['upc'];
 		}
 		return $searchResult;
 
