@@ -88,11 +88,27 @@ class Presentation
 
 	public function submitOrder($date,$cid,$cardNum,$expire){
 		global $Logic;
-		echo"submitted order";
 		$Logic->newOrder($date,$cid,$cardNum,$expire);
-		
 	}
 		
+	public function newestOrder(){
+		echo"got all orders";
+		global $Logic;
+		$result = $Logic->getAllOrders();
+		$max=0;
+		$newo;
+		//get max
+		while($row = $result->fetch_assoc()){
+			if($row['receiptID'] >= $max){
+				$newo = $row;
+				$max = $row['recieptID'];
+			}
+		}
+		return $newo;
+	}
+
+
+
 	public function Itemsd()
 	{
 		global $Logic;

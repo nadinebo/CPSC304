@@ -77,7 +77,7 @@ $P = new Presentation();
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <!--						SHOPPING CART TAB							     -->	
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-				<div role="tabpanel" class="tab-pane active" id="cart">
+				<div role="tabpanel" class="tab-pane" id="cart">
 					<h3> The Shopping Cart </h3>
 <?php
 session_start();
@@ -107,11 +107,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		/* If checkout was pressed */
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 	if(isset($_POST["submitCheckout"]) && $_POST["submitCheckout"]=="CHECKOUT"){
+		/* First Create The Order for the purchase */
 		$expirydate = $_POST["expirydate"];
 		$cardnumber = $_POST["cardnumber"];
 		$user = $_SESSION['user'];
+		$today = date("Y-m-d");
+		$P->submitOrder($today,$user['cid'],$cardnumber,$expirydate);
+		//Retrieve the latest order
+		$order = $P->newestOrder();
+		echo" recipt ID = ".$order['receiptID'];
 		for($i=0;$i<sizeof($basket);$i++){
 			$row = $basket[$i];
+			//create purchase Item
 			checkout($row,$user, $cardnumber, $expirydate);
 			$basket[$i]=null;
 		}
@@ -124,14 +131,14 @@ checkoutForm($basket);
 
 
 function checkout($row, $user, $cardnumber, $expirydate){
+	global $P;
 	if($row == null){
 		return null;
 	}
 
 	echo "Checking Out :".$user['cid']."<br>With the card :".$cardnumber."<br> and the expiry date : ".$expirydate."<br>";
 	//errors here
-	$P->submitOrder('1991-08-5',$user['cid'],$cardnumber,$expirydate);
-	
+	echo "making it here";
 }
 
 function checkoutForm($basket){
@@ -208,7 +215,7 @@ function echoBasket($basket){
 
 
 				</div>
-				<div role="tabpanel" class="tab-pane" id="shop">
+				<div role="tabpanel" class="tab-pane active" id="shop">
 					<h3> Browsing Store Items </h3>
 <?php
 //ITEM SELECTION TAB
@@ -370,8 +377,8 @@ function addFormSubmit(upc) {
 <script>
 function checkout() {
 	var form = document.getElementById('checkout');
-	form.cardnumber.value = '5554444';
-	form.expirydate.value = '1991-06-22';
+	form.cardnumber.value = '55533';
+	form.expirydate.value = '2017';
 	//form.cardnumber.value = prompt("Credit CardNumber", "#");
 	//form.expirydate.value = prompt("Expire Date", "YYYY-MM-DD");
 	form.submit();
