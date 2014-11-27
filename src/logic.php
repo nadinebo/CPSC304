@@ -21,6 +21,41 @@ class Logic
 		return $Data->login($cid,$password);
 	}
 
+	public function searchForItems($category,$title,$leadSinger){
+		global $Data;
+		return $Data->searchItems($category,$title,$leadSinger);
+	}
+
+	public function allItems() {
+		global $Logic;
+				
+		//testing using the layers as classes
+		$result = $Logic->getItems();
+		$schema = array('upc','title','type','category','company','year','price','stock');
+		
+		//implement ADD ITEM instead of DELETE
+		$delete = "DELETE ITEM";
+		$primary = 'upc';
+		$this->buildTable("All Items",$result,$schema,$delete,$primary);
+	}
+		
+	public function newestOrder(){
+		//echo"got all orders";
+		global $Logic;
+		$result = $Logic->getAllOrders();
+		$max=0;
+		$newo;
+		//get max
+		while($row = $result->fetch_assoc()){
+			if($row['receiptID'] >= $max){
+				$newo = $row;
+				$max = $row['recieptID'];
+			}
+		}
+		return $newo;
+	}
+
+
 	public function getItems(){
 		global $Data;
 		return $Data->queryAllItems();

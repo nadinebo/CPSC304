@@ -303,6 +303,55 @@ function echoBasket($basket){
 				<div role="tabpanel" class="tab-pane" id="searchI">
 					<h3> Search for Items</h3>
 					<?php
+						
+			if($_POST["submit"] ==  "Search For Item"){
+				
+				//$checker = $searchResult[0];
+				//echo $checker['upc'];
+				
+				//ITEM SELECTION TAB
+					echo "<form id=\"addSearchItem\" name=\"add\" action=\"";
+					echo htmlspecialchars($_SERVER["PHP_SELF"]);
+					echo "\" method=\"POST\">";
+					// Hidden value is used if the delete link is clicked
+					echo "<input type=\"hidden\" name=\"upc\" value=\"-1\"/>";
+					echo "<input type=\"hidden\" name=\"quantity\" value=\"-1\"/>";
+					// We need a submit value to detect if delete was pressed 
+					echo "<input type=\"hidden\" name=\"submitAdd\" value=\"ADD\"/>";
+					echo "<h2>Select Item</h2>";
+					echo "<table class='table' border=0 cellpadding =0 cellspacing=0>";
+					echo "<tr valine=center>";
+
+					$schema = array('upc','title','type','category','company','year','price','stock','quantity');
+
+					//SHOULD BE THE RESULT OF A SEARCH QUERY
+				$category = $_POST["new_Category"];
+				$title = $_POST["new_Title"];
+				$leadSinger = $_POST["new_LeadSinger"];
+				$searchResult = $P->searchForItems($category,$title,$leadSinger);
+				echo "searched";
+					//NOT UST GETTING ITEMS
+
+					for($i=0;$i<count($schema);$i++){
+						echo "<td class=rowheader>".$schema[$i]."</td>";
+					}
+					echo "</tr>";
+					for($i=0;$i<count($searchResult);$i++){
+						$row = $searchResult[$i];
+						for($j=0;$j<count($schema)-1;$j++){
+							echo"<td id=\"".$row[$schema[0]].$schema[$j]."\">".$row[$schema[$j]]."</td>";
+						}
+						echo "<td>";
+						echo "<input value=\"1\" size=\"2\"id=\"quantity".$row['upc']."\"></input>";
+						echo "<td>";
+						echo "<a href=\"javascript:addFormSubmit('".$row['upc']."');\">add</a>";
+						echo"</td></tr>";
+					}
+					echo"</table>";
+					echo"<br><br>";
+
+					echo "</form>";
+			}
 					$P->searchItems();
 					?>
 				</div>
@@ -370,7 +419,7 @@ function echoBasket($basket){
 <script>
 function checkout() {
 	var form = document.getElementById('checkout');
-	form.expirydate.value = '2017';
+	//form.expirydate.value = '2017';
 	form.cardnumber.value = prompt("Credit CardNumber", "#");
 	form.expirydate.value = prompt("Expire Date", "YYYY");
 	form.submit();

@@ -147,52 +147,47 @@ class Item_
 		} else {
 			
 		}
+
+		$searchResult = null;
+		$searchItem = null;
 				
-		echo "<table class='table'>";
-
-		for($j=0;$j<count($schema);$j++)
-		{
-			echo "<td class=rowheader>".$schema[$j]."</td>";
-		}
-
 		echo "<tr><h3> Search Results </h3></tr>";
-
+		$i=0;
 		if (count($schema) === 9) {
 			// LeadSinger would have been used to search
 			while ($row = $stmt->fetch()) {
-
-				echo "<tr>";
-				echo "<td>".$upc."</td>";	
-				echo "<td>".$title."</td>";
-				echo "<td>".$name."</td>";
-				echo "<td>".$type."</td>";
-				echo "<td>".$category."</td>";
-				echo "<td>".$company."</td>";
-				echo "<td>".$year."</td>";
-				echo "<td>".$price."</td>";
-				echo "<td>".$stock."</td>";	
-				
-				echo "</tr>";
+				$searchItem['upc']=$upc;	
+				$searchItem['title']=$title;
+				$searchItem['name']=$name;
+				$searchItem['type']=$type;
+				$searchItem['category']=$category;
+				$searchItem['company']=$company;
+				$searchItem['year']=$year;
+				$searchItem['price']=$price;
+				$searchItem['stock']=$stock;	
+				$searchResult[$i] = $searchItem;
+				$i++;
 			}
 		} else {
 			// LeadSinger would not have been used
 			while ($row = $stmt->fetch()) {
-
-				echo "<tr>";
-				echo "<td>".$upc."</td>";	
-				echo "<td>".$title."</td>";
-				echo "<td>".$type."</td>";
-				echo "<td>".$category."</td>";
-				echo "<td>".$company."</td>";
-				echo "<td>".$year."</td>";
-				echo "<td>".$price."</td>";
-				echo "<td>".$stock."</td>";	
-				
-				echo "</tr>";
+				echo $upc;
+				$searchItem['upc']=$upc;	
+				$searchItem['title']=$title;
+				$searchItem['type']=$type;
+				$searchItem['category']=$category;
+				$searchItem['company']=$company;
+				$searchItem['year']=$year;
+				$searchItem['price']=$price;
+				$searchItem['stock']=$stock;	
+				$searchResult[$i] = $searchItem;
+				$i++;
 			}
+			//$checker = $searchResult[0];
+			//echo $checker['upc'];
 		}
+		return $searchResult;
 
-		echo "</table><br>";
 	}
 
 

@@ -183,12 +183,6 @@ class Data
 				$this->getTopSelling($queryDate,$n);
 			}	
 
-			elseif($_POST["submit"] ==  "Search For Item"){
-				$category = $_POST["new_Category"];
-				$title = $_POST["new_Title"];
-				$leadSinger = $_POST["new_LeadSinger"];
-				$this->searchItems($category,$title,$leadSinger);
-			}
 
       		} //from elseif
   		}
