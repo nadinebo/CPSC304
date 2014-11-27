@@ -89,7 +89,6 @@ $basket = $_SESSION['shoppingBasket'];
 
 		/* If checkout was pressed */
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-	echo "<h1>POST</h1>";
 	if(isset($_POST["submitDelete"]) && $_POST["submitDelete"] == "DELETE"){
 		echo "<h1>ITEM DELETED</h1>";
 		$deleteUPC = $_POST['upc'];
@@ -108,20 +107,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		/* If checkout was pressed */
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 	if(isset($_POST["submitCheckout"]) && $_POST["submitCheckout"]=="CHECKOUT"){
-		echo "<h2>checkout</h2>";
+		$expirydate = $_POST["expirydate"];
+		$cardnumber = $_POST["cardnumber"];
+		$user = $_SESSION['user'];
 		for($i=0;$i<sizeof($basket);$i++){
 			$row = $basket[$i];
-			checkout($row);
+			checkout($row,$user, $cardnumber, $expirydate);
 			$basket[$i]=null;
 		}
 	}
+	$_SESSION['shoppingBasket'] = $basket;;
 }
 
 echoBasket($basket);
-echoEncodedVar($basket);
+checkoutForm($basket);
 
 
-function echoEncodedVar($basket){
+function checkout($row, $user, $cardnumber, $expirydate){
+	if($row == null){
+		return null;
+	}
+
+	echo "Checking Out :".$user['cid']."<br>With the card :".$cardnumber."<br> and the expiry date : ".$expirydate."<br>";
+	//$P->
+	
+}
+
+function checkoutForm($basket){
 	echo "<form id=\"checkout\" name=\"delete\" action=\"";
 	echo htmlspecialchars($_SERVER["PHP_SELF"]);
 	echo "\" method=\"POST\">";
@@ -131,8 +143,11 @@ function echoEncodedVar($basket){
 			for($j=0;$j<count($schema);$j++){
 				echo "<input type=\"hidden\" name=\"sbfv".$i.$schema[$j]."\" value=\"-1\"/>";
 			}
-	echo "<input type=\"hidden\" name=\"submitCheckout\" value=\"CHECKOUT\"/>";
 	}
+	echo "<input type=\"hidden\" name=\"submitCheckout\" value=\"CHECKOUT\"/>";
+	echo "<input type=\"hidden\" name=\"cardnumber\" value=\"-1\"/>";
+	echo "<input type=\"hidden\" name=\"expirydate\" value=\"-1\"/>";
+	echo "<input type=\"hidden\" name=\"upc\" value=\"-1\"/>";
 	echo "</form>";
 }
 
@@ -341,10 +356,9 @@ function addFormSubmit(upc) {
 			document.write("YOU SHOULD HAVE ACCEPTED");
 		}
 	}
-	else if (confirm('So you want to buy '+quant+' of '+title)) {
+	else{
 		// Set the value of a hidden HTML element in this form
 		var form = document.getElementById('addItem');
-		var upcc = 'upc';
 		form.upc.value = upc;
 		form.quantity.value = quant;
 		// Post this form
@@ -355,6 +369,8 @@ function addFormSubmit(upc) {
 <script>
 function checkout() {
 	var form = document.getElementById('checkout');
+	form.cardnumber.value = prompt("Credit CardNumber", "#");
+	form.expirydate.value = prompt("Credit CardNumber", "YYYY-MM-DD");
 	form.submit();
 	
 }

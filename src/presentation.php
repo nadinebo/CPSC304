@@ -85,6 +85,8 @@ class Presentation
 		global $Logic;
 		$Logic->newCustomer($cid,$password,$name,$address,$phone);
 	}
+
+	public function order(
 		
 	public function Itemsd()
 	{
