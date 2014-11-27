@@ -102,6 +102,11 @@ class Presentation
 		$this->buildAddForm($input,"Search For Item");
 	}
 
+	public function searchForItems($category,$title,$leadSinger){
+		global $Logic;
+		return $Logic->searchForItems($category,$title,$leadSinger);
+	}
+
 	public function allItems() {
 		global $Logic;
 				

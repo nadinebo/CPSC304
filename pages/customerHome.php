@@ -303,6 +303,13 @@ function echoBasket($basket){
 				<div role="tabpanel" class="tab-pane" id="searchI">
 					<h3> Search for Items</h3>
 					<?php
+						
+			if($_POST["submit"] ==  "Search For Item"){
+				$category = $_POST["new_Category"];
+				$title = $_POST["new_Title"];
+				$leadSinger = $_POST["new_LeadSinger"];
+				$P->searchForItems($category,$title,$leadSinger);
+			}
 					$P->searchItems();
 					?>
 				</div>
