@@ -52,10 +52,8 @@ class Data
 		
 		global $connection;
 		$connection = new mysqli($server, $user, $pass, $dbname);
-			//mysql_select_db($dbname);
 
 		if (!mysqli_connect_errno()) {
-			//echo "<b>Welcome!</b>";
 		}
 		
 		// Check that the connection was successful, otherwise exit
@@ -83,15 +81,12 @@ class Data
 		global $I;
 		$I = new Item_($connection);
 
-			//echo "data init";
 		global $PI;
 		$PI = new PurchaseItem($connection);
 
 		global $C;
 		$C = new Customer($connection);
 
-
-			//Added this
 
 			    // Check that the connection was successful, otherwise exit
 		if (mysqli_connect_errno()) {
@@ -103,7 +98,6 @@ class Data
 
 			if (isset($_POST["submitDelete"])){
 				if ($_POST["submitDelete"] == "DELETE ITEM") {
-      	//echo "inside delete";
 
 					$upc = $_POST['upc'];
 					$this->deleteItem($upc);
@@ -137,10 +131,8 @@ class Data
 	       		$this->insertHasSong($UPC,$title);
 	       	}
 	       	elseif($_POST["submit"] ==  "Add A Return"){
-	       	//$retID = $_POST["new_retID"];
 	       		$returnDate = $_POST["new_returnDate"];
 	       		$receiptID = $_POST["new_receiptID"];
-		//$this->insertReturn($retID,$returnDate,$receiptID);
 	       		$this->insertReturn($returnDate,$receiptID);
 	       	}
 	       	elseif($_POST["submit"] ==  "Add Customer"){
@@ -153,15 +145,11 @@ class Data
 
 	       	}
 	       	elseif($_POST["submit"] ==  "Add Order"){
-	       	//$receiptID = $_POST["new_receiptID"];
 	       		$date = $_POST["new_date"];
 	       		$cid = $_POST["new_cid"];
 	       		$cardNum = $_POST["new_cardNum"];
 	       		$expiryDate = $_POST["new_expiryDate"];
-	       	//$expectedDate = $_POST["new_expectedDate"];
-	       	//$deliveredDate = $_POST["new_deliveredDate"];
-		//$this->insertOrder($receiptID,$date,$cid,$cardNum,$expiryDate); //,$expectedDate,$deliveredDate);
-				$this->insertOrder($date,$cid,$cardNum,$expiryDate); //,$expectedDate,$deliveredDate);
+				$this->insertOrder($date,$cid,$cardNum,$expiryDate); 
 			}
 			elseif($_POST["submit"] ==  "Update Delivery Date"){
 				$receiptID = $_POST["new_receiptID"];
@@ -181,7 +169,6 @@ class Data
 				$UPC = $_POST["new_upc"];
 				$returnQuantity = $_POST["new_returnQuantity"];
 				$this->insertReturnItem($retID,$UPC,$returnQuantity);
-				//$this->insertReturnItem($UPC,$returnQuantity);
 			}
 
 			elseif($_POST["submit"] ==  "Get my daily sales"){
@@ -193,9 +180,6 @@ class Data
 			elseif($_POST["submit"] ==  "Get Top Selling"){
 				$queryDate = $_POST["new_queryDate"];
 				$n = $_POST["new_quantity"];
-
-				//echo "queryDate: " .$queryDate. " ! ";
-				//echo "n: " .$n. " ! ";
 				$this->getTopSelling($queryDate,$n);
 			}	
 
@@ -248,10 +232,8 @@ public function deleteLeadSinger($UPC,$Name){
 	return $LS->deleteLeadSinger($UPC,$Name);
 }
 
-//public function insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate){ 
 public function insertOrder($date,$CID,$cardNum,$expiryDate){ 
 	global $O;
-	//return $O->insertOrder($receiptID,$date,$CID,$cardNum,$expiryDate); 
 	return $O->insertOrder($date,$CID,$cardNum,$expiryDate); 
 }
 
@@ -285,11 +267,8 @@ public function deleteSongTitle($UPC,$title){
 	return $HS->deleteSongTitle($UPC,$title);
 }
 
-//public function insertReturn($retID,$returnDate,$receiptID){
 public function insertReturn($returnDate,$receiptID){
-		//echo"returnInsert Called DATA";
 	global $R;
-	//return $R->insertReturn($retID,$returnDate,$receiptID);
 	return $R->insertReturn($returnDate,$receiptID);
 }
 
@@ -330,7 +309,6 @@ public function deleteReturnItem($retID,$UPC){
 
 public function insertCustomer($cid,$password,$name,$address,$phone)
 {
-		//echo"customerInsertCalled DATA";
 	global $C;
 	return $C->insertCustomer($cid,$password,$name,$address,$phone);
 }
@@ -349,7 +327,6 @@ public function deleteCustomer($cid)
 
 public function insertPurchaseItem($receiptID,$UPC,$quantity)
 {
-		//echo"purchaseItemInsertCalled DATA";
 	global $PI;
 	return $PI->insertPurchaseItem($receiptID,$UPC,$quantity);
 }

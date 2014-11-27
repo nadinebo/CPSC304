@@ -19,7 +19,6 @@ class HasSong
 		$stmt->bind_param("is", $UPC, $title);
 		$stmt->execute();
 		if($stmt->error) {
-			//printf("<b>Error: %s. </b>\n", $stmt->error);
 			return $stmt->error;
 		} 
 		return 0;
@@ -47,7 +46,6 @@ class HasSong
 			return $stmt->error;
 		} else {
 			return 0;
-			//echo "<br>Successfully deleted song <i>".$title."</i><br>";
 		}
 	}
 }
