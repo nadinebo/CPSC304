@@ -305,10 +305,14 @@ function echoBasket($basket){
 					<?php
 						
 			if($_POST["submit"] ==  "Search For Item"){
+				
 				$category = $_POST["new_Category"];
 				$title = $_POST["new_Title"];
 				$leadSinger = $_POST["new_LeadSinger"];
-				$P->searchForItems($category,$title,$leadSinger);
+				$res = $P->searchForItems($category,$title,$leadSinger);
+				echo "searched";
+				$first = $res[0];
+				echo $res['upc'];
 			}
 					$P->searchItems();
 					?>

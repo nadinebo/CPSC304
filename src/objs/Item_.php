@@ -156,7 +156,6 @@ class Item_
 		if (count($schema) === 9) {
 			// LeadSinger would have been used to search
 			while ($row = $stmt->fetch()) {
-
 				$searchItem['upc']=$upc;	
 				$searchItem['title']=$title;
 				$searchItem['name']=$name;
@@ -172,7 +171,7 @@ class Item_
 		} else {
 			// LeadSinger would not have been used
 			while ($row = $stmt->fetch()) {
-
+				echo $upc;
 				$searchItem['upc']=$upc;	
 				$searchItem['title']=$title;
 				$searchItem['type']=$type;
