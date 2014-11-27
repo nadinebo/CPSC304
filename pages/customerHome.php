@@ -57,91 +57,149 @@
 
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<?php
-				include '../src/presentation.php';
-				$P = new Presentation();
-				?>
+<?php
+include '../src/presentation.php';
+$P = new Presentation();
+?>
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<!--						SHOPPING CART TAB							     -->	
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				<div role="tabpanel" class="tab-pane" id="cart">
 					<h3> The Shopping Cart </h3>
-					<?php
-					session_start();
-					if(!isset($_SESSION['shoppingBasket'])){
-						//$_SESSION['shoppingBasket'] = null;
-						//echo "new basket";
-					}
-					$basket = $_SESSION['shoppingBasket'];
+<?php
+session_start();
+if(!isset($_SESSION['shoppingBasket'])){
+	//$_SESSION['shoppingBasket'] = null;
+	//echo "new basket";
+}
+$basket = $_SESSION['shoppingBasket'];
 
-					if($_SERVER["REQUEST_METHOD"] == "POST") {
-						echo "<h1>POST</h1>";
-						if(isset($_POST["submitDelete"]) && $_POST["submitDelete"] == "DELETE"){
-							echo "<h1>ITEM DELETED</h1>";
-							$deleteUPC = $_POST['upc'];
-							echo $deleteUPC;
-							for($i=0;$i<count($basket);$i++){
-								$item = $basket[$i];
-								if($item['upc'] == $deleteUPC){
-									$basket[$i]=null;
-									break;
-								}
-							}
-						}
-						$_SESSION['shoppingBasket'] = $basket;;
-					}
+		/* If checkout was pressed */
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+	if(isset($_POST["submitDelete"]) && $_POST["submitDelete"] == "DELETE"){
+		echo "<h1>ITEM DELETED</h1>";
+		$deleteUPC = $_POST['upc'];
+		echo $deleteUPC;
+		for($i=0;$i<count($basket);$i++){
+			$item = $basket[$i];
+			if($item['upc'] == $deleteUPC){
+				$basket[$i]=null;
+				break;
+			}
+		}
+	}
+	$_SESSION['shoppingBasket'] = $basket;;
+}
 
-					echoBasket($basket);
+		/* If checkout was pressed */
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+	if(isset($_POST["submitCheckout"]) && $_POST["submitCheckout"]=="CHECKOUT"){
+		/* First Create The Order for the purchase */
+		$expirydate = $_POST["expirydate"];
+		$cardnumber = $_POST["cardnumber"];
+		$user = $_SESSION['user'];
+		$today = date("Y-m-d");
+		$P->submitOrder($today,$user['cid'],$cardnumber,$expirydate);
+		//Retrieve the latest order
+		$order = $P->newestOrder();
+		echo" recipt ID = ".$order['receiptID'];
+		for($i=0;$i<sizeof($basket);$i++){
+			$row = $basket[$i];
+			if($row == null){
+				continue;
+			}
+			purchase($order['receiptID'],$row['upc'],$row['quantity']);
+			//create purchase Item
+			$basket[$i]=null;
+		}
+	}
+	$_SESSION['shoppingBasket'] = $basket;;
+}
 
-					function echoEncodedVar($basket){
-						$schema = array('upc','title','type','category','company','year','quantity','price');
-						for($i=0;$i<sizeof($basket);$i++){
-							$row = $basket[$i];
-							for($j=0;$j<count($schema);$j++){
-								echo "<input type=\"hidden\" name=\"sbfv".$row[$schema[0]].$schema[$j]."\" value=\"-1\"/>";
-							}
-						}
-					}
+echoBasket($basket);
+checkoutForm($basket);
 
-					function echoBasket($basket){
-						echo "<form id=\"removeItem\" name=\"delete\" action=\"";
-						echo htmlspecialchars($_SERVER["PHP_SELF"]);
-						echo "\" method=\"POST\">";
-						// Hidden value is used if the delete link is clicked
-						echo "<input type=\"hidden\" name=\"upc\" value=\"-1\"/>";
-						// We need a submit value to detect if delete was pressed 
-						echo "<input type=\"hidden\" name=\"submitDelete\" value=\"DELETE\"/>";
-						echoEncodedVar($basket);
-						echo "<h2>Shopping Basket</h2>";
-						echo "<table class='table' border=0 cellpadding =0 cellspacing=0>";
-						echo "<tr valine=center>";
-						$schema = array('upc','title','type','category','company','year','quantity','price');
-						for($i=0;$i<count($schema);$i++){
-							echo "<td class=rowheader>".$schema[$i]."</td>";
-						}
-						echo "</tr>";
 
-						for($i=0;$i<sizeof($basket);$i++){
-							echo $i;
-							$row = $basket[$i];
-							if($row == null){
-								echo"NULL";
-								continue;
-							}else{
-								for($j=0;$j<count($schema);$j++){
-									echo"<td>".$row[$schema[$j]]."</td>";
-								}
-							}
-							echo "<td>";
-							echo "<a href=\"javascript:formSubmit('".$row['upc']."');\">remove</a>";
-							echo"</td></tr>";
-						}
-						echo"</table>";
-						echo"<br><br>";
-						echo "</form>";
+function purchase($reciptID, $upc, $quantity){
+	echo "ID : ".$reciptID."upc :".$upc."quantity".$quantity."<br>";
+	global $P;
+	$P->submitPurchaseItem($reciptID,$upc,$quantity);
+}
 
-						echo"<input type=\"button\" value=\"checkout\" onclick=\"javascript:checkout()\"/>";
-					}
+function checkoutForm($basket){
+	echo "<form id=\"checkout\" name=\"delete\" action=\"";
+	echo htmlspecialchars($_SERVER["PHP_SELF"]);
+	echo "\" method=\"POST\">";
+	$schema = array('upc','title','type','category','company','year','quantity','price');
+	for($i=0;$i<sizeof($basket);$i++){
+			$row = $basket[$i];
+			for($j=0;$j<count($schema);$j++){
+				echo "<input type=\"hidden\" name=\"sbfv".$i.$schema[$j]."\" value=\"-1\"/>";
+			}
+	}
+	echo "<input type=\"hidden\" name=\"submitCheckout\" value=\"CHECKOUT\"/>";
+	echo "<input type=\"hidden\" name=\"cardnumber\" value=\"-1\"/>";
+	echo "<input type=\"hidden\" name=\"expirydate\" value=\"-1\"/>";
+	echo "<input type=\"hidden\" name=\"upc\" value=\"-1\"/>";
+	echo "</form>";
+}
 
-					?>				
-				</div> <!--closed cart div-->
+function echoBasket($basket){
+	echo "<form id=\"removeItem\" name=\"delete\" action=\"";
+	echo htmlspecialchars($_SERVER["PHP_SELF"]);
+	echo "\" method=\"POST\">";
+	// Hidden value is used if the delete link is clicked
+	echo "<input type=\"hidden\" name=\"upc\" value=\"-1\"/>";
+	// We need a submit value to detect if delete was pressed 
+	echo "<input type=\"hidden\" name=\"submitDelete\" value=\"DELETE\"/>";
+	echo "<h2>Shopping Basket</h2>";
+	echo "<table class='table' border=0 cellpadding =0 cellspacing=0>";
+	echo "<tr valine=center>";
+	$schema = array('upc','title','type','category','company','year','quantity','price');
+	for($i=0;$i<count($schema);$i++){
+		echo "<td class=rowheader>".$schema[$i]."</td>";
+	}
+	echo "</tr>";
+
+	for($i=0;$i<sizeof($basket);$i++){
+		echo $i;
+		$row = $basket[$i];
+		if($row == null){
+			echo"NULL";
+			continue;
+		}else{
+			for($j=0;$j<count($schema);$j++){
+				echo"<td>".$row[$schema[$j]]."</td>";
+			}
+		}
+		echo "<td>";
+		echo "<a href=\"javascript:formSubmit('".$row['upc']."');\">remove</a>";
+		echo"</td></tr>";
+	}
+	echo"</table>";
+	echo"<br><br>";
+	echo "</form>";
+
+	echo"<input type=\"button\" value=\"checkout\" onclick=\"javascript:checkout()\"/>";
+}
+
+	?>				
+
+	</div> <!--closed cart div-->
+
+
+
+
+
+
+
+
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<!--						SHOPPING CART TAB							     -->	
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
 
 				<div role="tabpanel" class="tab-pane active" id="shop">
 					<h3> Browsing Store Items </h3>
@@ -295,7 +353,7 @@
 			document.write("YOU SHOULD HAVE ACCEPTED");
 		}
 	}
-	else if (confirm('So you want to buy '+quant+' of '+title)) {
+	else{
 		// Set the value of a hidden HTML element in this form
 		var form = document.getElementById('addItem');
 		form.upc.value = upc;
@@ -306,9 +364,15 @@
 }
 </script>
 <script>
-	function checkout() {
-		document.write("clicked");
-	}
+function checkout() {
+	var form = document.getElementById('checkout');
+	form.cardnumber.value = '55533';
+	form.expirydate.value = '2017';
+	//form.cardnumber.value = prompt("Credit CardNumber", "#");
+	//form.expirydate.value = prompt("Expire Date", "YYYY-MM-DD");
+	form.submit();
+	
+}
 </script>
 </body>
 </html>

@@ -86,9 +86,19 @@ class Presentation
 		$Logic->newCustomer($cid,$password,$name,$address,$phone);
 	}
 
+	public function submitOrder($date,$cid,$cardNum,$expire){
+		global $Logic;
+		$Logic->newOrder($date,$cid,$cardNum,$expire);
+	}
+	
+	public function submitPurchaseItem($reciptID,$upc,$quantity){
+		global $Logic;
+		echo "going down";
+		$Logic->newPurchaseItem($reciptID,$upc,$quantity);
+	}
+
 	public function searchItems() {
 		global $Logic;
-
 		$input = array('Category','Title', 'LeadSinger');
 		$this->buildAddForm($input,"Search For Item");
 	}
@@ -106,6 +116,24 @@ class Presentation
 		$this->buildTable("All Items",$result,$schema,$delete,$primary);
 	}
 		
+	public function newestOrder(){
+		echo"got all orders";
+		global $Logic;
+		$result = $Logic->getAllOrders();
+		$max=0;
+		$newo;
+		//get max
+		while($row = $result->fetch_assoc()){
+			if($row['receiptID'] >= $max){
+				$newo = $row;
+				$max = $row['recieptID'];
+			}
+		}
+		return $newo;
+	}
+
+
+
 	public function Itemsd()
 	{
 		global $Logic;
