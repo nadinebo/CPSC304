@@ -23,15 +23,9 @@
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
-
 	<title>Cals</title>
-<!--
-    A simple stylesheet is provided so you can modify colours, fonts, etc.
--->
-<link href="../styles/main.css" rel="stylesheet" type="text/css">
-
+	<link href="../styles/main.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
 
 
@@ -47,6 +41,9 @@
 				$P->buildAddForm(array('cid','password'),"Login");
 				echo "<b>Invalid User name or Password<b><br>";
 				echo "<a href=\"register.php\">Would you like to register?</a>";
+			}
+			else {
+			echo "<a href=\"home.php\">Take me the the home page</a>";
 			}
 		}
 	}

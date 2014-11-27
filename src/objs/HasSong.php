@@ -19,7 +19,7 @@ class HasSong
 		$stmt->bind_param("is", $UPC, $title);
 		$stmt->execute();
 		if($stmt->error) {
-			printf("<b>Error: %s. </b>\n", $stmt->error);
+			//printf("<b>Error: %s. </b>\n", $stmt->error);
 			return $stmt->error;
 		} 
 		return 0;
