@@ -40,7 +40,6 @@
 	</header>
 
 	<div class="container">
-		<h4><em>This page will include tabs for the different actions a Customer can do.</em></h3>
 		<h1>Welcome outlander, to our glorious hovel.</h1>
 		<h2>Take this rare shopping basket for hording.</h2>
 
