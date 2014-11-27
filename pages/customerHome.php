@@ -91,9 +91,9 @@ $basket = $_SESSION['shoppingBasket'];
 		/* If checkout was pressed */
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 	if(isset($_POST["submitDelete"]) && $_POST["submitDelete"] == "DELETE"){
-		echo "<h1>ITEM DELETED</h1>";
+		//echo "<h1>ITEM DELETED</h1>";
 		$deleteUPC = $_POST['upc'];
-		echo $deleteUPC;
+		//echo $deleteUPC;
 		for($i=0;$i<count($basket);$i++){
 			$item = $basket[$i];
 			if($item['upc'] == $deleteUPC){
@@ -116,7 +116,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$P->submitOrder($today,$user['cid'],$cardnumber,$expirydate);
 		//Retrieve the latest order
 		$order = $P->newestOrder();
-		echo" recipt ID = ".$order['receiptID'];
+		//echo" recipt ID = ".$order['receiptID'];
 		for($i=0;$i<sizeof($basket);$i++){
 			$row = $basket[$i];
 			if($row == null){
@@ -135,7 +135,7 @@ checkoutForm($basket);
 
 
 function purchase($reciptID, $upc, $quantity){
-	echo "ID : ".$reciptID."upc :".$upc."quantity".$quantity."<br>";
+	//echo "ID : ".$reciptID."upc :".$upc."quantity".$quantity."<br>";
 	global $P;
 	$P->submitPurchaseItem($reciptID,$upc,$quantity);
 }
@@ -176,10 +176,10 @@ function echoBasket($basket){
 	echo "</tr>";
 
 	for($i=0;$i<sizeof($basket);$i++){
-		echo $i;
+		//echo $i;
 		$row = $basket[$i];
 		if($row == null){
-			echo"NULL";
+			//echo"NULL";
 			continue;
 		}else{
 			for($j=0;$j<count($schema);$j++){
@@ -262,7 +262,7 @@ function echoBasket($basket){
 						if(isset($_POST["submitAdd"]) && $_POST["submitAdd"] == "ADD"){
 							$addUPC = $_POST['upc'];
 							$quantity = $_POST['quantity'];
-							echo $quantity."<br>";
+							//echo $quantity."<br>";
 							//echo $addUPC;
 							//echo "<h1>ITEM ADDED</h1>";
 							session_start();
@@ -277,7 +277,7 @@ function echoBasket($basket){
 									break;
 								}
 							}
-							echo $addItem['upc'];
+							//echo $addItem['upc'];
 							/* Check if the Item is already in the basket and update it*/
 							for($i=0;$i<count($addBasket);$i++){
 								$row = $addBasket[$i];
@@ -298,7 +298,7 @@ function echoBasket($basket){
 								$basketElement['category']=$addItem['category'];
 								$basketElement['year']=$addItem['year'];
 								$basketElement['quantity']= $quantity;
-								echo "inserting price";
+								//echo "inserting price";
 								$basketElement['price']= $quantity * $addItem['price'];
 								$s = count($addBasket);
 								$addBasket[$s] = $basketElement;
@@ -366,7 +366,7 @@ function echoBasket($basket){
 			document.write("YOU SHOULD HAVE ACCEPTED");
 		}
 	}
-	else{
+	else if (confirm('you sure you want '+quant+'?')) {
 		// Set the value of a hidden HTML element in this form
 		var form = document.getElementById('addItem');
 		form.upc.value = upc;
@@ -379,10 +379,9 @@ function echoBasket($basket){
 <script>
 function checkout() {
 	var form = document.getElementById('checkout');
-	form.cardnumber.value = '55533';
 	form.expirydate.value = '2017';
-	//form.cardnumber.value = prompt("Credit CardNumber", "#");
-	//form.expirydate.value = prompt("Expire Date", "YYYY-MM-DD");
+	form.cardnumber.value = prompt("Credit CardNumber", "#");
+	form.expirydate.value = prompt("Expire Date", "YYYY");
 	form.submit();
 	
 }

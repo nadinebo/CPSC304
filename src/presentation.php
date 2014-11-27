@@ -93,7 +93,6 @@ class Presentation
 	
 	public function submitPurchaseItem($reciptID,$upc,$quantity){
 		global $Logic;
-		echo "going down";
 		$Logic->newPurchaseItem($reciptID,$upc,$quantity);
 	}
 
@@ -117,7 +116,7 @@ class Presentation
 	}
 		
 	public function newestOrder(){
-		echo"got all orders";
+		//echo"got all orders";
 		global $Logic;
 		$result = $Logic->getAllOrders();
 		$max=0;
@@ -223,7 +222,7 @@ class Presentation
 		//ADDED HERE
 		$schema1 = array('receiptID','deliveredDate');
 		//$this->buildTable("All Orders",$result,$schema);
-		echo "<h3>Set/Update Delivery Date</h3>";
+		//echo "<h3>Set/Update Delivery Date</h3>";
 		$this->buildAddForm($schema1, "Update Delivery Date"); 
 		
 		//
