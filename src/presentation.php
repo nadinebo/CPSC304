@@ -358,8 +358,8 @@ class Presentation
 		//$Logic->newReturn('2014-11-11',12014);
 		//$Logic->newReturn('2014-11-10',11014);
 
-		//$Logic->newReturnItem(1,10007,2);
-		//$Logic->newReturnItem(2,20002,1);
+		$Logic->newReturnItem(1,10007,2);
+		$Logic->newReturnItem(2,20002,1);
 		//$Logic->newReturnItem(90876,20004,3);
 	}
 	
