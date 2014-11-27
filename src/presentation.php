@@ -86,7 +86,12 @@ class Presentation
 		$Logic->newCustomer($cid,$password,$name,$address,$phone);
 	}
 
-	public function order(
+	public function submitOrder($date,$cid,$cardNum,$expire){
+		global $Logic;
+		echo"submitted order";
+		$Logic->newOrder($date,$cid,$cardNum,$expire);
+		
+	}
 		
 	public function Itemsd()
 	{

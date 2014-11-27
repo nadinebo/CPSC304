@@ -77,7 +77,7 @@ $P = new Presentation();
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <!--						SHOPPING CART TAB							     -->	
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-				<div role="tabpanel" class="tab-pane" id="cart">
+				<div role="tabpanel" class="tab-pane active" id="cart">
 					<h3> The Shopping Cart </h3>
 <?php
 session_start();
@@ -129,7 +129,8 @@ function checkout($row, $user, $cardnumber, $expirydate){
 	}
 
 	echo "Checking Out :".$user['cid']."<br>With the card :".$cardnumber."<br> and the expiry date : ".$expirydate."<br>";
-	//$P->
+	//errors here
+	$P->submitOrder('1991-08-5',$user['cid'],$cardnumber,$expirydate);
 	
 }
 
@@ -207,7 +208,7 @@ function echoBasket($basket){
 
 
 				</div>
-				<div role="tabpanel" class="tab-pane active" id="shop">
+				<div role="tabpanel" class="tab-pane" id="shop">
 					<h3> Browsing Store Items </h3>
 <?php
 //ITEM SELECTION TAB
@@ -369,8 +370,10 @@ function addFormSubmit(upc) {
 <script>
 function checkout() {
 	var form = document.getElementById('checkout');
-	form.cardnumber.value = prompt("Credit CardNumber", "#");
-	form.expirydate.value = prompt("Credit CardNumber", "YYYY-MM-DD");
+	form.cardnumber.value = '5554444';
+	form.expirydate.value = '1991-06-22';
+	//form.cardnumber.value = prompt("Credit CardNumber", "#");
+	//form.expirydate.value = prompt("Expire Date", "YYYY-MM-DD");
 	form.submit();
 	
 }
