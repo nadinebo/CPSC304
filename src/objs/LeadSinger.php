@@ -19,7 +19,7 @@ class LeadSinger
 		$stmt->bind_param("is", $UPC, $Name);
 		$stmt->execute();
 		if($stmt->error) {
-			printf("<b>Error: %s. </b><br>\n", $stmt->error);
+			//printf("<b>Error: %s. </b><br>\n", $stmt->error);
 			return $stmt->error;
 		} else {
 			//echo "<b>Successfully added ".$Name."</b><br>";
@@ -45,7 +45,7 @@ class LeadSinger
 		$stmt->bind_param("is",$UPC,$Name);
 		$stmt->execute();
 		if($stmt->error) {
-			printf("<b>Error: %s. </b><br>\n", $stmt->error);
+			//printf("<b>Error: %s. </b><br>\n", $stmt->error);
 			return $stmt->error;
 		} else {
 			//echo "<b>Successfully deleted ".$Name."</b><br>";

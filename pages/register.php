@@ -8,9 +8,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		$name= $_POST["new_name"];
 		$address= $_POST["new_address"];
 		$phone= $_POST["new_phone"];
-		$P->register($cid,$password,$name,$address,$phone);
-		header('Location: login.php');
-	}
+		
+		if($P->register($cid,$password,$name,$address,$phone) >= 0){
+			echo "<a href=\"login.php\">Take me the the login page</a>";
+		}
+	}	
 }
 ?>
 
@@ -18,15 +20,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
-
 	<title>Cals</title>
-<!--
-    A simple stylesheet is provided so you can modify colours, fonts, etc.
--->
-<link href="../styles/main.css" rel="stylesheet" type="text/css">
-
+	<link href="../styles/main.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
 
 
