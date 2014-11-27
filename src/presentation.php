@@ -85,6 +85,26 @@ class Presentation
 		global $Logic;
 		$Logic->newCustomer($cid,$password,$name,$address,$phone);
 	}
+
+	public function searchItems() {
+		global $Logic;
+
+		$input = array('Category','Title', 'LeadSinger');
+		$this->buildAddForm($input,"Search For Item");
+	}
+
+	public function allItems() {
+		global $Logic;
+				
+		//testing using the layers as classes
+		$result = $Logic->getItems();
+		$schema = array('upc','title','type','category','company','year','price','stock');
+		
+		//implement ADD ITEM instead of DELETE
+		$delete = "DELETE ITEM";
+		$primary = 'upc';
+		$this->buildTable("All Items",$result,$schema,$delete,$primary);
+	}
 		
 	public function Itemsd()
 	{
@@ -101,6 +121,8 @@ class Presentation
 		//testing using the layers as classes
 		$result = $Logic->getItems();
 		$schema = array('upc','title','type','category','company','year','price','stock');
+		//should be ADD instead of DELETE
+
 		$delete = "DELETE ITEM";
 		$primary = 'upc';
 		$this->buildTable("All Items",$result,$schema,$delete,$primary);
@@ -236,7 +258,7 @@ class Presentation
 		// CD Albums
 		$Logic->newItem(20001,'1989','CD','Pop','Big Machine Records',2014,14.99,10);
 		$Logic->newItem(20002,'Bitches Brew','CD','Jazz','Original',1970,9.99,10);
-		$Logic->newItem(20003,'Led Zeppelin','CD','Rock','Atlantic Recording Corp.',1969,9.99,10);
+		$Logic->newItem(20003,'Led Zeppelin II','CD','Rock','Atlantic Recording Corp.',1969,9.99,10);
 		$Logic->newItem(20004,'Songs About Jane','CD','Pop','Interscope Records',2002,9.99,10);
 		$Logic->newItem(20005,'Crash My Party','CD','Country','Capitol Records Nashville',2013,14.99,10);
 		$Logic->newItem(20006,'Tailgates & Tanlines','CD','Country','Capitol Records Nashville',2011,14.99,10);
