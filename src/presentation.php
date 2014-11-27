@@ -261,7 +261,7 @@ class Presentation
 		global $Logic;
 		
 		$result = $Logic->getAllReturnItems();
-		$schema = array('ReturnID','upc','ReturnQuantity');
+		$schema = array('retID','upc','returnQuantity');
 		$this->buildTable("Specify Returned Items",$result,$schema);
 		$this->buildAddForm($schema,"Add Return Item");
 		
