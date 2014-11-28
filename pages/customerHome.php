@@ -350,7 +350,6 @@ function echoBasket($basket){
 				$title = $_POST["new_Title"];
 				$leadSinger = $_POST["new_LeadSinger"];
 				$searchResult = $P->searchForItems($category,$title,$leadSinger);
-				echo "searched";
 					//NOT UST GETTING ITEMS
 
 					for($i=0;$i<count($schema);$i++){

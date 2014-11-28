@@ -171,7 +171,6 @@ class Item_
 		} else {
 			// LeadSinger would not have been used
 			while ($row = $stmt->fetch()) {
-				echo $upc;
 				$searchItem['upc']=$upc;	
 				$searchItem['title']=$title;
 				$searchItem['type']=$type;
@@ -183,8 +182,6 @@ class Item_
 				$searchResult[$i] = $searchItem;
 				$i++;
 			}
-			//$checker = $searchResult[0];
-			//echo $checker['upc'];
 		}
 		return $searchResult;
 
