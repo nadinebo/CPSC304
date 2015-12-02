@@ -11,7 +11,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 		if($P->register($cid,$password,$name,$address,$phone) >= 0){
 			echo "<a href=\"login.php\">Take me the the login page</a>";
-		}
+		}else{
+			echo "<h2>That Cid is allready taken please choose another<br></h2>";
+				}
 	}	
 }
 ?>

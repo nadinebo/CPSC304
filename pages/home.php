@@ -53,8 +53,8 @@
 
 	<?php
 	include '../src/presentation.php';
-	$P = new Presentation();
-	$P->initData();
+//	$P = new Presentation();
+//	$P->initData();
 	?>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
